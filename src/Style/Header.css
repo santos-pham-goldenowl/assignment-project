@@ -1,0 +1,113 @@
+/* ----------Header----------- */
+.header {
+  height: 66px;
+  border: 1px solid #85b043;
+  display: flex;
+  position: relative;
+}
+/* header logo */
+.header-logo {
+  margin: auto 0px;
+  margin-left: 20px;
+  height: 60px;
+  width: 100px;
+  border: 1px solid black;
+  background-color: red;
+  background: url("../Images/shopify-logo-1C711BCDE4-seeklogo.com.png");
+  background-size: 100% 100%;
+}
+/* header menu */
+.header-menu {
+  display: flex;
+  height: 100%;
+  position: absolute;
+  right: 10px;
+  top: 0px;
+}
+/* header menu custom */
+.header-menu-product,
+.header-user,
+.header-cart {
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+}
+
+/* header menu link */
+.header-menu .menu-link {
+  text-decoration: none;
+  color: rgb(20, 5, 5);
+  font-weight: bold;
+}
+
+/* header menu product */
+.header-menu-product {
+  margin-right: 30px;
+}
+
+.header-menu-product .menu-link {
+  margin-right: 8px;
+  font-size: 1.8em;
+  color: #85b043;
+  padding: 5px;
+  transition: 0.3s;
+}
+
+.header-menu-product .menu-link:hover {
+  background-color: #85b043;
+  color: white;
+}
+
+/* header user */
+.login,
+.signup {
+  display: flex;
+  align-items: center;
+  background-color: #85b043;
+  margin-right: 10px;
+  border-radius: 3px;
+  font-size: 1.2em;
+}
+
+.login {
+  padding-right: 8px;
+}
+.login .menu-link,
+.signup .menu-link {
+  display: inline-block;
+  line-height: 100%;
+  padding: 10px;
+  color: #fff;
+}
+.header-user .login {
+  display: flex;
+  align-items: center;
+}
+.header-user .login .login-icon {
+  height: 16px;
+  width: 16px;
+  background: url("../Images/sign-in-alt-solid.svg");
+}
+
+.header-user .signup .signup-icon {
+  height: 16px;
+  width: 16px;
+  background: url("../Images/user-plus-solid.svg");
+}
+
+/* header cart */
+.header-cart {
+  margin: 0px 30px;
+  position: relative;
+}
+.count {
+  position: absolute;
+  right: 0px;
+  top: 1px;
+  font-size: 1.4em;
+}
+.header-cart > .cart-icon {
+  height: 4em;
+  width: 4em;
+  background: url("../Images/cart-arrow-down-solid.svg");
+}
