@@ -2,7 +2,6 @@ import React from "react";
 
 import "./Style/App.css";
 import Header from "./Component/Header";
-import Home from "./Component/Home";
 import Footer from "./Component/Footer";
 
 class App extends React.Component {

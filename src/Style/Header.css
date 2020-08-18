@@ -1,17 +1,16 @@
 /* ----------Header----------- */
 .header {
   height: 66px;
-  border: 1px solid #85b043;
+  border-bottom: 1px solid #85b043;
   display: flex;
   position: relative;
 }
 /* header logo */
 .header-logo {
   margin: auto 0px;
-  margin-left: 20px;
+  margin-left: 60px;
   height: 60px;
   width: 100px;
-  border: 1px solid black;
   background-color: red;
   background: url("../Images/shopify-logo-1C711BCDE4-seeklogo.com.png");
   background-size: 100% 100%;
@@ -30,7 +29,6 @@
 .header-cart {
   display: flex;
   align-items: center;
-  border: 1px solid black;
 }
 
 /* header menu link */
@@ -69,7 +67,8 @@
   font-size: 1.2em;
 }
 
-.login {
+.login,
+.signup {
   padding-right: 8px;
 }
 .login .menu-link,
@@ -100,11 +99,21 @@
   margin: 0px 30px;
   position: relative;
 }
-.count {
+.count-in-cart {
   position: absolute;
-  right: 0px;
-  top: 1px;
-  font-size: 1.4em;
+  right: -5px;
+  top: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 15px;
+  border-radius: 5px;
+  background-color: yellow;
+  font-size: 1.3em;
+}
+.count-in-cart > p {
+  margin: 0px;
 }
 .header-cart > .cart-icon {
   height: 4em;

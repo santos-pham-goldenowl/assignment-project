@@ -43,7 +43,9 @@ class Header extends React.Component {
               </Link>
             </div>
             <div className="header-cart">
-              <div className="count">0</div>
+              <div className="count-in-cart">
+                <p>0</p>
+              </div>
               <Link to="/cart" className="cart-icon"></Link>
             </div>
           </div>
