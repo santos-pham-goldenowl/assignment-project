@@ -77,7 +77,9 @@ class Login extends React.Component {
                     <Link to="/signup">You do not have an acount yet?</Link>
                   </div>
                   <div>
-                    <a href="/">Forgot your password</a>
+                    <Link to="/" className="forgot-pw">
+                      Forgot your password
+                    </Link>
                   </div>
                   {/* <div>
                     {this.state.error ? (

@@ -4,6 +4,7 @@ import React from "react";
 import "../Style/Header.css";
 import Login from "./Login";
 import Signup from "./Signup";
+import User from "./User";
 import Cart from "./Cart";
 import Home from "./Home";
 import Product from "./Product";
@@ -41,7 +42,7 @@ class Header extends React.Component {
                 </Link>
                 <div className="signup-icon"></div>
               </div>
-              <Link to="#" className="menu-link">
+              <Link to="/user" className="menu-link">
                 (Username)
               </Link>
             </div>
@@ -63,6 +64,9 @@ class Header extends React.Component {
           </Route>
           <Route path="/signup">
             <Signup />
+          </Route>
+          <Route path="/user">
+            <User />
           </Route>
           <Route path="/cart">
             <Cart />

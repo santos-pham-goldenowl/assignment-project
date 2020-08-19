@@ -27,14 +27,15 @@ class Cart extends React.Component {
             <tr>
               <td>
                 <div className="name-img-product">
-                  <p>Shoes</p>
-                  <img
-                    src="https://images-na.ssl-images-amazon.com/images/I/61Ez19M9BZL._AC_UY1000_.jpg"
-                    className="product-img"
-                    width="80px"
-                    height="80px"
-                    alt="Can not display"
-                  ></img>
+                  <p className="ordered-product-name">Shoes</p>
+                  <div className="product-img">
+                    <img
+                      src="https://images-na.ssl-images-amazon.com/images/I/61Ez19M9BZL._AC_UY1000_.jpg"
+                      width="80px"
+                      height="80px"
+                      alt="Can not display"
+                    ></img>
+                  </div>
                 </div>
               </td>
               <td>Black</td>
@@ -56,14 +57,15 @@ class Cart extends React.Component {
             <tr>
               <td>
                 <div className="name-img-product">
-                  <p>Hat</p>
-                  <img
-                    src="https://static.nike.com/a/images/t_default/e8f60e06-25ef-4834-ae47-f78803e3299a/legacy91-golf-hat-KN3jRL.jpg"
-                    className="product-img"
-                    width="80px"
-                    height="80px"
-                    alt="Can not display"
-                  ></img>
+                  <p className="ordered-product-name">Hat</p>
+                  <div className="product-img">
+                    <img
+                      src="https://static.nike.com/a/images/t_default/e8f60e06-25ef-4834-ae47-f78803e3299a/legacy91-golf-hat-KN3jRL.jpg"
+                      width="80px"
+                      height="80px"
+                      alt="Can not display"
+                    ></img>
+                  </div>
                 </div>
               </td>
               <td>White</td>

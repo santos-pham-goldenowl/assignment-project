@@ -1,0 +1,45 @@
+.edit-profile-btn {
+  margin-bottom: 10px;
+}
+
+.edit-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-title {
+  font-size: 1.6em;
+  font-weight: bold;
+}
+
+.edit-user-form {
+  width: 200px;
+  height: 200px;
+  padding-top: 10px;
+  /* border: 1px solid orange; */
+}
+
+.edit-title-lb {
+  font-size: 1.1em;
+  display: block;
+  font-weight: 600;
+}
+
+.edit-user-form input {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.edit-user-btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-user-btn {
+  margin-top: 15px;
+  background-color: var(--primary-color);
+  border: none;
+  padding: 5px 20px;
+}

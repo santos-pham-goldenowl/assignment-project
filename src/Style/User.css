@@ -1,0 +1,47 @@
+.user-infor-container {
+  display: flex;
+  height: calc(100% - 90px - 66px);
+  justify-content: center;
+  align-items: center;
+}
+
+.user-infor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 300px;
+  border: 1px solid var(--primary-color);
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  width: 100%;
+  margin: 30px 0px 20px 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.user-name {
+  font-size: 1.4em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.user-address {
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.edit-user-infor {
+  display: flex;
+  justify-content: center;
+}
+
+.edit-user-infor-btn {
+  width: 80%;
+  font-size: 1.3em;
+  margin-bottom: 25px;
+  border: none;
+  padding: 5px 15px;
+}

@@ -1,10 +1,11 @@
 /* ----------Header----------- */
 .header {
   height: 66px;
-  border-bottom: 1px solid #85b043;
+  border-bottom: 1px solid var(--primary-color);
   display: flex;
   position: relative;
 }
+
 /* header logo */
 .header-logo {
   display: block;
@@ -16,6 +17,7 @@
   background: url("../Images/shopify-logo-1C711BCDE4-seeklogo.com.png");
   background-size: 100% 100%;
 }
+
 /* header menu */
 .header-menu {
   display: flex;
@@ -24,6 +26,7 @@
   right: 10px;
   top: 0px;
 }
+
 /* header menu custom */
 .header-menu-product,
 .header-user,
@@ -47,13 +50,13 @@
 .header-menu-product .menu-link {
   margin-right: 8px;
   font-size: 1.8em;
-  color: #85b043;
+  color: var(--primary-color);
   padding: 5px;
   transition: 0.3s;
 }
 
 .header-menu-product .menu-link:hover {
-  background-color: #85b043;
+  background-color: var(--primary-color);
   color: white;
 }
 
@@ -62,7 +65,7 @@
 .signup {
   display: flex;
   align-items: center;
-  background-color: #85b043;
+  background-color: var(--primary-color);
   margin-right: 10px;
   border-radius: 3px;
   font-size: 1.2em;
@@ -72,6 +75,7 @@
 .signup {
   padding-right: 8px;
 }
+
 .login .menu-link,
 .signup .menu-link {
   display: inline-block;
@@ -79,10 +83,12 @@
   padding: 10px;
   color: #fff;
 }
+
 .header-user .login {
   display: flex;
   align-items: center;
 }
+
 .header-user .login .login-icon {
   height: 16px;
   width: 16px;
@@ -100,6 +106,7 @@
   margin: 0px 30px;
   position: relative;
 }
+
 .count-in-cart {
   position: absolute;
   right: -5px;
@@ -113,9 +120,11 @@
   background-color: yellow;
   font-size: 1.3em;
 }
+
 .count-in-cart > p {
   margin: 0px;
 }
+
 .header-cart > .cart-icon {
   height: 4em;
   width: 4em;
