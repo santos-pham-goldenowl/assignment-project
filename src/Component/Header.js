@@ -6,13 +6,16 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Cart from "./Cart";
 import Home from "./Home";
+import Product from "./Product";
 
 class Header extends React.Component {
   render() {
     return (
       <Router>
         <div className="header">
-          <div className="header-logo"></div>
+          <div>
+            <Link to="/" className="header-logo"></Link>
+          </div>
           <div className="header-menu">
             <div className="header-menu-product">
               <Link to="#" className="menu-link">
@@ -63,6 +66,9 @@ class Header extends React.Component {
           </Route>
           <Route path="/cart">
             <Cart />
+          </Route>
+          <Route exact path="/">
+            <Product />
           </Route>
         </Switch>
       </Router>

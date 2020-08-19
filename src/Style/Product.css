@@ -1,0 +1,29 @@
+.product-list-container {
+  border: 1px solid orange;
+}
+
+.product-list-row {
+  /* border: 1px solid black; */
+}
+
+.product {
+  border: 1px solid black;
+}
+
+.product-name {
+  font-size: 2.1em;
+  text-align: center;
+}
+
+.product-price {
+  text-align: center;
+  font-size: 1.5em;
+  border: 1px solid orange;
+  border-radius: 10px;
+}
+.product-add-to-cart {
+  background-color: yellowgreen;
+  text-align: center;
+  font-size: 1.5em;
+  border-radius: 10px;
+}

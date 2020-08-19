@@ -1,7 +1,8 @@
 /* Login page */
 .login-page,
 .signup-page {
-  height: 100%;
+  /* 100% screen - height of header and footer */
+  height: calc(100vh - 90px - 66px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,6 +50,7 @@
   width: 100%;
   margin-bottom: 3px;
   height: 40px;
+  font-size: 1.4em;
 }
 /* Span */
 .span-form {

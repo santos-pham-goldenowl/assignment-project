@@ -6,7 +6,7 @@ import "../Style/Cart.css";
 class Cart extends React.Component {
   render() {
     return (
-      <div>
+      <div className="cart-page">
         <div className="back-home-container">
           <Link to="/home" className="back-home-link">
             Back to shopping

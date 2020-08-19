@@ -1,5 +1,7 @@
 /* Cart */
-
+.cart-page {
+  padding-bottom: 150px;
+}
 /* Back home  */
 .back-home-container {
   display: flex;
@@ -21,6 +23,7 @@
 }
 /* Title Cart List */
 .title-cart-list {
+  margin-top: 12px;
   text-align: center;
   font-size: 1.6em;
   font-weight: bold;
@@ -73,6 +76,9 @@ tr:nth-child(even) {
 .checkout-btn {
   background-color: #85b043;
   cursor: pointer;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
   position: absolute;
   margin-top: 15px;
   padding: 10px 15px;

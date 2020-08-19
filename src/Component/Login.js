@@ -76,6 +76,9 @@ class Login extends React.Component {
                   <div className="has-not-account">
                     <Link to="/signup">You do not have an acount yet?</Link>
                   </div>
+                  <div>
+                    <a href="/">Forgot your password</a>
+                  </div>
                   {/* <div>
                     {this.state.error ? (
                       <p className="err-login">{this.state.error}</p>
