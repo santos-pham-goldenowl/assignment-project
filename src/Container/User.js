@@ -1,4 +1,6 @@
 import React from "react";
+import HelmetComp from "../Component/Helmet";
+
 import "../Style/User.css";
 import ChangeUserInfor from "./ChangeUserInfor";
 
@@ -6,6 +8,7 @@ class User extends React.Component {
   render() {
     return (
       <div className="user-infor-container">
+        <HelmetComp title="User" />
         <div className="user-infor">
           <div className="avatar">
             <img

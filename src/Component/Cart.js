@@ -8,7 +8,7 @@ class Cart extends React.Component {
     return (
       <div className="cart-page">
         <div className="back-home-container">
-          <Link to="/home" className="back-home-link">
+          <Link to="/" className="back-home-link">
             Back to shopping
           </Link>
         </div>

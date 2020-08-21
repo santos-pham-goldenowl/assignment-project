@@ -1,12 +1,15 @@
 import React from "react";
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik } from "formik";
 
+import { TitleForm, Input, Button } from "../Component/Form";
+import HelmetComp from "../Component/Helmet";
 import "../Style/Form.css";
 
 class Signup extends React.Component {
   render() {
     return (
       <div className="signup-page">
+        <HelmetComp title={"Sign up"} />
         <Formik
           initialValues={{ email: "", password: "" }}
           validate={(values) => {
@@ -24,48 +27,38 @@ class Signup extends React.Component {
             return errors;
           }}
           // -onSubmit (Sign up)
-          onSubmit={(values, { setSubmitting }) => {}}
+          onSubmit={(values, { setSubmitting }) => {
+            setSubmitting(false);
+          }}
         >
           {({ values, handleSubmit, isSubmitting }) => (
             <form onSubmit={handleSubmit}>
               <div className="form">
                 <div className="form-container">
-                  <div className="title">
-                    <p>Sign up</p>
-                  </div>
+                  <TitleForm titleForm="Sign up" />
                   <div className="user-input">
-                    <div className="input-email">
-                      <span className="span-form" for="email">
-                        Email
-                      </span>
-                      <Field
-                        type="email"
-                        name="email"
-                        id="email"
-                        value={values.email}
-                      />
-                      <ErrorMessage
-                        name="email"
-                        component="div"
-                        className="error"
-                      />
-                    </div>
-                    <div className="input-pw">
-                      <span className="span-form" for="pw">
-                        Password
-                      </span>
-                      <Field
-                        type="password"
-                        name="password"
-                        id="pw"
-                        value={values.password}
-                      />
-                      <ErrorMessage
-                        name="password"
-                        component="div"
-                        className="error"
-                      />
-                    </div>
+                    <Input
+                      clNameContainerDiv="input-email"
+                      lbNameIp="Email"
+                      ipType="email"
+                      ipName="email"
+                      idIp="email"
+                      ipValue={values.email}
+                      nameErr="email"
+                      componentErr="div"
+                      clNameErr="error"
+                    />
+                    <Input
+                      clNameContainerDiv="input-pw"
+                      lbNameIp="Password"
+                      typeIp="password"
+                      nameIp="password"
+                      idIp="pw"
+                      valueIp={values.password}
+                      nameErr="password"
+                      componentErr="div"
+                      clNameErr="error"
+                    />
                   </div>
                   <div className="btn-signup">
                     <button type="submit" disabled={isSubmitting}>
