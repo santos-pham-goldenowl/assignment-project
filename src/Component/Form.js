@@ -39,7 +39,7 @@ function Input(props) {
 function Button(props) {
   const { disabled } = props;
   return (
-    <div className="btn-login">
+    <div className="btn-submit">
       <button type="submit" disabled={disabled}>
         Submit
       </button>

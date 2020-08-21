@@ -1,7 +1,7 @@
 /* Cart */
 .cart-page {
   padding-bottom: 150px;
-  height: calc(100% - 90px - 66px);
+  min-height: calc(100% - 90px - 66px);
 }
 /* Back home  */
 .back-home-container {

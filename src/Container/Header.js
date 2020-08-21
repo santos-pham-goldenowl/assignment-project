@@ -2,11 +2,12 @@ import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
 import React from "react";
 import "../Style/Header.css";
-import Login from "../Container/Login";
-import Signup from "../Container/Signup";
-import User from "../Container/User";
-import Cart from "./Cart";
-import Product from "../Container/Product";
+import Login from "./Login";
+import Signup from "./Signup";
+import User from "./User";
+// import Cart from "../Component/Cart";
+import Product from "./Product";
+import ShoppingItemList from "../Component/ShoppingItemList";
 
 class Header extends React.Component {
   render() {
@@ -49,28 +50,15 @@ class Header extends React.Component {
               <div className="count-in-cart">
                 <p>0</p>
               </div>
-              <Link to="/cart" className="cart-icon"></Link>
-              {/* <div className="shopping-infor">
-                <h3 className="shopping-infor-title">Shopping Information</h3>
-                <div className="shopping-item">
-                  <div className="shopping-item-container">
-                    <div className="shopping-item-img"></div>
-                    <div className="shopping-item-name">Name</div>
-                    <div className="item-price-count">
-                      <div>1</div>
-                      <div>10.000</div>
-                    </div>
-                    <div className="remove-item">
-                      <button>X</button>
-                    </div>
-                  </div>
-                </div>
-                <div className="test">
-                  <button className="checkout-shopping">
-                    PROCEED TO CHECKOUT
-                  </button>
-                </div>
-              </div> */}
+              <label for="cart-check-box">
+                <div to="/cart" className="cart-icon"></div>
+              </label>
+              <input
+                type="checkbox"
+                id="cart-check-box"
+                checked="false"
+              ></input>
+              <ShoppingItemList />
             </div>
           </div>
         </div>
@@ -85,9 +73,9 @@ class Header extends React.Component {
           <Route path="/user">
             <User />
           </Route>
-          <Route path="/cart">
+          {/* <Route path="/cart">
             <Cart />
-          </Route>
+          </Route> */}
           <Route exact path="/">
             <Product />
           </Route>

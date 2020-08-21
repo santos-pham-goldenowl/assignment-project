@@ -60,11 +60,7 @@ class Signup extends React.Component {
                       clNameErr="error"
                     />
                   </div>
-                  <div className="btn-signup">
-                    <button type="submit" disabled={isSubmitting}>
-                      Submit
-                    </button>
-                  </div>
+                  <Button disabled={isSubmitting} />
                   {/* <div>
                     {this.state.error ? (
                       <p className="err-login">{this.state.error}</p>

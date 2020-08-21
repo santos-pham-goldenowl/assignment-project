@@ -18,92 +18,6 @@
   background-size: 100% 100%;
 }
 
-/* Cart infor */
-.shopping-infor {
-  height: 350px;
-  position: absolute;
-  top: 100%;
-  right: 0px;
-  width: 350px;
-  border: 1px solid black;
-}
-
-.shopping-infor-title {
-  text-align: center;
-}
-
-.shopping-item {
-  height: 50px;
-}
-
-.shopping-item-container {
-  width: 95%;
-  margin: 0px auto;
-  display: flex;
-  align-items: center;
-  border: 1px solid orange;
-}
-.shopping-item-img {
-  background-image: url("https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/24/637233230044441609_dell-inspiron-n3593c-den-dd.png");
-  background-size: 100% 100%;
-  height: 30px;
-  flex-grow: 2;
-}
-.shopping-item-name {
-  text-align: center;
-  flex-grow: 5;
-}
-.item-price-count {
-  text-align: center;
-  flex-grow: 2;
-}
-.remove-item {
-  flex-grow: 1;
-}
-.remove-item > button {
-  display: block;
-  border: none;
-  font-size: 1.2em;
-  margin: 0px auto;
-  color: #f07639;
-}
-
-/* Checkout button (Cart) */
-/* .checkout-shopping {
-  display: flex;
-  justify-content: center;
-} */
-.test > .checkout-shopping {
-  display: block;
-  width: 60%;
-  border: none;
-  color: #fff;
-  font-size: 1.4em;
-  font-weight: bold;
-  background-color: #f07639;
-  position: absolute;
-  bottom: 12px;
-  float: none;
-  padding: 3px 12px;
-  border-radius: 5px;
-  margin: auto 0px;
-}
-.checkout-shopping {
-  display: block;
-  width: 60%;
-  border: none;
-  color: #fff;
-  font-size: 1.4em;
-  font-weight: bold;
-  background-color: #f07639;
-  /* position: absolute; */
-  bottom: 12px;
-  float: none;
-  padding: 3px 12px;
-  border-radius: 5px;
-  margin: auto 0px;
-}
-
 /* header menu */
 .header-menu {
   display: flex;
@@ -217,9 +131,133 @@
 .count-in-cart > p {
   margin: 0px;
 }
-
-.header-cart > .cart-icon {
+.header-cart label {
+  display: block;
+  height: 4em;
+  width: 4em;
+}
+.header-cart .cart-icon {
   height: 4em;
   width: 4em;
   background: url("../Images/cart-arrow-down-solid.svg");
+}
+
+/* Cart infor */
+.shopping-infor {
+  background-color: #e6ae30;
+  z-index: 2;
+  height: 400px;
+  position: absolute;
+  top: 100%;
+  right: 0px;
+  width: 350px;
+}
+
+.shopping-infor::before {
+  content: "";
+  position: absolute;
+  top: -17px;
+  right: 10px;
+  border-left: 9px solid transparent;
+  border-top: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 9px solid #e6ae30;
+}
+
+.shopping-infor-title {
+  text-align: center;
+  margin: 10px 0px;
+  padding-bottom: 8px;
+  font-weight: bold;
+  color: #fff;
+  border-bottom: 1px solid orange;
+}
+
+.shopping-item-list-container {
+  height: 260px;
+  overflow: auto;
+}
+
+.shopping-item-container {
+  height: 50px;
+  border-bottom: 1px solid rgb(218, 209, 193);
+}
+
+.shopping-item-container:hover {
+  background-color: #ffe;
+}
+
+.shopping-item {
+  width: 95%;
+  height: 100%;
+  margin: 0px auto;
+  display: flex;
+  align-items: center;
+}
+
+.shopping-item-img {
+  background-image: url("https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/24/637233230044441609_dell-inspiron-n3593c-den-dd.png");
+  background-size: 100% 100%;
+  height: 30px;
+  flex-grow: 2;
+}
+
+.shopping-item-name {
+  text-align: center;
+  flex-grow: 5;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+.item-price-count {
+  text-align: center;
+  flex-grow: 2;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+.remove-item {
+  flex-grow: 1;
+}
+
+.remove-item > button {
+  display: block;
+  border: none;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: 0px auto;
+  color: #f07639;
+}
+
+.shopping-total-price {
+  text-align: right;
+  margin: 10px 30px 0px 0px;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+/* Checkout button (Cart) */
+.checkout-shopping {
+  display: flex;
+  position: absolute;
+  bottom: 12px;
+  width: 100%;
+}
+.checkout-shopping .checkout-shopping-btn {
+  display: block;
+  border: none;
+  color: #fff;
+  font-size: 1.4em;
+  font-weight: bold;
+  background-color: #f07639;
+  padding: 5px 15px;
+  border-radius: 5px;
+  margin: 0px auto;
+}
+#cart-check-box {
+  display: none;
+}
+
+#cart-check-box:checked ~ .shopping-infor {
+  display: none;
 }
