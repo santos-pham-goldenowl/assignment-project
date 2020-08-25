@@ -2,9 +2,9 @@ import React from "react";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
 
-import HelmetComp from "../Component/Helmet";
-import { TitleForm, Input, Button } from "../Component/Form";
-import "../Style/Form.css";
+import HelmetComp from "../Component/Helmet/Helmet";
+import { TitleForm, Input, Button } from "../Component/Form/Form";
+import "../Component/Form/Form.css";
 
 class Login extends React.Component {
   render() {

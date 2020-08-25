@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../Style/Select.css";
+import "./Select.css";
 
 class Select extends React.Component {
   render() {

@@ -1,8 +1,9 @@
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 
-import "./Style/App.css";
-import Header from "./Container/Header";
-import Footer from "./Container/Footer";
+import "./App.css";
+import Header from "./Component/Header/Header";
+import Footer from "./Component/Footer/Footer";
 
 class App extends React.Component {
   constructor(props) {
@@ -14,10 +15,12 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className="app" ref={this.myRef}>
-        <Header />
-        <Footer />
-      </div>
+      <Router>
+        <div className="app" ref={this.myRef}>
+          <Header />
+          <Footer />
+        </div>
+      </Router>
     );
   }
 }

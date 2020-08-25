@@ -1,9 +1,9 @@
 import React from "react";
 import { Formik } from "formik";
 
-import { TitleForm, Input, Button } from "../Component/Form";
-import HelmetComp from "../Component/Helmet";
-import "../Style/Form.css";
+import { TitleForm, Input, Button } from "../Component/Form/Form";
+import HelmetComp from "../Component/Helmet/Helmet";
+import "../Component/Form/Form.css";
 
 class Signup extends React.Component {
   render() {

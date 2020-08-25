@@ -1,0 +1,60 @@
+.product-view-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 400px;
+  /* height: calc(100vh - 66px); */
+  height: 330px;
+  margin-bottom: 30px;
+}
+
+.product-view {
+  display: flex;
+  width: 40%;
+  height: 90%;
+  border: 1px solid orange;
+}
+
+.product-view-name {
+  margin: 10px 0px;
+  font-size: 1.9em;
+  font-weight: bold;
+}
+
+.product-view-img {
+  width: 50%;
+  height: 100%;
+  background-image: url("https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/24/637233230044441609_dell-inspiron-n3593c-den-dd.png");
+  background-size: 100% 100%;
+}
+
+.product-view-action {
+  width: 50%;
+  position: relative;
+}
+
+.product-view-price>p {
+  font-size: 1.5em;
+}
+
+.product-view-buy {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 30px;
+  width: 90%;
+}
+
+.product-view-buy .product-view-buy-btn {
+  background-color: var(--primary-color);
+  font-weight: bold;
+  width: 90%;
+  border: none;
+  padding: 5px 0px;
+}
+
+.product-view-more-items {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}

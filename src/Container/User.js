@@ -1,5 +1,5 @@
 import React from "react";
-import HelmetComp from "../Component/Helmet";
+import HelmetComp from "../Component/Helmet/Helmet";
 
 import "../Style/User.css";
 import ChangeUserInfor from "./ChangeUserInfor";

@@ -1,10 +1,10 @@
 import React from "react";
 import { Container, Row } from "reactstrap";
-import HelmetComp from "../Component/Helmet";
+import HelmetComp from "../Component/Helmet/Helmet";
 
 import "../Style/Product.css";
-import ItemList from "../Component/ItemList";
-import Select from "../Component/Select";
+import ItemList from "./ItemList";
+import Select from "../Component/Select/Select";
 
 const productList = [
   {
@@ -92,14 +92,23 @@ const productList = [
     price: "22.000.0000",
   },
 ];
+
 class Product extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productList: productList,
+      productList: [],
     };
   }
+
+  componentDidMount() {
+    this.setState({
+      productList: productList,
+    });
+  }
+
   render() {
+    const { productList } = this.state;
     return (
       <div className="main-container">
         <HelmetComp title={"Home"} />
@@ -128,7 +137,7 @@ class Product extends React.Component {
             />
           </Row>
           <Row className="product-list-row">
-            <ItemList productList={this.state.productList} />
+            <ItemList productList={productList} />
           </Row>
         </Container>
       </div>

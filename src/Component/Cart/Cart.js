@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "../Style/Cart.css";
+import "./Cart.css";
 
 class Cart extends React.Component {
   render() {
@@ -27,10 +27,10 @@ class Cart extends React.Component {
             <tr>
               <td>
                 <div className="name-img-product">
-                  <p className="ordered-product-name">Shoes</p>
+                  <p className="ordered-product-name">Dell</p>
                   <div className="product-img">
                     <img
-                      src="https://images-na.ssl-images-amazon.com/images/I/61Ez19M9BZL._AC_UY1000_.jpg"
+                      src="https://cdn.tgdd.vn/Products/Images/44/218439/hp-348-g7-i5-9ph06pa-kg2-1-218439-400x400.jpg"
                       width="80px"
                       height="80px"
                       alt="Can not display"
@@ -57,10 +57,10 @@ class Cart extends React.Component {
             <tr>
               <td>
                 <div className="name-img-product">
-                  <p className="ordered-product-name">Hat</p>
+                  <p className="ordered-product-name">Asus</p>
                   <div className="product-img">
                     <img
-                      src="https://static.nike.com/a/images/t_default/e8f60e06-25ef-4834-ae47-f78803e3299a/legacy91-golf-hat-KN3jRL.jpg"
+                      src="https://cdn.tgdd.vn/Products/Images/44/225808/dell-vostro-3590-i5-grmgk3-225520-055537-400x400.jpg"
                       width="80px"
                       height="80px"
                       alt="Can not display"
