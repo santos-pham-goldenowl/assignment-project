@@ -2,7 +2,7 @@
 .login-page,
 .signup-page {
   /* 100% screen - height of header and footer */
-  height: calc(100vh - 90px - 66px);
+  min-height: calc(100vh - 90px - 66px);
   display: flex;
   justify-content: center;
   align-items: center;

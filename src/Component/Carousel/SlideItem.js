@@ -6,10 +6,6 @@ class SlideItem extends React.Component {
     return (
       <div className="slide-item" style={st}>
         <p className="slide-item-name">{name}</p>
-        {/* <div
-          className="slide-item-img"
-          style={{ backgroundImage: `url("${src}")` }}
-        ></div> */}
         <div className="slide-item-img">
           <img src={`${src}`} alt="Can not display"></img>
         </div>

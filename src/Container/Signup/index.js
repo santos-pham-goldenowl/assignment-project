@@ -1,16 +1,16 @@
 import React from "react";
 import { Formik } from "formik";
-import { Link } from "react-router-dom";
 
-import HelmetComp from "../Component/Helmet/Helmet";
-import { TitleForm, Input, Button } from "../Component/Form/Form";
-import "../Component/Form/Form.css";
+import Input from "../../Component/Form/input/index";
+import Button from "../../Component/Form/button/index";
+import HelmetComp from "../../Component/Helmet";
+import "./style.css";
 
-class Login extends React.Component {
+class Signup extends React.Component {
   render() {
     return (
-      <div className="login-page">
-        <HelmetComp title={"login"} />
+      <div className="signup-page">
+        <HelmetComp title={"Sign up"} />
         <Formik
           initialValues={{ email: "", password: "" }}
           validate={(values) => {
@@ -27,7 +27,7 @@ class Login extends React.Component {
             }
             return errors;
           }}
-          // -onSubmit (Sign in)
+          // -onSubmit (Sign up)
           onSubmit={(values, { setSubmitting }) => {
             setSubmitting(false);
           }}
@@ -36,15 +36,17 @@ class Login extends React.Component {
             <form onSubmit={handleSubmit}>
               <div className="form">
                 <div className="form-container">
-                  <TitleForm titleForm="Login" />
+                  <div className="title">
+                    <p>Sign up</p>
+                  </div>
                   <div className="user-input">
                     <Input
                       clNameContainerDiv="input-email"
                       lbNameIp="Email"
-                      typeIp="email"
-                      nameIp="email"
+                      ipType="email"
+                      ipName="email"
                       idIp="email"
-                      valueIp={values.email}
+                      ipValue={values.email}
                       nameErr="email"
                       componentErr="div"
                       clNameErr="error"
@@ -62,14 +64,13 @@ class Login extends React.Component {
                     />
                   </div>
                   <Button disabled={isSubmitting} />
-                  <div className="has-not-account">
-                    <Link to="/signup">You do not have an acount yet?</Link>
-                  </div>
-                  <div>
-                    <Link to="/" className="forgot-pw">
-                      Forgot your password
-                    </Link>
-                  </div>
+                  {/* <div>
+                    {this.state.error ? (
+                      <p className="err-login">{this.state.error}</p>
+                    ) : (
+                      ""
+                    )}
+                  </div> */}
                 </div>
               </div>
             </form>
@@ -80,4 +81,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default Signup;

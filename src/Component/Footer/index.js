@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
 
-import "./Footer.css";
+import "./style.css";
 
 class Footer extends React.Component {
   render() {
@@ -13,13 +13,13 @@ class Footer extends React.Component {
               <a href="/contact-us">Contact Us</a>
             </Col>
             <Col className="footer-infor">
-              <a href="/contact-us">About Us</a>
+              <a href="/about-us">About Us</a>
             </Col>
             <Col className="footer-infor">
-              <a href="/contact-us">Stores</a>
+              <a href="/store">Stores</a>
             </Col>
             <Col className="footer-infor">
-              <a href="/contact-us">Policy</a>
+              <a href="/policy">Policy</a>
             </Col>
           </Row>
         </Container>

@@ -1,8 +1,8 @@
 import React from "react";
-import HelmetComp from "../Component/Helmet/Helmet";
+import HelmetComp from "../../Component/Helmet/index";
 
-import "../Style/User.css";
-import ChangeUserInfor from "./ChangeUserInfor";
+import "./style.css";
+import ChangeUserInfor from "../ChangeUserInfor";
 
 class User extends React.Component {
   render() {

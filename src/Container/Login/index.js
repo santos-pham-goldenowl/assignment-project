@@ -1,15 +1,17 @@
 import React from "react";
 import { Formik } from "formik";
+import { Link } from "react-router-dom";
 
-import { TitleForm, Input, Button } from "../Component/Form/Form";
-import HelmetComp from "../Component/Helmet/Helmet";
-import "../Component/Form/Form.css";
+import HelmetComp from "../../Component/Helmet/index";
+import Input from "../../Component/Form/input/index";
+import Button from "../../Component/Form/button/index";
+import "./style.css";
 
-class Signup extends React.Component {
+class Login extends React.Component {
   render() {
     return (
-      <div className="signup-page">
-        <HelmetComp title={"Sign up"} />
+      <div className="login-page">
+        <HelmetComp title={"login"} />
         <Formik
           initialValues={{ email: "", password: "" }}
           validate={(values) => {
@@ -26,7 +28,7 @@ class Signup extends React.Component {
             }
             return errors;
           }}
-          // -onSubmit (Sign up)
+          // -onSubmit (Sign in)
           onSubmit={(values, { setSubmitting }) => {
             setSubmitting(false);
           }}
@@ -35,15 +37,17 @@ class Signup extends React.Component {
             <form onSubmit={handleSubmit}>
               <div className="form">
                 <div className="form-container">
-                  <TitleForm titleForm="Sign up" />
+                  <div className="title">
+                    <p>Login</p>
+                  </div>
                   <div className="user-input">
                     <Input
                       clNameContainerDiv="input-email"
                       lbNameIp="Email"
-                      ipType="email"
-                      ipName="email"
+                      typeIp="email"
+                      nameIp="email"
                       idIp="email"
-                      ipValue={values.email}
+                      valueIp={values.email}
                       nameErr="email"
                       componentErr="div"
                       clNameErr="error"
@@ -61,13 +65,14 @@ class Signup extends React.Component {
                     />
                   </div>
                   <Button disabled={isSubmitting} />
-                  {/* <div>
-                    {this.state.error ? (
-                      <p className="err-login">{this.state.error}</p>
-                    ) : (
-                      ""
-                    )}
-                  </div> */}
+                  <div className="has-not-account">
+                    <Link to="/signup">You do not have an acount yet?</Link>
+                  </div>
+                  <div>
+                    <Link to="/" className="forgot-pw">
+                      Forgot your password
+                    </Link>
+                  </div>
                 </div>
               </div>
             </form>
@@ -78,4 +83,4 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+export default Login;

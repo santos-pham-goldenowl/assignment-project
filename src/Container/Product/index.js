@@ -1,10 +1,10 @@
 import React from "react";
 import { Container, Row } from "reactstrap";
-import HelmetComp from "../Component/Helmet/Helmet";
 
-import "../Style/Product.css";
-import ItemList from "./ItemList";
-import Select from "../Component/Select/Select";
+import "./style.css";
+import HelmetComp from "../../Component/Helmet";
+import ItemList from "../ItemList";
+import Select from "../../Component/Select/index";
 
 const productList = [
   {

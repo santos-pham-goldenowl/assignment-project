@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
-import "../Style/ChangeUserInfor.css";
+import "./style.css";
 
 class ChangeUserInfor extends React.Component {
   constructor(props) {
