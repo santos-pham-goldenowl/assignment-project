@@ -1,45 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import ShoppingItem from "../Component/ShoppingItem/ShoppingItem";
 
-const shoppingItemList = [
-  {
-    id: 1,
-    name: "Asus",
-    price: 20000,
-  },
-  {
-    id: 2,
-    name: "Asus",
-    price: 20000,
-  },
-  {
-    id: 3,
-    name: "Asus",
-    price: 20000,
-  },
-  {
-    id: 4,
-    name: "Asus",
-    price: 20000,
-  },
-  {
-    id: 5,
-    name: "Asus",
-    price: 20000,
-  },
-  {
-    id: 6,
-    name: "Asus",
-    price: 20000,
-  },
-  {
-    id: 7,
-    name: "Asus",
-    price: 20000,
-  },
-];
 class ShoppingItemList extends React.Component {
   constructor(props) {
     super(props);
@@ -49,7 +13,7 @@ class ShoppingItemList extends React.Component {
   }
   componentDidMount() {
     this.setState({
-      shoppingItemList: shoppingItemList,
+      shoppingItemList: this.props.shoppingList,
     });
   }
   render() {
@@ -83,4 +47,10 @@ class ShoppingItemList extends React.Component {
   }
 }
 
-export default ShoppingItemList;
+const mapStateToProps = (state) => {
+  return {
+    shoppingList: state.ShoppingListReducer,
+  };
+};
+
+export default connect(mapStateToProps, null)(ShoppingItemList);
