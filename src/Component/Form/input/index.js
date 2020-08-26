@@ -1,14 +1,6 @@
 import React from "react";
 import { Field, ErrorMessage } from "formik";
 
-function TitleForm(props) {
-  return (
-    <div className="title">
-      <p>{props.titleForm}</p>
-    </div>
-  );
-}
-
 function Input(props) {
   const {
     clNameContainerDiv,
@@ -36,15 +28,4 @@ function Input(props) {
   );
 }
 
-function Button(props) {
-  const { disabled } = props;
-  return (
-    <div className="btn-submit">
-      <button type="submit" disabled={disabled}>
-        Submit
-      </button>
-    </div>
-  );
-}
-
-export { TitleForm, Input, Button };
+export default Input;

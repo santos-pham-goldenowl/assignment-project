@@ -1,12 +1,12 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-import "../Style/ProductView.css";
-import Slider from "../Component/Carousel/Slider";
+import "./style.css";
+import Slider from "../../Component/Carousel/Slider";
 
 class ProductView extends React.Component {
   componentDidMount() {
-    const id = this.props.match.params.id;
+    // const id = this.props.match.params.id;
     // -Call Api to get data by id
   }
   render() {

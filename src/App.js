@@ -1,9 +1,15 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
-import Header from "./Component/Header/Header";
-import Footer from "./Component/Footer/Footer";
+import Header from "./Component/Header/index";
+import Footer from "./Component/Footer/index";
+import Login from "./Container/Login/index";
+import Signup from "./Container/Signup/index";
+import User from "./Container/User/index";
+import Cart from "./Container/Cart/index";
+import Product from "./Container/Product/index";
+import ProductView from "./Container/ProductView";
 
 class App extends React.Component {
   constructor(props) {
@@ -18,6 +24,29 @@ class App extends React.Component {
       <Router>
         <div className="app" ref={this.myRef}>
           <Header />
+
+          <Switch>
+            <Route exact path="/sign-up"></Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/signup">
+              <Signup />
+            </Route>
+            <Route path="/user">
+              <User />
+            </Route>
+            <Route path="/cart">
+              <Cart />
+            </Route>
+            <Route exact path="/">
+              <Product />
+            </Route>
+            <Route exact path="/product/:id">
+              <ProductView />
+            </Route>
+          </Switch>
+
           <Footer />
         </div>
       </Router>

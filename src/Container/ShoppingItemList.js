@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import ShoppingItem from "../Component/ShoppingItem/ShoppingItem";
-import EmptyCart from "../Component/Cart/EmptyCart";
 
 const shoppingItemList = [
   {
@@ -72,7 +71,7 @@ class ShoppingItemList extends React.Component {
             <p className="shopping-total-price">Total: 0</p>
           </div>
         ) : (
-          <EmptyCart />
+          <div className="empty-cart"></div>
         )}
         <div className="checkout-shopping">
           <Link to="/cart" className="checkout-shopping-btn">

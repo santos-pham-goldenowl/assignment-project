@@ -54,32 +54,6 @@ tr:nth-child(even) {
   background-color: #84ad77;
 }
 
-/* Table - Product Image  */
-.name-img-product {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.ordered-product-name {
-  margin-right: 30px;
-}
-
-/* Table - number of item */
-.change-numberof-item-ip {
-  width: 30px;
-  text-align: center;
-  margin: 0px 3px;
-}
-
-.remove-item-btn {
-  background-color: #e23737;
-  color: #fff;
-  border: none;
-  margin-left: 10px;
-  border-radius: 5px;
-}
-
 /* Table checkout */
 .checkout-btn {
   background-color: var(--primary-color);

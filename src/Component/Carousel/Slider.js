@@ -109,8 +109,8 @@ export default class Slider extends React.Component {
             );
           })}
         </div>
-        <button onClick={this.goLeft} class="slide-btn" id="go-left"></button>
-        <button onClick={this.goRight} class="slide-btn" id="go-right"></button>
+        <button onClick={this.goLeft} id="go-left"></button>
+        <button onClick={this.goRight} id="go-right"></button>
       </div>
     );
   }
