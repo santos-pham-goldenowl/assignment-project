@@ -1,97 +1,12 @@
 import React from "react";
 import { Container, Row } from "reactstrap";
+import { connect } from "react-redux";
 
 import "./style.css";
 import HelmetComp from "../../Component/Helmet";
-import ItemList from "../ItemList";
+// import ItemList from "../ItemList/index";
+import Item from "../../Component/Item/index";
 import Select from "../../Component/Select/index";
-
-const productList = [
-  {
-    id: 1,
-    name: "Asus laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/24/637233230044441609_dell-inspiron-n3593c-den-dd.png",
-    price: "18.000.0000",
-  },
-  {
-    id: 2,
-    name: "Dell laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/14/637224559757700958_asus-vivobook-x509-bac-dd.png",
-    price: "24.000.0000",
-  },
-  {
-    id: 3,
-    name: "Hp laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/6/2/637266923419786995_hp-15s-fq-bac-dd.png",
-    price: "15.000.0000",
-  },
-  {
-    id: 4,
-    name: "Thinkpad laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/2/27/637183901495990470_hp-348-g7-bac-dd.png",
-    price: "22.000.0000",
-  },
-  {
-    id: 5,
-    name: "Asus laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/24/637233230044441609_dell-inspiron-n3593c-den-dd.png",
-    price: "18.000.0000",
-  },
-  {
-    id: 6,
-    name: "Dell laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/14/637224559757700958_asus-vivobook-x509-bac-dd.png",
-    price: "24.000.0000",
-  },
-  {
-    id: 7,
-    name: "Hp laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/6/2/637266923419786995_hp-15s-fq-bac-dd.png",
-    price: "15.000.0000",
-  },
-  {
-    id: 8,
-    name: "Thinkpad laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/2/27/637183901495990470_hp-348-g7-bac-dd.png",
-    price: "22.000.0000",
-  },
-  {
-    id: 9,
-    name: "Asus laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/24/637233230044441609_dell-inspiron-n3593c-den-dd.png",
-    price: "18.000.0000",
-  },
-  {
-    id: 10,
-    name: "Dell laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/14/637224559757700958_asus-vivobook-x509-bac-dd.png",
-    price: "24.000.0000",
-  },
-  {
-    id: 11,
-    name: "Hp laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/6/2/637266923419786995_hp-15s-fq-bac-dd.png",
-    price: "15.000.0000",
-  },
-  {
-    id: 12,
-    name: "Thinkpad laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/2/27/637183901495990470_hp-348-g7-bac-dd.png",
-    price: "22.000.0000",
-  },
-];
 
 class Product extends React.Component {
   constructor(props) {
@@ -103,7 +18,7 @@ class Product extends React.Component {
 
   componentDidMount() {
     this.setState({
-      productList: productList,
+      productList: this.props.shoppingList,
     });
   }
 
@@ -137,7 +52,15 @@ class Product extends React.Component {
             />
           </Row>
           <Row className="product-list-row">
-            <ItemList productList={productList} />
+            {productList.map((product, index) => (
+              <Item
+                key={index}
+                id={product.id}
+                src={product.src}
+                name={product.name}
+                price={product.price}
+              />
+            ))}
           </Row>
         </Container>
       </div>
@@ -145,4 +68,10 @@ class Product extends React.Component {
   }
 }
 
-export default Product;
+function mapStateToProps(state) {
+  return {
+    shoppingList: state.ItemListReducer,
+  };
+}
+
+export default connect(mapStateToProps, null)(Product);
