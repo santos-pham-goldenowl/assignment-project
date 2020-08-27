@@ -15,7 +15,7 @@ function Input(props) {
   } = props;
   return (
     <div className={clNameContainerDiv}>
-      <label className="span-form" for="pw">
+      <label className="span-form" htmlFor="pw">
         {lbName}
       </label>
       <Field type={typeIp} name={nameIp} id={idIp} value={valueIp} />

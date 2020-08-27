@@ -2,9 +2,14 @@
 
 .header {
   height: 66px;
-  border-bottom: 1px solid var(--primary-color);
   display: flex;
-  position: relative;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  background-color: #fff;
+  box-shadow: 0 2px 2px 0 #c0f97f7d;
+  z-index: 2;
 }
 
 /* header logo */
