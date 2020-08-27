@@ -1,11 +1,13 @@
-import { Link } from "react-router-dom";
-
 import React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
 import "./style.css";
 import ShoppingItemList from "../../Container/ShoppingItemList";
 
 class Header extends React.Component {
   render() {
+    const { shoppingItemList } = this.props;
     return (
       <div className="header">
         <div>
@@ -45,7 +47,7 @@ class Header extends React.Component {
           </div>
           <div className="header-cart">
             <div className="count-in-cart">
-              <p>0</p>
+              <p>{shoppingItemList.length}</p>
             </div>
             <label htmlFor="cart-check-box" className="lbCart">
               <div to="/cart" className="cart-icon"></div>
@@ -65,4 +67,10 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    shoppingItemList: state.ShoppingListReducer,
+  };
+};
+
+export default connect(mapStateToProps, null)(Header);

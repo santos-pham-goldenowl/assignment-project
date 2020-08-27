@@ -4,12 +4,16 @@ import "./style.css";
 
 class Select extends React.Component {
   render() {
-    const { optionNameList, inputValue } = this.props;
+    const { optionNameList, inputValue, handleOnChange } = this.props;
     return (
-      <form action="" className="filter-form">
+      <form
+        action=""
+        className="filter-form"
+        onChange={(e) => handleOnChange(e)}
+      >
         <select name="" id="">
           {optionNameList.map((optionName) => (
-            <option value="" key={optionName.id}>
+            <option value={optionName.name} key={optionName.id}>
               {optionName.name}
             </option>
           ))}

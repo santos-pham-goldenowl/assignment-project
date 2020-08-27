@@ -2,37 +2,53 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import ShoppingItem from "../Component/ShoppingItem/ShoppingItem";
+import ShoppingItem from "../Component/ShoppingItem/index";
+import { RemoveItem } from "../redux/action";
 
 class ShoppingItemList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      shoppingItemList: [],
+  sumPrice = () => {
+    // - Remove dot notation
+    const removeDotNotation = (value) => {
+      const regex = /[.]/g;
+      return value.replace(regex, "");
     };
-  }
-  componentDidMount() {
-    this.setState({
-      shoppingItemList: this.props.shoppingList,
-    });
-  }
+
+    const { shoppingItemList } = this.props;
+    // - Get Sum of selected items' price
+    const sumPrice = shoppingItemList.reduce((accumulator, currentValue) => {
+      const numberPrice = removeDotNotation(currentValue.price);
+      const convertPriceToNumber = +numberPrice;
+      return accumulator + convertPriceToNumber * currentValue.count;
+    }, 0);
+
+    return sumPrice;
+  };
+
+  removeItem = (id) => {
+    return () => {
+      this.props.removeItem(id);
+    };
+  };
+
   render() {
-    const { shoppingItemList } = this.state;
+    const { shoppingItemList } = this.props;
     return (
       <div className="shopping-infor">
-        {true ? (
+        {/* - Render shopping item componnents */}
+        {shoppingItemList.length ? (
           <div>
             <div className="shopping-item-list-container">
               {shoppingItemList.map((shoppingItem) => (
                 <ShoppingItem
                   key={shoppingItem.id}
                   itemName={shoppingItem.name}
-                  countItem="1"
-                  priceSum={shoppingItem.price}
+                  countItem={shoppingItem.count}
+                  itemPrice={shoppingItem.price}
+                  removeItem={this.removeItem(shoppingItem.id)}
                 />
               ))}
             </div>
-            <p className="shopping-total-price">Total: 0</p>
+            <p className="shopping-total-price">Total: {this.sumPrice()}</p>
           </div>
         ) : (
           <div className="empty-cart"></div>
@@ -49,8 +65,14 @@ class ShoppingItemList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    shoppingList: state.ShoppingListReducer,
+    shoppingItemList: state.ShoppingListReducer,
   };
 };
 
-export default connect(mapStateToProps, null)(ShoppingItemList);
+function mapDispatchToProps(dispatch) {
+  return {
+    removeItem: (id) => dispatch(RemoveItem(id)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingItemList);

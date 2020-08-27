@@ -8,7 +8,7 @@ import Login from "./Container/Login/index";
 import Signup from "./Container/Signup/index";
 import User from "./Container/User/index";
 import Cart from "./Container/Cart/index";
-import Product from "./Container/Product/index";
+import ProductList from "./Container/ProductList/index";
 import ProductView from "./Container/ProductView";
 
 class App extends React.Component {
@@ -40,7 +40,7 @@ class App extends React.Component {
               <Cart />
             </Route>
             <Route exact path="/">
-              <Product />
+              <ProductList />
             </Route>
             <Route exact path="/product/:id">
               <ProductView />
