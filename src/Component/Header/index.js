@@ -45,6 +45,9 @@ class Header extends React.Component {
               </Link>
               <div className="signup-icon"></div>
             </div>
+            <div>
+              <p>Log out</p>
+            </div>
             <Link to="/user" className="menu-link">
               (Username)
             </Link>

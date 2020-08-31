@@ -39,6 +39,7 @@ class ProductList extends React.Component {
     const argValue = arg;
     // - Convert arguments array to an object
     const properties = Object.assign({}, argValue);
+
     // - Convert properties object to an object with keys in temp array respectively.
     const temp = ["id", "src", "name", "price"];
     temp.forEach((item, index) => {
@@ -63,7 +64,7 @@ class ProductList extends React.Component {
       valueSelect: value,
     });
   };
-
+  // - filter action when select
   filter = () => {
     const { valueSelect } = this.state;
     const actionFilter = Filter(valueSelect);

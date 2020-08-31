@@ -17,7 +17,7 @@ class ShoppingItemList extends React.Component {
     document.addEventListener("mousedown", this.handleOnOff);
   }
 
-  // handle popup component
+  // - handle popup component
   handleOnOff = (e) => {
     const { current } = this.shoppingListRef;
     const { target } = e;
@@ -28,7 +28,7 @@ class ShoppingItemList extends React.Component {
     }
   };
 
-  //calculate sum the price of all selected items
+  // - calculate sum the price of all selected items
   sumPrice = () => {
     const { shoppingList } = this.props.shoppingItemList;
     const sumPrice = shoppingList.reduce((accumulator, currentValue) => {
@@ -55,6 +55,7 @@ class ShoppingItemList extends React.Component {
               {shoppingList.map((shoppingItem) => (
                 <ShoppingItem
                   key={shoppingItem.id}
+                  src={shoppingItem.src}
                   itemName={shoppingItem.name}
                   countItem={shoppingItem.count}
                   itemPrice={shoppingItem.price}
