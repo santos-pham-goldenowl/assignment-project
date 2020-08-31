@@ -1,6 +1,8 @@
 import React from "react";
 import handlePrice from "../../utilities";
 
+import "./style.css";
+
 class ShoppingItem extends React.Component {
   render() {
     const { itemName, countItem, itemPrice, removeItem } = this.props;

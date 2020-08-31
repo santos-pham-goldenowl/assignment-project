@@ -2,9 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import ShoppingItem from "../Component/ShoppingItem/index";
-import { RemoveItem, HandlePopUp } from "../redux/action";
-import handlePrice from "../utilities";
+import "./style.css";
+import ShoppingItem from "../../Component/ShoppingItem/index";
+import { RemoveItem, HandlePopUp } from "../../redux/action";
+import handlePrice from "../../utilities";
 
 class ShoppingItemList extends React.Component {
   constructor(props) {
@@ -26,6 +27,8 @@ class ShoppingItemList extends React.Component {
       this.props.handlePopUp();
     }
   };
+
+  //calculate sum the price of all selected items
   sumPrice = () => {
     const { shoppingList } = this.props.shoppingItemList;
     const sumPrice = shoppingList.reduce((accumulator, currentValue) => {
@@ -62,10 +65,19 @@ class ShoppingItemList extends React.Component {
             <p className="shopping-total-price">Total: {this.sumPrice()}</p>
           </div>
         ) : (
-          <div className="empty-cart"></div>
+          <div className="empty-cart-container">
+            <div className="empty-cart"></div>
+          </div>
         )}
         <div className="checkout-shopping">
-          <Link to="/cart" className="checkout-shopping-btn">
+          <Link
+            to="/cart"
+            className={
+              shoppingList.length
+                ? "checkout-shopping-btn"
+                : "checkout-shopping-btn disable"
+            }
+          >
             PROCEED TO CHECKOUT
           </Link>
         </div>

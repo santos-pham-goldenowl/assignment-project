@@ -1,9 +1,8 @@
 /* Cart */
-
 .cart-page {
   /* padding-bottom: 150px; */
   margin-top: 66px;
-  min-height: calc(100% - 90px - 66px);
+  min-height: calc(100vh - 90px - 66px);
 }
 
 /* Back home  */
@@ -50,7 +49,9 @@ table {
   font-size: 1.5em;
 }
 
-tr, td, th {
+tr,
+td,
+th {
   text-align: center;
   border: 1px solid #dddddd;
   padding: 8px;
