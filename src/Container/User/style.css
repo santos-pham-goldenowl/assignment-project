@@ -1,6 +1,7 @@
 .user-infor-container {
   display: flex;
-  height: calc(100% - 90px - 66px);
+  height: calc(100vh - 90px - 66px);
+  margin-top: 66px;
   justify-content: center;
   align-items: center;
 }

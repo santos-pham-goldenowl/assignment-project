@@ -1,33 +1,40 @@
-const initialState = [];
+const initialState = {
+  shoppingList: [],
+  isPopUp: false,
+};
 function ShoppingListReducer(state = initialState, action) {
-  let newState = [...state];
+  let newState = { ...state };
   switch (action.type) {
     case "Add":
       const { id, src, name, price } = action.payload;
-      //if newState without a added id key is init a new key by id
-      const addedItem = newState.find((item) => {
+      // - if newState without a added id key is init a new key by id
+      const addedItem = newState.shoppingList.find((item) => {
         return item.id === id;
       });
+      // - else initiate a new item and push it into a added items array
       if (!addedItem) {
         const itemProperties = {
-          id: id,
-          src: src,
-          name: name,
-          price: price,
+          id,
+          src,
+          name,
+          price,
           count: 1,
         };
-        newState.push(itemProperties);
-        console.log("newState: ", newState);
+        newState.shoppingList.push(itemProperties);
       } else {
         addedItem.count++;
       }
       return newState;
     case "Remove":
       const idRemovedItem = action.payload;
-      const newSelectedItemList = newState.filter((item) => {
+      const newSelectedItemList = newState.shoppingList.filter((item) => {
         return item.id !== idRemovedItem;
       });
-      return newSelectedItemList;
+      newState.shoppingList = newSelectedItemList;
+      return newState;
+    case "PopUp":
+      newState.isPopUp = !newState.isPopUp;
+      return newState;
     default:
       return state;
   }

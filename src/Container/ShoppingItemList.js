@@ -3,25 +3,36 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import ShoppingItem from "../Component/ShoppingItem/index";
-import { RemoveItem } from "../redux/action";
+import { RemoveItem, HandlePopUp } from "../redux/action";
+import handlePrice from "../utilities";
 
 class ShoppingItemList extends React.Component {
-  sumPrice = () => {
-    // - Remove dot notation
-    const removeDotNotation = (value) => {
-      const regex = /[.]/g;
-      return value.replace(regex, "");
-    };
+  constructor(props) {
+    super(props);
+    this.shoppingListRef = React.createRef();
+  }
 
-    const { shoppingItemList } = this.props;
-    // - Get Sum of selected items' price
-    const sumPrice = shoppingItemList.reduce((accumulator, currentValue) => {
-      const numberPrice = removeDotNotation(currentValue.price);
-      const convertPriceToNumber = +numberPrice;
-      return accumulator + convertPriceToNumber * currentValue.count;
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleOnOff);
+  }
+
+  // handle popup component
+  handleOnOff = (e) => {
+    const { current } = this.shoppingListRef;
+    const { target } = e;
+    const cartIcon = document.getElementById("cart");
+    if (current && !current.contains(target) && target !== cartIcon) {
+      console.log("matched");
+      this.props.handlePopUp();
+    }
+  };
+  sumPrice = () => {
+    const { shoppingList } = this.props.shoppingItemList;
+    const sumPrice = shoppingList.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue.price * currentValue.count;
     }, 0);
 
-    return sumPrice;
+    return handlePrice(sumPrice);
   };
 
   removeItem = (id) => {
@@ -31,14 +42,14 @@ class ShoppingItemList extends React.Component {
   };
 
   render() {
-    const { shoppingItemList } = this.props;
+    const { shoppingList } = this.props.shoppingItemList;
     return (
-      <div className="shopping-infor">
+      <div ref={this.shoppingListRef} className="shopping-infor">
         {/* - Render shopping item componnents */}
-        {shoppingItemList.length ? (
+        {shoppingList.length ? (
           <div>
             <div className="shopping-item-list-container">
-              {shoppingItemList.map((shoppingItem) => (
+              {shoppingList.map((shoppingItem) => (
                 <ShoppingItem
                   key={shoppingItem.id}
                   itemName={shoppingItem.name}
@@ -72,6 +83,7 @@ const mapStateToProps = (state) => {
 function mapDispatchToProps(dispatch) {
   return {
     removeItem: (id) => dispatch(RemoveItem(id)),
+    handlePopUp: () => dispatch(HandlePopUp()),
   };
 }
 

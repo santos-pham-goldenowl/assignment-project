@@ -4,23 +4,17 @@ import "./style.css";
 
 class Select extends React.Component {
   render() {
-    const { optionNameList, inputValue, handleOnChange } = this.props;
+    const { optionNameList, handleOnChange } = this.props;
     return (
-      <form
-        action=""
-        className="filter-form"
-        onChange={(e) => handleOnChange(e)}
-      >
-        <select name="" id="">
+      <>
+        <select name="" id="" onChange={handleOnChange}>
           {optionNameList.map((optionName) => (
-            <option value={optionName.name} key={optionName.id}>
+            <option value={optionName.id} key={optionName.id}>
               {optionName.name}
             </option>
           ))}
         </select>
-        <br></br>
-        <input type="submit" value={inputValue}></input>
-      </form>
+      </>
     );
   }
 }

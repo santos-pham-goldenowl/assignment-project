@@ -4,10 +4,14 @@ import { connect } from "react-redux";
 
 import "./style.css";
 import ShoppingItemList from "../../Container/ShoppingItemList";
+import { HandlePopUp } from "../../redux/action";
 
 class Header extends React.Component {
+  handlePopUp = () => {
+    this.props.handlePopUp();
+  };
   render() {
-    const { shoppingItemList } = this.props;
+    const { shoppingList, isPopUp } = this.props.shoppingItemList;
     return (
       <div className="header">
         <div>
@@ -46,22 +50,22 @@ class Header extends React.Component {
             </Link>
           </div>
           <div className="header-cart">
-            <div className="count-in-cart">
-              <p>{shoppingItemList.length}</p>
+            <div className="count-in-cart" id="count-selected-item">
+              <p>{shoppingList.length}</p>
             </div>
-            <label htmlFor="cart-check-box" className="lbCart">
-              <div to="/cart" className="cart-icon"></div>
-            </label>
+            <div
+              id="cart"
+              className="cart-icon"
+              onClick={this.handlePopUp}
+            ></div>
           </div>
         </div>
-        <input
-          hidden
-          type="checkbox"
-          id="cart-check-box"
-          defaultChecked="false"
-        ></input>
-        <label htmlFor="cart-check-box" className="lbOverlay"></label>
-        <ShoppingItemList />
+        {isPopUp && (
+          <>
+            <div className="Overlay"></div>
+            <ShoppingItemList />
+          </>
+        )}
       </div>
     );
   }
@@ -73,4 +77,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Header);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handlePopUp: () => dispatch(HandlePopUp()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

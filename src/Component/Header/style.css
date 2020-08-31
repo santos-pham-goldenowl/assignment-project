@@ -37,7 +37,9 @@
 
 /* header menu custom */
 
-.header-menu-product, .header-user, .header-cart {
+.header-menu-product,
+.header-user,
+.header-cart {
   display: flex;
   align-items: center;
 }
@@ -78,7 +80,8 @@
 
 /* header user */
 
-.login, .signup {
+.login,
+.signup {
   display: flex;
   align-items: center;
   background-color: var(--primary-color);
@@ -87,11 +90,13 @@
   font-size: 1.2em;
 }
 
-.login, .signup {
+.login,
+.signup {
   padding-right: 8px;
 }
 
-.login .menu-link, .signup .menu-link {
+.login .menu-link,
+.signup .menu-link {
   display: inline-block;
   line-height: 100%;
   padding: 10px;
@@ -136,14 +141,8 @@
   font-size: 1.3em;
 }
 
-.count-in-cart>p {
+.count-in-cart > p {
   margin: 0px;
-}
-
-.header-cart .lbCart {
-  display: block;
-  height: 4em;
-  width: 4em;
 }
 
 .header-cart .cart-icon {
@@ -152,10 +151,29 @@
   width: 4em;
   background: url("../../Images/cart-arrow-down-solid.svg");
 }
+/* scale when click add button */
+.count-in-cart.scale {
+  animation: zoominoutsinglefeatured 1s infinite;
+  animation-iteration-count: 1;
+  z-index: 2;
+  background-color: #f07639;
+  color: #fff;
+}
+@keyframes zoominoutsinglefeatured {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1, 1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
 /* ---------- Cart infor ---------- */
 
-.lbOverlay {
+.Overlay {
   position: fixed;
   top: 66px;
   width: 100%;
@@ -173,7 +191,8 @@
   height: 400px;
   width: 350px;
   border: 1px solid rgba(105, 206, 110, 0.23);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(105, 206, 110, 0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
+    0 6px 6px rgba(105, 206, 110, 0.23);
   z-index: 2;
 }
 
@@ -249,7 +268,7 @@
   flex-grow: 1;
 }
 
-.remove-item>button {
+.remove-item > button {
   display: block;
   border: none;
   font-weight: bold;
@@ -284,14 +303,6 @@
   padding: 5px 15px;
   border-radius: 5px;
   margin: 0px auto;
-}
-
-#cart-check-box:checked~.lbOverlay {
-  display: none;
-}
-
-#cart-check-box:checked~.shopping-infor {
-  display: none;
 }
 
 /* Empty cart */

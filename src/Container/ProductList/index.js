@@ -6,14 +6,39 @@ import "./style.css";
 import HelmetComp from "../../Component/Helmet";
 import Product from "../../Component/Product/index";
 import Select from "../../Component/Select/index";
-import { AddItem, LowToHigh } from "../../redux/action/index";
+import { AddItem, Filter } from "../../redux/action/index";
 
 class ProductList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      optionNameList: [
+        {
+          id: 1,
+          name: "Category A",
+        },
+        {
+          id: 2,
+          name: "Categroy B",
+        },
+        {
+          id: 3,
+          name: "Price: Low to high",
+        },
+        {
+          id: 4,
+          name: "Price: Hight to low",
+        },
+      ],
+      valueSelect: "1",
+    };
+  }
   addItem = (...arg) => {
+    const countInCart = document.getElementById("count-selected-item");
+
     const argValue = arg;
     // - Convert arguments array to an object
     const properties = Object.assign({}, argValue);
-
     // - Convert properties object to an object with keys in temp array respectively.
     const temp = ["id", "src", "name", "price"];
     temp.forEach((item, index) => {
@@ -22,16 +47,27 @@ class ProductList extends React.Component {
     });
 
     return () => {
+      if (countInCart) {
+        countInCart.classList.add("scale");
+        setTimeout(() => {
+          countInCart.classList.remove("scale");
+        }, 1001);
+      }
       this.props.addItem(properties);
     };
   };
 
   handleOnChange = (e) => {
-    const valueSelect = e.target.value;
-    if (valueSelect === "Price: Low to high") {
-      this.props.lowToHigh(valueSelect);
-    }
-    console.log(e.target.value);
+    const { value } = e.target;
+    this.setState({
+      valueSelect: value,
+    });
+  };
+
+  filter = () => {
+    const { valueSelect } = this.state;
+    const actionFilter = Filter(valueSelect);
+    this.props.filter(actionFilter);
   };
 
   render() {
@@ -42,28 +78,17 @@ class ProductList extends React.Component {
         <HelmetComp title={"Home"} />
         <Container className="product-list-container">
           <Row>
-            <Select
-              optionNameList={[
-                {
-                  id: 1,
-                  name: "Category A",
-                },
-                {
-                  id: 2,
-                  name: "Categroy B",
-                },
-                {
-                  id: 3,
-                  name: "Price: Low to high",
-                },
-                {
-                  id: 4,
-                  name: "Price: Hight to low",
-                },
-              ]}
-              handleOnChange={this.handleOnChange}
-              inputValue={"Filter"}
-            />
+            <div className="filter">
+              <div className="filter-select">
+                <Select
+                  optionNameList={this.state.optionNameList}
+                  handleOnChange={this.handleOnChange}
+                />
+              </div>
+              <div className="filter-btn">
+                <button onClick={this.filter}>Filter</button>
+              </div>
+            </div>
           </Row>
           <Row className="product-list-row">
             {productList.map((product) => (
@@ -97,7 +122,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addItem: (properties) => dispatch(AddItem(properties)),
-    lowToHigh: (value) => dispatch(LowToHigh(value)),
+    filter: (value) => dispatch(value),
   };
 }
 

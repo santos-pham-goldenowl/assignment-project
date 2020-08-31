@@ -1,9 +1,19 @@
+// - Add item
 const AddItem = (properties) => {
   return {
     type: "Add",
     payload: properties,
   };
 };
+
+// const Middleware = (store) => (next) => (action) => {
+//   if (typeof action === "function") {
+//     action(next);
+//   }
+//   next(action);
+// };
+
+// - Remove item
 const RemoveItem = (id) => {
   return {
     type: "Remove",
@@ -11,11 +21,47 @@ const RemoveItem = (id) => {
   };
 };
 
-const LowToHigh = (value) => {
+// - Filter items
+const Filter = (value) => {
+  let valueAction;
+  switch (value) {
+    case "1":
+      console.log("1 in action");
+      valueAction = {
+        type: 1,
+        payload: value,
+      };
+      break;
+    case "2":
+      console.log("2");
+      valueAction = {
+        type: 2,
+        payload: value,
+      };
+      break;
+    case "3":
+      valueAction = {
+        type: 3,
+        payload: value,
+      };
+      break;
+    case "4":
+      valueAction = {
+        type: 4,
+        payload: value,
+      };
+      break;
+    default:
+      return null;
+  }
+  return valueAction;
+};
+
+// - handle PopUp
+const HandlePopUp = () => {
   return {
-    type: "Price: Low to high",
-    payload: value,
+    type: "PopUp",
   };
 };
 
-export { AddItem, RemoveItem, LowToHigh };
+export { AddItem, RemoveItem, Filter, HandlePopUp };

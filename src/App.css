@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
 }
+
 :root {
   --primary-color: #85b043;
 }
@@ -11,5 +12,5 @@ html {
 }
 
 .app {
-  height: 100vh;
+  /* height: 100vh; */
 }

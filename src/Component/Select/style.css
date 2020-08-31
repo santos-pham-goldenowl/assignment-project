@@ -1,20 +1,5 @@
 /* Product filterform */
-.filter-form {
-  width: 100px;
-  margin-bottom: 10px;
-}
 
-.filter-form select {
-  margin-top: 10px;
-  height: 30px;
-  font-size: 1.5em;
-}
-
-.filter-form input {
-  background-color: yellow;
-  margin-top: 10px;
-  padding: 3px 15px;
-  border: none;
-  border-radius: 3px;
-  font-size: 1.3em;
+select {
+  height: 27px;
 }

@@ -2,9 +2,12 @@ import React from "react";
 import { Col } from "reactstrap";
 import { Link } from "react-router-dom";
 
+import handlePrice from "../../utilities";
+
 class Product extends React.Component {
   render() {
     const { id, src, name, price, addItem } = this.props;
+    const displayPrice = handlePrice(price);
     return (
       <Col className="product">
         <div className="product-container">
@@ -12,7 +15,7 @@ class Product extends React.Component {
             <img src={src} alt="can not display"></img>
           </Link>
           <p className="product-name">{name}</p>
-          <p className="product-price">{price}</p>
+          <p className="product-price">{displayPrice}</p>
           <div className="product-add-to-cart">
             <button className="product-add-to-cart-btn" onClick={addItem}>
               Add to cart

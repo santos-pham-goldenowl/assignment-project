@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import HelmetComp from "../../Component/Helmet/index";
 import Input from "../../Component/Form/input/index";
 import Button from "../../Component/Form/button/index";
+
+import "../../Component/Form/style.css";
 import "./style.css";
 
 class Login extends React.Component {

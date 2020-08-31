@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import Input from "../../Component/Form/input/index";
 import Button from "../../Component/Form/button/index";
 import HelmetComp from "../../Component/Helmet";
+import "../../Component/Form/style.css";
 import "./style.css";
 
 class Signup extends React.Component {
