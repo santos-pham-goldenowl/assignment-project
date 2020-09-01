@@ -3,7 +3,8 @@
 .cart-page {
   /* padding-bottom: 150px; */
   margin-top: 66px;
-  min-height: calc(100vh - 90px - 66px);
+  margin-bottom: 100px;
+  min-height: calc(100vh - 90px - 66px - 100px);
 }
 
 /* Back home  */
@@ -50,9 +51,7 @@ table {
   font-size: 1.5em;
 }
 
-tr,
-td,
-th {
+tr, td, th {
   text-align: center;
   border: 1px solid #dddddd;
   padding: 8px;
@@ -60,6 +59,22 @@ th {
 
 tr:nth-child(even) {
   background-color: #84ad77;
+}
+
+tr:nth-child(2n+1) {
+  background-color: rgba(26, 175, 72, 0.42);
+}
+
+tr:first-child {
+  background-color: #b4bd6c;
+}
+
+tr:last-child {
+  background-color: #b4bd6c;
+}
+
+tr:last-child>th:first-child {
+  text-align: right;
 }
 
 /* Table checkout */

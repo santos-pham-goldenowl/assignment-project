@@ -31,4 +31,13 @@ const handlePrice = (value) => {
 //     return String(value).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, '$1,');
 // }
 
-export default handlePrice;
+// - calculate sum the price of all selected items
+const sumPrice = (props) => {
+  const { shoppingList } = props.shoppingItemList;
+  const sumPrice = shoppingList.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.price * currentValue.count;
+  }, 0);
+  return handlePrice(sumPrice);
+};
+
+export { handlePrice, sumPrice };

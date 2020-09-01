@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./style.css";
 import ShoppingItem from "../../Component/ShoppingItem/index";
+import { sumPrice } from "../../utilities";
 import { RemoveItem, HandlePopUp } from "../../redux/action";
-import handlePrice from "../../utilities";
 
 class ShoppingItemList extends React.Component {
   constructor(props) {
@@ -23,19 +23,8 @@ class ShoppingItemList extends React.Component {
     const { target } = e;
     const cartIcon = document.getElementById("cart");
     if (current && !current.contains(target) && target !== cartIcon) {
-      console.log("matched");
       this.props.handlePopUp();
     }
-  };
-
-  // - calculate sum the price of all selected items
-  sumPrice = () => {
-    const { shoppingList } = this.props.shoppingItemList;
-    const sumPrice = shoppingList.reduce((accumulator, currentValue) => {
-      return accumulator + currentValue.price * currentValue.count;
-    }, 0);
-
-    return handlePrice(sumPrice);
   };
 
   removeItem = (id) => {
@@ -44,8 +33,15 @@ class ShoppingItemList extends React.Component {
     };
   };
 
+  proceedCheckout = () => {
+    const { history, handlePopUp } = this.props;
+    history.push("/cart");
+    handlePopUp();
+  };
+
   render() {
-    const { shoppingList } = this.props.shoppingItemList;
+    const { props } = this;
+    const { shoppingList } = props.shoppingItemList;
     return (
       <div ref={this.shoppingListRef} className="shopping-infor">
         {/* - Render shopping item componnents */}
@@ -55,7 +51,7 @@ class ShoppingItemList extends React.Component {
               {shoppingList.map((shoppingItem) => (
                 <ShoppingItem
                   key={shoppingItem.id}
-                  src={shoppingItem.src}
+                  url={shoppingItem.url}
                   itemName={shoppingItem.name}
                   countItem={shoppingItem.count}
                   itemPrice={shoppingItem.price}
@@ -63,7 +59,7 @@ class ShoppingItemList extends React.Component {
                 />
               ))}
             </div>
-            <p className="shopping-total-price">Total: {this.sumPrice()}</p>
+            <p className="shopping-total-price">Total: {sumPrice(props)}</p>
           </div>
         ) : (
           <div className="empty-cart-container">
@@ -71,8 +67,8 @@ class ShoppingItemList extends React.Component {
           </div>
         )}
         <div className="checkout-shopping">
-          <Link
-            to="/cart"
+          <button
+            onClick={this.proceedCheckout}
             className={
               shoppingList.length
                 ? "checkout-shopping-btn"
@@ -80,7 +76,7 @@ class ShoppingItemList extends React.Component {
             }
           >
             PROCEED TO CHECKOUT
-          </Link>
+          </button>
         </div>
       </div>
     );
@@ -93,11 +89,13 @@ const mapStateToProps = (state) => {
   };
 };
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (dispatch) => {
   return {
     removeItem: (id) => dispatch(RemoveItem(id)),
     handlePopUp: () => dispatch(HandlePopUp()),
   };
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingItemList);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ShoppingItemList)
+);

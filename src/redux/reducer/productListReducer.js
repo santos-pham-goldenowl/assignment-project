@@ -2,84 +2,96 @@ const initialState = [
   {
     id: "abc1",
     name: "Asus laptop",
-    src:
+    color: "black",
+    url:
       "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/24/637233230044441609_dell-inspiron-n3593c-den-dd.png",
     price: "18000000",
   },
   {
     id: "abc2",
     name: "Dell laptop",
-    src:
+    color: "white",
+    url:
       "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/14/637224559757700958_asus-vivobook-x509-bac-dd.png",
     price: "24000000",
   },
   {
     id: "abc3",
     name: "Hp laptop",
-    src:
+    color: "red",
+    url:
       "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/6/2/637266923419786995_hp-15s-fq-bac-dd.png",
     price: "15000000",
   },
   {
     id: "abc4",
     name: "Thinkpad laptop",
-    src:
+    color: "yellow",
+    url:
       "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/2/27/637183901495990470_hp-348-g7-bac-dd.png",
     price: "22000000",
   },
   {
     id: "abc5",
     name: "MSI laptop",
-    src:
+    color: "brown",
+    url:
       "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/24/637233230044441609_dell-inspiron-n3593c-den-dd.png",
     price: "30000000",
   },
   {
     id: "abc6",
     name: "Dell laptop",
-    src:
+    color: "pink",
+    url:
       "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/14/637224559757700958_asus-vivobook-x509-bac-dd.png",
     price: "14000000",
   },
   {
     id: "abc7",
     name: "Hp laptop",
-    src:
+    color: "green",
+    url:
       "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/6/2/637266923419786995_hp-15s-fq-bac-dd.png",
     price: "19000000",
   },
   {
     id: "abc8",
     name: "Thinkpad laptop",
-    src:
+    color: "blue",
+    url:
       "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/2/27/637183901495990470_hp-348-g7-bac-dd.png",
     price: "26000000",
   },
   {
     id: "abc9",
     name: "DELL laptop",
-    src:
+    color: "silver",
+    url:
       "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/24/637233230044441609_dell-inspiron-n3593c-den-dd.png",
     price: "17000000",
   },
   {
     id: "abca10",
     name: "Lenovo laptop",
-    src:
+    color: "purple",
+    url:
       "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/14/637224559757700958_asus-vivobook-x509-bac-dd.png",
     price: "12000000",
   },
   {
     id: "abc11",
     name: "Hp laptop",
-    src:
+    color: "yellow",
+    url:
       "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/6/2/637266923419786995_hp-15s-fq-bac-dd.png",
     price: "15000000",
   },
   {
     id: "abc12",
     name: "Thinkpad laptop",
-    src:
+    color: "black",
+    url:
       "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/2/27/637183901495990470_hp-348-g7-bac-dd.png",
     price: "29000000",
   },

@@ -6,7 +6,7 @@ function ShoppingListReducer(state = initialState, action) {
   let newState = { ...state };
   switch (action.type) {
     case "Add":
-      const { id, src, name, price } = action.payload;
+      const { id, url, name, color, price } = action.payload;
       // - if newState without a added id key is init a new key by id
       const addedItem = newState.shoppingList.find((item) => {
         return item.id === id;
@@ -15,8 +15,9 @@ function ShoppingListReducer(state = initialState, action) {
       if (!addedItem) {
         const itemProperties = {
           id,
-          src,
+          url,
           name,
+          color,
           price,
           count: 1,
         };

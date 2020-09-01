@@ -1,44 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import CartItem from "../../Component/CartItem/index";
+import { connect } from "react-redux";
 
+import CartItem from "../../Component/CartItem/index";
+import { RemoveItem } from "../../redux/action";
+import { sumPrice } from "../../utilities";
 import "./style.css";
 
-const selectedItemList = [
-  {
-    name: "Dell",
-    url:
-      "https://cdn.tgdd.vn/Products/Images/44/218439/hp-348-g7-i5-9ph06pa-kg2-1-218439-400x400.jpg",
-    color: "black",
-    size: "M",
-    quantity: 1,
-    price: "$500",
-  },
-  {
-    name: "Asus",
-    url:
-      "https://cdn.tgdd.vn/Products/Images/44/225808/dell-vostro-3590-i5-grmgk3-225520-055537-400x400.jpg",
-    color: "white",
-    size: "L",
-    quantity: 3,
-    price: "$900",
-  },
-];
-
 class Cart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedItemList: [],
-    };
-  }
-  componentDidMount() {
-    this.setState({
-      selectedItemList,
-    });
-  }
+  // - Remove selected item
+  removeSelectedItem = (id) => {
+    return () => this.props.removeItem(id);
+  };
   render() {
-    const { selectedItemList } = this.state;
+    const { props } = this;
+    const { shoppingList } = props.shoppingItemList;
     return (
       <div className="cart-page">
         <div className="back-home-container">
@@ -55,23 +31,28 @@ class Cart extends React.Component {
               <tr>
                 <th>Name</th>
                 <th>Color</th>
-                <th>Size</th>
                 <th>Quantity</th>
                 <th>Price</th>
               </tr>
-              {selectedItemList.map((selectedItem, index) => {
+              {shoppingList.map((selectedItem, index) => {
                 return (
                   <CartItem
-                    key={index}
+                    key={selectedItem.id}
                     name={selectedItem.name}
                     url={selectedItem.url}
                     color={selectedItem.color}
-                    size={selectedItem.size}
-                    quantity={selectedItem.quantity}
+                    quantity={selectedItem.count}
                     price={selectedItem.price}
+                    removeSelectedItem={this.removeSelectedItem(
+                      selectedItem.id
+                    )}
                   />
                 );
               })}
+              <tr>
+                <th colSpan="3">Total</th>
+                <th>{sumPrice(props)}</th>
+              </tr>
             </tbody>
           </table>
           <div>
@@ -83,4 +64,16 @@ class Cart extends React.Component {
   }
 }
 
-export default Cart;
+const mapStateToProps = (state) => {
+  return {
+    shoppingItemList: state.ShoppingListReducer,
+  };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    removeItem: (id) => dispatch(RemoveItem(id)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

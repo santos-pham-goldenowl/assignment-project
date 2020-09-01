@@ -41,13 +41,14 @@ class ProductList extends React.Component {
     const properties = Object.assign({}, argValue);
 
     // - Convert properties object to an object with keys in temp array respectively.
-    const temp = ["id", "src", "name", "price"];
+    const temp = ["id", "url", "name", "color", "price"];
     temp.forEach((item, index) => {
       properties[item] = properties[index.toString()];
       delete properties[index];
     });
 
     return () => {
+      // add add to scale when click and then remove that class
       if (countInCart) {
         countInCart.classList.add("scale");
         setTimeout(() => {
@@ -96,13 +97,15 @@ class ProductList extends React.Component {
               <Product
                 key={product.id}
                 id={product.id}
-                src={product.src}
+                url={product.url}
+                color={product.color}
                 name={product.name}
                 price={product.price}
                 addItem={this.addItem(
                   product.id,
-                  product.src,
+                  product.url,
                   product.name,
+                  product.color,
                   product.price
                 )}
               />

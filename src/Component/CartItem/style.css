@@ -1,23 +1,31 @@
 /* Table - Product Image  */
-.product-name-img {
+
+.product-name-img-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.ordered-product-name {
-  margin-right: 30px;
+.product-name-img {
+  width: 60%;
 }
 
 /* Table - number of item */
+
 .change-numberof-item-ip {
-  width: 30px;
+  border: none;
+  width: 50px;
   text-align: center;
   margin: 0px 3px;
 }
 
+.change-quantity-btn {
+  border: none;
+  width: 30px;
+}
+
 .remove-item-btn {
-  background-color: #e23737;
+  background-color: #bb6464;
   color: #fff;
   border: none;
   margin-left: 10px;
