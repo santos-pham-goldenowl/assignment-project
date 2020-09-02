@@ -100,18 +100,21 @@ const initialState = [
 function ProductListReducer(state = initialState, action) {
   let newState = [...state];
   switch (action.type) {
-    case 1:
-      return state;
-    case 2:
-      return state;
+    // case 1:
+    //   return state;
+    // case 2:
+    //   return state;
     case 3:
-      const lowToHighList = newState.sort((a, b) => a.price - b.price);
-      return lowToHighList;
+      // const lowToHighList = newState.sort((a, b) => a.price - b.price);
+      // return lowToHighList;
+      const lowToHigh = [...newState];
+      const tempList = lowToHigh.sort((a, b) => a.price - b.price);
+      return tempList;
     case 4:
       const hightToLowList = newState.sort((a, b) => b.price - a.price);
       return hightToLowList;
     default:
-      return state;
+      return newState;
   }
 }
 

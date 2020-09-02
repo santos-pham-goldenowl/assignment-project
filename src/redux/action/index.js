@@ -26,14 +26,12 @@ const Filter = (value) => {
   let valueAction;
   switch (value) {
     case "1":
-      console.log("1 in action");
       valueAction = {
         type: 1,
         payload: value,
       };
       break;
     case "2":
-      console.log("2");
       valueAction = {
         type: 2,
         payload: value,

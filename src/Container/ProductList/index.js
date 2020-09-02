@@ -118,6 +118,7 @@ class ProductList extends React.Component {
 }
 
 function mapStateToProps(state) {
+  console.log("ProductListReducer: ", state.ProductListReducer);
   return {
     productList: state.ProductListReducer,
   };
