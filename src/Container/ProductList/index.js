@@ -15,11 +15,11 @@ class ProductList extends React.Component {
       optionNameList: [
         {
           id: 1,
-          name: "Category A",
+          name: "Mobile Category",
         },
         {
           id: 2,
-          name: "Categroy B",
+          name: "Tablet Categroy",
         },
         {
           id: 3,
@@ -118,7 +118,6 @@ class ProductList extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log("ProductListReducer: ", state.ProductListReducer);
   return {
     productList: state.ProductListReducer,
   };

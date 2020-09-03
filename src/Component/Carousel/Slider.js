@@ -2,79 +2,16 @@ import React from "react";
 import "./index.css";
 import SlideItem from "./SlideItem";
 
-const relatedProductList = [
-  {
-    id: 1,
-    name: "Asus laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/24/637233230044441609_dell-inspiron-n3593c-den-dd.png",
-    price: "18.000.0000",
-  },
-  {
-    id: 2,
-    name: "Dell laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/14/637224559757700958_asus-vivobook-x509-bac-dd.png",
-    price: "24.000.0000",
-  },
-  {
-    id: 3,
-    name: "Hp laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/6/2/637266923419786995_hp-15s-fq-bac-dd.png",
-    price: "15.000.0000",
-  },
-  {
-    id: 4,
-    name: "Thinkpad laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/2/27/637183901495990470_hp-348-g7-bac-dd.png",
-    price: "22.000.0000",
-  },
-  {
-    id: 5,
-    name: "Asus laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/24/637233230044441609_dell-inspiron-n3593c-den-dd.png",
-    price: "18.000.0000",
-  },
-  {
-    id: 6,
-    name: "Dell laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/4/14/637224559757700958_asus-vivobook-x509-bac-dd.png",
-    price: "24.000.0000",
-  },
-  {
-    id: 7,
-    name: "Hp laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/6/2/637266923419786995_hp-15s-fq-bac-dd.png",
-    price: "15.000.0000",
-  },
-  {
-    id: 8,
-    name: "Thinkpad laptop",
-    src:
-      "https://images.fpt.shop/unsafe/fit-in/240x215/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2020/2/27/637183901495990470_hp-348-g7-bac-dd.png",
-    price: "22.000.0000",
-  },
-];
 export default class Slider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       x: 0,
-      relatedProductList: [],
     };
-  }
-  componentDidMount() {
-    this.setState({
-      relatedProductList,
-    });
   }
   goLeft = () => {
     const { x } = this.state;
+    const { relatedProductList } = this.props;
     x === 0
       ? this.setState({
           x: -100 * (relatedProductList.length - 4),
@@ -83,6 +20,7 @@ export default class Slider extends React.Component {
   };
   goRight = () => {
     const { x } = this.state;
+    const { relatedProductList } = this.props;
     x === -100 * (relatedProductList.length - 4)
       ? this.setState({ x: 0 })
       : this.setState({ x: x - 100 });
@@ -90,6 +28,7 @@ export default class Slider extends React.Component {
 
   render() {
     const { x } = this.state;
+    const { relatedProductList, currentProductId } = this.props;
     let style = {
       transform: `translateX(${x}%)`,
     };
@@ -97,14 +36,16 @@ export default class Slider extends React.Component {
       <div className="slider">
         <p className="slider-title">Related Product</p>
         <div className="slide">
-          {relatedProductList.map((item, index) => {
+          {relatedProductList.map((product) => {
             return (
               <SlideItem
-                key={index}
-                name={item.name}
-                src={item.src}
-                price={item.price}
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                url={product.url}
+                price={product.price}
                 st={style}
+                currentProductId={currentProductId}
               />
             );
           })}

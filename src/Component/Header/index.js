@@ -45,12 +45,16 @@ class Header extends React.Component {
               </Link>
               <div className="signup-icon"></div>
             </div>
-            <div>
-              <p>Log out</p>
+            <div className="logout">
+              <Link to="/login" className="menu-link">
+                Log out
+              </Link>
             </div>
-            <Link to="/user" className="menu-link">
-              (Username)
-            </Link>
+            <div>
+              <Link to="/user" className="menu-link">
+                (Username)
+              </Link>
+            </div>
           </div>
           <div className="header-cart">
             <div className="count-in-cart" id="count-selected-item">

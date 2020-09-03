@@ -2,6 +2,8 @@ import React from "react";
 import { Col } from "reactstrap";
 import { Link } from "react-router-dom";
 
+import "./style.css";
+
 import { handlePrice } from "../../utilities";
 
 class Product extends React.Component {
@@ -12,7 +14,7 @@ class Product extends React.Component {
       <Col className="product">
         <div className="product-container">
           <Link to={`/product/${id}`} className="product-img">
-            <img src={url} alt="can not display"></img>
+            <img src={url} alt="can not display" width="230" height="200"></img>
           </Link>
           <p className="product-name">{name}</p>
           <p className="product-price">{displayPrice}</p>

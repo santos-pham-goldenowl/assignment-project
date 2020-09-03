@@ -66,9 +66,22 @@
     transition: 0.5s;
 }
 
+.slide-item.current {
+    border: 1px solid red;
+    box-shadow: 0 0 24px 6px rgba(97, 36, 36, 0.15);
+}
+
+.current-status {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 1.3em;
+    background-color: red;
+}
+
 .slide-item-name, .slide-item-price {
     font-size: 1.5em;
-    font-weight: 300;
+    font-weight: 400;
     margin-top: 5px;
     text-align: center;
 }

@@ -1,15 +1,27 @@
 import React from "react";
 
+import { handlePrice } from "../../utilities";
+
 class SlideItem extends React.Component {
   render() {
-    const { name, src, price, st } = this.props;
+    const { id, name, url, price, st, currentProductId } = this.props;
+    const displayPrice = handlePrice(price);
+    const currentClassname =
+      currentProductId === id ? "slide-item current" : "slide-item";
+    const currentStatus = currentProductId === id ? "Exploring" : "";
     return (
-      <div className="slide-item" style={st}>
+      <div className={currentClassname} style={st}>
+        <p className="current-status">{currentStatus}</p>
         <p className="slide-item-name">{name}</p>
         <div className="slide-item-img">
-          <img src={`${src}`} alt="Can not display"></img>
+          <img
+            src={`${url}`}
+            alt="Can not display"
+            width="230"
+            height="200"
+          ></img>
         </div>
-        <div className="slide-item-price">{price}</div>
+        <div className="slide-item-price">{displayPrice}</div>
       </div>
     );
   }

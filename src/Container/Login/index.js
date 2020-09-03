@@ -45,25 +45,25 @@ class Login extends React.Component {
                   <div className="user-input">
                     <Input
                       clNameContainerDiv="input-email"
-                      lbNameIp="Email"
+                      ipNameLabel="Email"
                       typeIp="email"
                       nameIp="email"
-                      idIp="email"
+                      ipId="email"
                       valueIp={values.email}
                       nameErr="email"
-                      componentErr="div"
-                      clNameErr="error"
+                      errorComponent="div"
+                      errorClName="error"
                     />
                     <Input
                       clNameContainerDiv="input-pw"
-                      lbNameIp="Password"
+                      ipNameLabel="Password"
                       typeIp="password"
                       nameIp="password"
-                      idIp="pw"
+                      ipId="pw"
                       valueIp={values.password}
                       nameErr="password"
-                      componentErr="div"
-                      clNameErr="error"
+                      errorComponent="div"
+                      errorClName="error"
                     />
                   </div>
                   <Button disabled={isSubmitting} />

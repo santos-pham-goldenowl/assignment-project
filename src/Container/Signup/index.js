@@ -43,25 +43,25 @@ class Signup extends React.Component {
                   <div className="user-input">
                     <Input
                       clNameContainerDiv="input-email"
-                      lbNameIp="Email"
+                      ipNameLabel="Email"
                       ipType="email"
                       ipName="email"
-                      idIp="email"
+                      ipId="email"
                       ipValue={values.email}
                       nameErr="email"
-                      componentErr="div"
-                      clNameErr="error"
+                      errorComponent="div"
+                      errorClName="error"
                     />
                     <Input
                       clNameContainerDiv="input-pw"
-                      lbNameIp="Password"
+                      ipNameLabel="Password"
                       typeIp="password"
                       nameIp="password"
                       idIp="pw"
                       valueIp={values.password}
                       nameErr="password"
-                      componentErr="div"
-                      clNameErr="error"
+                      errorComponent="div"
+                      errorClName="error"
                     />
                   </div>
                   <Button disabled={isSubmitting} />
