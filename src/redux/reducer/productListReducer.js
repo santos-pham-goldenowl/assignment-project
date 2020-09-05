@@ -74,7 +74,7 @@ const initialState = [
   },
   {
     id: "abc9",
-    name: "Samsung Galaxy Tab Ă",
+    name: "Samsung Galaxy Tab",
     color: "black",
     category: "tablet",
     url:
@@ -124,7 +124,7 @@ const initialState = [
     category: "tablet",
     url:
       "https://cdn.tgdd.vn/Products/Images/522/221774/ipad-pro-11-inch-wifi-cellular-128gb-2020-bac-600x600-200x200.jpg",
-    price: "29000000",
+    price: "26000000",
   },
   {
     id: "abc15",
@@ -133,7 +133,7 @@ const initialState = [
     category: "tablet",
     url:
       "https://cdn.tgdd.vn/Products/Images/522/202820/ipad-mini-79-inch-wifi-cellular-64gb-2019-gold-400x400.jpg",
-    price: "29000000",
+    price: "21000000",
   },
   {
     id: "abc16",
@@ -142,7 +142,7 @@ const initialState = [
     category: "tablet",
     url:
       "https://cdn.tgdd.vn/Products/Images/522/208870/samsung-galaxy-tab-s6-400x400.jpg",
-    price: "29000000",
+    price: "10000000",
   },
   {
     id: "abc17",
@@ -151,7 +151,7 @@ const initialState = [
     category: "mobile",
     url:
       "https://cdn.tgdd.vn/Products/Images/42/213591/oppo-reno3-trang-600x600-400x400.jpg",
-    price: "29000000",
+    price: "12000000",
   },
   {
     id: "abc18",
@@ -160,7 +160,7 @@ const initialState = [
     category: "mobile",
     url:
       "https://cdn.tgdd.vn/Products/Images/42/153856/iphone-11-red-400x400.jpg",
-    price: "29000000",
+    price: "17000000",
   },
   {
     id: "abc19",
@@ -169,7 +169,7 @@ const initialState = [
     category: "mobile",
     url:
       "https://cdn.tgdd.vn/Products/Images/42/219314/samsung-galaxy-a21s-055620-045659-400x400.jpg",
-    price: "29000000",
+    price: "19000000",
   },
   {
     id: "abc20",
@@ -178,7 +178,7 @@ const initialState = [
     category: "mobile",
     url:
       "https://cdn.tgdd.vn/Products/Images/42/226733/realme-c12-red-fix-2-600x600-200x200.jpg",
-    price: "29000000",
+    price: "11000000",
   },
   {
     id: "abc21",
@@ -187,7 +187,7 @@ const initialState = [
     category: "mobile",
     url:
       "https://cdn.tgdd.vn/Products/Images/42/210654/iphone-11-pro-max-512gb-gold-400x400.jpg",
-    price: "29000000",
+    price: "14000000",
   },
   {
     id: "abc22",
@@ -196,7 +196,7 @@ const initialState = [
     category: "mobile",
     url:
       "https://cdn.tgdd.vn/Products/Images/42/213022/samsung-galaxy-z-flip-den-600x600-400x400.jpg",
-    price: "29000000",
+    price: "24000000",
   },
   {
     id: "abc23",
@@ -205,7 +205,7 @@ const initialState = [
     category: "mobile",
     url:
       "https://cdn.tgdd.vn/Products/Images/42/210655/iphone-11-pro-256gb-black-400x400.jpg",
-    price: "29000000",
+    price: "26000000",
   },
   {
     id: "abc24",
@@ -214,7 +214,7 @@ const initialState = [
     category: "mobile",
     url:
       "https://cdn.tgdd.vn/Products/Images/42/217937/samsung-galaxy-s20-ultra-600x600-1-400x400.jpg",
-    price: "29000000",
+    price: "20000000",
   },
 ];
 
