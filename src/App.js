@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,15 +21,43 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.myRef = React.createRef();
-    this.state = {
-      isLogin: true,
-    };
   }
   componentDidMount() {
     this.myRef.current.scrollTo(0, 0);
   }
+  // Check if have isLogin in LocalStorage is get this value. Otherwise, get the value in redux
+  isLogin = () => {
+    const { user } = this.props;
+    const localStorageState = localStorage.getItem("persist:root");
+    let isLoginLocalStorage;
+    if (localStorageState) {
+      const isLoginTemp = JSON.parse(localStorageState).UserReducer;
+      isLoginLocalStorage = JSON.parse(isLoginTemp).isLogin;
+    }
+    const isLogin = isLoginLocalStorage ? isLoginLocalStorage : user.isLogin;
+    return isLogin;
+  };
+  // PrivateRoute is used to render components respectively when entering home page
+  PrivateRoute = ({ component: Component, ...rest }) => {
+    const isLogin = this.isLogin();
+    return (
+      <Route
+        render={(props) =>
+          isLogin === true ? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/login",
+                state: { from: props.location },
+              }}
+            />
+          )
+        }
+      />
+    );
+  };
   render() {
-    const { isLogin } = this.state;
     return (
       <Router>
         <div className="app" ref={this.myRef}>
@@ -48,9 +77,10 @@ class App extends React.Component {
             <Route path="/cart">
               <Cart />
             </Route>
-            <Route exact path="/">
-              {isLogin ? <ProductList /> : <Redirect to="/login" />}
-            </Route>
+            {/* <Route exact path="/">
+              {this.state.isLogin ? <ProductList /> : <Redirect to="/login" />}
+            </Route> */}
+            <this.PrivateRoute path="/" component={ProductList} />
             <Route exact path="/product/:id">
               <ProductView />
             </Route>
@@ -63,4 +93,10 @@ class App extends React.Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    user: state.UserReducer,
+  };
+}
+
+export default connect(mapStateToProps, null)(App);

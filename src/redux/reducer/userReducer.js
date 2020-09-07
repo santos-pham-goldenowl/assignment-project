@@ -1,4 +1,6 @@
-const initialState = [];
+const initialState = {
+  isLogin: false,
+};
 
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {

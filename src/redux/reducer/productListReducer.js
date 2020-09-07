@@ -220,21 +220,16 @@ const initialState = [
 
 function ProductListReducer(state = initialState, action) {
   let newState = [...state];
-  console.log("state: ", state);
-  console.log("initial newState: ", newState);
   switch (action.type) {
     case 1:
-      console.log("newState: ", newState);
       const mobileList = [...newState].filter(
         (product) => product.category === "mobile"
       );
       return mobileList; // lưu trong localStorage
     case 2:
-      console.log("newState: ", newState);
       const tabletList = [...newState].filter(
         (product) => product.category === "tablet"
       );
-      console.log("tablet: ", tabletList);
       return tabletList;
     case 3:
       const lowToHigh = [...newState];

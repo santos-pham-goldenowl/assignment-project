@@ -31,8 +31,21 @@ class ProductList extends React.Component {
         },
       ],
       valueSelect: "1",
+      productList: [],
     };
   }
+
+  // componentDidMount() {
+  //   fetch("/product")
+  //     .then((data) => data.json())
+  //     .then((data) => {
+  //       this.state.productList.push(data);
+  //       this.setState({
+  //         productList: this.state.productList,
+  //       });
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
   addItem = (...arg) => {
     const countInCart = document.getElementById("count-selected-item");
 
