@@ -4,8 +4,10 @@ const initialState = {
 
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 1:
-      return state;
+    case "Login":
+      const newState = { ...state };
+      newState.isLogin = true;
+      return newState;
     default:
       return state;
   }

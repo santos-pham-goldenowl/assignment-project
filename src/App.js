@@ -80,8 +80,8 @@ class App extends React.Component {
             {/* <Route exact path="/">
               {this.state.isLogin ? <ProductList /> : <Redirect to="/login" />}
             </Route> */}
-            <this.PrivateRoute path="/" component={ProductList} />
-            <Route exact path="/product/:id">
+            <this.PrivateRoute exact path="/" component={ProductList} />
+            <Route path="/product/:id">
               <ProductView />
             </Route>
           </Switch>

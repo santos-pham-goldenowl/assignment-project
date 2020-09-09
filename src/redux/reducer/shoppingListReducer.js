@@ -11,6 +11,7 @@ function ShoppingListReducer(state = initialState, action) {
       const addedItem = newState.shoppingList.find((item) => {
         return item.id === id;
       });
+
       // - else initiate a new item and push it into a added items array
       if (!addedItem) {
         const itemProperties = {
@@ -21,6 +22,7 @@ function ShoppingListReducer(state = initialState, action) {
           price,
           count: 1,
         };
+
         newState.shoppingList.push(itemProperties);
       } else {
         addedItem.count++;
@@ -31,6 +33,7 @@ function ShoppingListReducer(state = initialState, action) {
       const newSelectedItemList = newState.shoppingList.filter((item) => {
         return item.id !== idRemovedItem;
       });
+
       newState.shoppingList = newSelectedItemList;
       return newState;
     case "PopUp":

@@ -62,4 +62,11 @@ const HandlePopUp = () => {
   };
 };
 
-export { AddItem, RemoveItem, Filter, HandlePopUp };
+const LoginAct = () => {
+  console.log("action");
+  return {
+    type: "Login",
+  };
+};
+
+export { AddItem, RemoveItem, Filter, HandlePopUp, LoginAct };

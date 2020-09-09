@@ -1,10 +1,12 @@
 import React from "react";
 import { Formik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 import HelmetComp from "../../Component/Helmet/index";
 import Input from "../../Component/Form/input/index";
 import Button from "../../Component/Form/button/index";
+import { LoginAct } from "../../redux/action/index";
 
 import "../../Component/Form/style.css";
 import "./style.css";
@@ -32,7 +34,11 @@ class Login extends React.Component {
           }}
           // -onSubmit (Sign in)
           onSubmit={(values, { setSubmitting }) => {
+            this.props.login();
             setSubmitting(false);
+            // react router dom version 4
+            this.props.history.push("/");
+            // window.location = "/";
           }}
         >
           {({ values, handleSubmit, isSubmitting }) => (
@@ -85,4 +91,16 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+function mapStateToProps(state) {
+  return {
+    user: state.UserReducer,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    login: () => dispatch(LoginAct()),
+  };
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
