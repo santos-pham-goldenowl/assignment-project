@@ -36,35 +36,14 @@ class Login extends React.Component {
           // -onSubmit (Sign in)
           onSubmit={(values, { setSubmitting }) => {
             setSubmitting(false);
-            axios
-              .post("/api/login", values)
-              .then((res) => {
-                if (res.data.success) {
-                  localStorage.setItem("token", res.data.token);
-                  this.props.login();
-                  this.props.history.push("/");
-                }
-              })
-              .catch((err) => console.log("err: ", err));
-
-            // fetch("/login", {
-            //   method: "POST",
-            //   headers: {
-            //     "Content-Type": "application/json",
-            //     Accept: "application/json",
-            //   },
-            //   body: JSON.stringify(values),
-            // })
-            //   .then((res) => res.json())
-            //   .then((data) => {
-            //     this.props.login();
-            // const { token } = data;
-            // cookie.set("token", token);
-            //
-            // });
-
-            // react router dom version 4
-            // window.location = "/";
+            axios.post("/api/login", values).then((res) => {
+              if (res.data.success) {
+                localStorage.setItem("token", res.data.token);
+                this.props.login();
+                this.props.history.push("/");
+              }
+            });
+            // .catch((err) => console.log("err: ", err));
           }}
         >
           {({ values, handleSubmit, isSubmitting }) => (
