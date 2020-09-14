@@ -1,4 +1,5 @@
 'use strict';
+const bcrypt = require('bcrypt');
 const {
   Model
 } = require('sequelize');
@@ -11,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+    }
+
+    async isValidPassword(password) {
+      return await bcrypt.compare(password, this.password);
     }
   };
   Users.init({
@@ -27,12 +32,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    password: {
+      type: DataTypes.STRING,
+      allowNUll: false,
+    },
     phone: DataTypes.STRING,
     avatarUrl: DataTypes.STRING,
     secretKey: DataTypes.STRING,
   }, {
     sequelize,
-    modelName: 'Users',
+    modelName: 'Users'
   });
+
   return Users;
 };

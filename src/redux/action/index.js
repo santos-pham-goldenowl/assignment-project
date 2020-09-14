@@ -63,7 +63,6 @@ const HandlePopUp = () => {
 };
 
 const LoginAct = () => {
-  console.log("action");
   return {
     type: "Login",
   };

@@ -4,23 +4,24 @@ import { Field, ErrorMessage } from "formik";
 function Input(props) {
   const {
     clNameContainerDiv,
+    htmlFor,
     ipNameLabel,
-    typeIp,
-    nameIp,
+    ipType,
+    ipName,
     ipId,
     valueIp,
-    nameErr,
+    errName,
     errorComponent,
     errorClName,
   } = props;
   return (
     <div className={clNameContainerDiv}>
-      <label className="span-form" htmlFor="pw">
+      <label className="span-form" htmlFor={htmlFor}>
         {ipNameLabel}
       </label>
-      <Field type={typeIp} name={nameIp} id={ipId} value={valueIp} />
+      <Field type={ipType} name={ipName} id={ipId} value={valueIp} />
       <ErrorMessage
-        name={nameErr}
+        name={errName}
         component={errorComponent}
         className={errorClName}
       />

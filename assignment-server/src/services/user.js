@@ -1,4 +1,4 @@
-import Models from '@models';
+import Models from "@models";
 
 class UserService {
   constructor() {
@@ -10,9 +10,30 @@ class UserService {
 
   publicInformation(user) {
     delete user.secretKey;
+    delete user.password;
     return {
       ...user,
-    }
+    };
+  }
+
+  getUsers(filter) {
+    return this.UserModel.findAll(filter);
+  }
+
+  getUserByEmail(email) {
+    return this.UserModel.findOne({
+      where: {
+        email,
+      },
+    });
+  }
+
+  getUserById(id) {
+    return this.UserModel.findOne({
+      where: {
+        id,
+      },
+    });
   }
 }
 

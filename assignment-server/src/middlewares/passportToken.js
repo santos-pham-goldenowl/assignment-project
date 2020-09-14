@@ -1,40 +1,24 @@
-const passport = require('passport');
-const BearerStrategy = require('passport-http-bearer');
+import passport from "passport";
+import { Strategy as localStrategy } from "passport-local";
+import { Strategy as JwtStrategy } from "passport-jwt";
+import { ExtractJwt } from "passport-jwt";
+import { UserService } from "@services";
 
-passport.use(new BearerStrategy(
-  // function(consumerKey, done) {
-  //   console.log('run to comsuserKey');
-  //   Consumer.findOne({ key: consumerKey }, function (err, consumer) {
-  //     if (err) { return done(err); }
-  //     if (!consumer) { return done(null, false); }
-  //     return done(null, consumer, consumer.secret);
-  //   });
-  // },
-  // function(accessToken, done) {
-  //   console.log('accessToken: ', accessToken);
-  //   AccessToken.findOne({ token: accessToken }, function (err, token) {
-  //     if (err) { return done(err); }
-  //     if (!token) { return done(null, false); }
-  //     Users.findById(token.userId, function(err, user) {
-  //       if (err) { return done(err); }
-  //       if (!user) { return done(null, false); }
-  //       // fourth argument is optional info.  typically used to pass
-  //       // details needed to authorize the request (ex: `scope`)
-  //       return done(null, user, token.secret, { scope: token.scope });
-  //     });
-  //   });
-  // },
-  // function(timestamp, nonce, done) {
-  //   console.log('come here????');
-  //   // validate the timestamp and nonce as necessary
-  //   done(null, true)
-  // }
-  function(token, done) {
-    console.log('token: ', token);
-    // User.findOne({ token: token }, function (err, user) {
-    //   if (err) { return done(err); }
-    //   if (!user) { return done(null, false); }
-    //   return done(null, user, { scope: 'read' });
-    // });
-  }
-));
+let opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = process.env.JWT_SECRET_KEY;
+passport.use(
+  new JwtStrategy(opts, async function (jwt_payload, done) {
+    const { id } = jwt_payload;
+    const existedUser = await UserService.getUserById(id);
+    if (!existedUser) {
+      return done(new Error("Not found!"), false);
+    }
+    if (existedUser) {
+      return done(null, existedUser);
+    } else {
+      return done(null, false);
+      // or you could create a new account
+    }
+  })
+);
