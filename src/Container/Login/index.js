@@ -2,6 +2,7 @@ import React from "react";
 import { Formik } from "formik";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import axios from "axios";
 
 import HelmetComp from "../../Component/Helmet/index";
 import Input from "../../Component/Form/input/index";
@@ -34,10 +35,35 @@ class Login extends React.Component {
           }}
           // -onSubmit (Sign in)
           onSubmit={(values, { setSubmitting }) => {
-            this.props.login();
             setSubmitting(false);
+            axios
+              .post("/api/login", values)
+              .then((res) => {
+                if (res.data.success) {
+                  localStorage.setItem("token", res.data.token);
+                  this.props.login();
+                  this.props.history.push("/");
+                }
+              })
+              .catch((err) => console.log("err: ", err));
+
+            // fetch("/login", {
+            //   method: "POST",
+            //   headers: {
+            //     "Content-Type": "application/json",
+            //     Accept: "application/json",
+            //   },
+            //   body: JSON.stringify(values),
+            // })
+            //   .then((res) => res.json())
+            //   .then((data) => {
+            //     this.props.login();
+            // const { token } = data;
+            // cookie.set("token", token);
+            //
+            // });
+
             // react router dom version 4
-            this.props.history.push("/");
             // window.location = "/";
           }}
         >
@@ -50,24 +76,26 @@ class Login extends React.Component {
                   </div>
                   <div className="user-input">
                     <Input
-                      clNameContainerDiv="input-email"
+                      clNameContainerDiv="ip-form"
+                      htmlFor="email"
                       ipNameLabel="Email"
-                      typeIp="email"
-                      nameIp="email"
+                      ipType="email"
+                      ipName="email"
                       ipId="email"
                       valueIp={values.email}
-                      nameErr="email"
+                      errName="email"
                       errorComponent="div"
                       errorClName="error"
                     />
                     <Input
-                      clNameContainerDiv="input-pw"
+                      clNameContainerDiv="ip-form"
+                      htmlFor="password"
                       ipNameLabel="Password"
-                      typeIp="password"
+                      ipType="password"
                       nameIp="password"
-                      ipId="pw"
+                      ipId="password"
                       valueIp={values.password}
-                      nameErr="password"
+                      errName="password"
                       errorComponent="div"
                       errorClName="error"
                     />

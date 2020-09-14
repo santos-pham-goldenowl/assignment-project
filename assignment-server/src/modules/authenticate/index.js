@@ -1,11 +1,22 @@
-import { Router } from 'express';
-import Controller from './controller';
-import trycatchWrapper from '@utils/trycatchWrapper';
+import { Router } from "express";
+import Controller from "./controller";
+import trycatchWrapper from "@utils/trycatchWrapper";
+import passport from "passport";
 
-const router = new Router();
+const publicRoutes = new Router();
 
-router.post('/signup', trycatchWrapper(async (req, res, next) => {
-  return await Controller.signUp(req, res, next);
-}));
+publicRoutes.post(
+  "/signup",
+  trycatchWrapper(async (req, res, next) => {
+    return await Controller.signUp(req, res, next);
+  })
+);
 
-export default router;
+publicRoutes.post(
+  "/login",
+  trycatchWrapper(async (req, res, next) => {
+    return await Controller.login(req, res, next);
+  })
+);
+
+export default publicRoutes;

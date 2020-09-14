@@ -1,5 +1,5 @@
-// import Models from '@models';
-import { ProductService } from '@services';
+import Models from "@models";
+import { ProductService } from "@services";
 // import Services from '@services';
 
 class ProductController {
@@ -13,7 +13,7 @@ class ProductController {
         success: true,
         results: results,
       });
-    } catch(err) {
+    } catch (err) {
       next(err);
     }
   }
@@ -27,7 +27,7 @@ class ProductController {
         success: true,
         result: result,
       });
-    } catch(err) {
+    } catch (err) {
       next(err);
     }
   }

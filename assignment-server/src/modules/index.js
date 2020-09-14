@@ -2,11 +2,18 @@ import { Router } from 'express';
 import ProductRoutes from './products';
 import CategoriesRoutes from './categories';
 import AuthenticationRoutes from './authenticate';
+import UserRoutes from './users';
 
-const router = new Router();
+const secureRoutes = new Router();
+const publicRoutes = new Router();
 
-router.use('/products', ProductRoutes);
-router.use('/categories', CategoriesRoutes);
-router.use('/', AuthenticationRoutes);
+publicRoutes.use('/', AuthenticationRoutes);
 
-export default router;
+secureRoutes.use('/products', ProductRoutes);
+secureRoutes.use('/categories', CategoriesRoutes);
+secureRoutes.use('/users', UserRoutes);
+
+export {
+  publicRoutes,
+  secureRoutes,
+};

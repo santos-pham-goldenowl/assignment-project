@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row } from "reactstrap";
 import { connect } from "react-redux";
+import axios from "axios";
 
 import "./style.css";
 import HelmetComp from "../../Component/Helmet";
@@ -35,17 +36,21 @@ class ProductList extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   fetch("/product")
-  //     .then((data) => data.json())
-  //     .then((data) => {
-  //       this.state.productList.push(data);
-  //       this.setState({
-  //         productList: this.state.productList,
-  //       });
-  //     })
-  //     .catch((err) => console.log(err));
-  // }
+  componentDidMount() {
+    const token = localStorage.getItem("token");
+    const authToken = "Bearer " + token;
+    const options = {
+      headers: {
+        Authorization: authToken,
+      },
+    };
+    axios.get("/api/products", options).then((response) => {
+      const { results } = response.data;
+      this.setState({
+        productList: results,
+      });
+    });
+  }
   addItem = (...arg) => {
     const countInCart = document.getElementById("count-selected-item");
 
@@ -86,7 +91,7 @@ class ProductList extends React.Component {
   };
 
   render() {
-    const { productList } = this.props;
+    const { productList } = this.state;
     // debugger;
     return (
       <div className="main-container">
@@ -110,13 +115,13 @@ class ProductList extends React.Component {
               <Product
                 key={product.id}
                 id={product.id}
-                url={product.url}
+                url={product.image_url}
                 color={product.color}
                 name={product.name}
                 price={product.price}
                 addItem={this.addItem(
                   product.id,
-                  product.url,
+                  product.image_url,
                   product.name,
                   product.color,
                   product.price
