@@ -2,47 +2,76 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import "./style.css";
 import Slider from "../../Component/Carousel/Slider";
-import { handlePrice } from "../../utilities";
+import { handlePrice, headerToken } from "../../utilities/index";
+import httpLayer from "../../httpLayer";
+
+import "./style.css";
 
 class ProductView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: "",
+      productSelected: "",
       relatedProductList: [],
     };
   }
-  componentDidMount() {
+  async componentDidMount() {
     // -Call Api to get data by id
-    const id = this.props.match.params.id;
+    const response = await this.getUser();
+    const product = response.result;
 
-    // - Get productList from Redux, then find a product that have its id, after that find category by id.
-    // - Finally, use filter method to get product list which has the same category.
-    const { productList } = this.props;
-    const product = productList.find((product) => product.id === id);
-    const { category } = product;
-    let newList = productList.filter(
-      (product) => product.category === category
-    );
+    // - Get categrory value of selecting product and call Api to get category list by it.
+    const { category } = response.result;
+    const categoryList = await this.getCategoryList(category);
 
     // - Set selected product on head of aray by insert selected product into the array
-    // - After using Set() method to get unique product value.
+    //  - After using reduce method to remove duplicate values after getting a new array with unique values.
+    const newList = [...categoryList.result];
     newList.unshift(product);
-    const relatedProductList = Array.from(new Set(newList));
+
+    const relatedProductList = newList.reduce((accumulator, currentValue) => {
+      const { id } = currentValue;
+      const flag = accumulator.find((item) => item.id === id);
+      if (!flag) {
+        accumulator.push(currentValue);
+      }
+      return accumulator;
+    }, []);
+
+    // - product is representative for current product
+    // - relatedProductList is reprentative for product list that relative with current value (Slide);
     this.setState({
-      product,
+      productSelected: product,
       relatedProductList,
     });
   }
 
+  async getUser() {
+    const id = this.props.match.params.id;
+    const response = await httpLayer
+      .get(`/api/products/${id}`, headerToken)
+      .then((res) => {
+        return res.data;
+      });
+    return response;
+  }
+
+  async getCategoryList(category) {
+    const response = await httpLayer
+      .get(`/api/products/category/${category}`, headerToken)
+      .then((res) => {
+        return res.data;
+      });
+    return response;
+  }
+
   render() {
-    const { relatedProductList, product } = this.state;
-    const { url, name, price } = product;
+    const { productSelected, relatedProductList } = this.state;
+    const { imageUrl, name, price } = productSelected;
     let displayPrice;
     if (price) {
-      displayPrice = handlePrice(price);
+      displayPrice = handlePrice.formatPrice(price);
     } else {
       displayPrice = "";
     }
@@ -54,7 +83,7 @@ class ProductView extends React.Component {
             <div className="product-view-img-container">
               <div
                 className="product-view-img"
-                style={{ backgroundImage: `url("${url}")` }}
+                style={{ backgroundImage: `url("${imageUrl}")` }}
               ></div>
             </div>
             <div className="product-view-action">

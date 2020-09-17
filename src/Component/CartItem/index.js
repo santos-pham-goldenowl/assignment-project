@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./style.css";
-import { handlePrice } from "../../utilities";
+import { handlePrice } from "../../utilities/index";
 
 class CartItem extends React.Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class CartItem extends React.Component {
       price,
       removeSelectedItem,
     } = this.props;
-    const displayPrice = handlePrice(price);
+    const displayPrice = handlePrice.formatPrice(price);
     return (
       <>
         <tr>

@@ -9,10 +9,12 @@ class UserService {
   }
 
   publicInformation(user) {
-    delete user.secretKey;
-    delete user.password;
+    // delete user.secretKey;
+    // delete user.password;
+    const { password, secretKey, ...rest } = { ...user };
     return {
-      ...user,
+      // ...user,
+      rest,
     };
   }
 

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import CartItem from "../../Component/CartItem/index";
 import { RemoveItem } from "../../redux/action";
-import { sumPrice } from "../../utilities";
+import { handlePrice } from "../../utilities/index";
 import "./style.css";
 
 class Cart extends React.Component {
@@ -51,7 +51,7 @@ class Cart extends React.Component {
               })}
               <tr>
                 <th colSpan="3">Total</th>
-                <th>{sumPrice(props)}</th>
+                <th>{handlePrice.priceSum(props)}</th>
               </tr>
             </tbody>
           </table>

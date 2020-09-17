@@ -1,8 +1,6 @@
-'use strict';
-const bcrypt = require('bcrypt');
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const bcrypt = require("bcrypt");
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Users extends Model {
     /**
@@ -14,35 +12,38 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
 
-    async isValidPassword(password) {
-      return await bcrypt.compare(password, this.password);
+    isValidPassword(password) {
+      return bcrypt.compare(password, this.password);
     }
-  };
-  Users.init({
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
+  }
+  Users.init(
+    {
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNUll: false,
+      },
+      phone: DataTypes.STRING,
+      avatarUrl: DataTypes.STRING,
+      secretKey: DataTypes.STRING,
     },
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNUll: false,
-    },
-    phone: DataTypes.STRING,
-    avatarUrl: DataTypes.STRING,
-    secretKey: DataTypes.STRING,
-  }, {
-    sequelize,
-    modelName: 'Users'
-  });
+    {
+      sequelize,
+      modelName: "Users",
+    }
+  );
 
   return Users;
 };

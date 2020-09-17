@@ -1,13 +1,14 @@
 import React from "react";
 import { Container, Row } from "reactstrap";
 import { connect } from "react-redux";
-import axios from "axios";
 
 import "./style.css";
 import HelmetComp from "../../Component/Helmet";
 import Product from "../../Component/Product/index";
 import Select from "../../Component/Select/index";
 import { AddItem, Filter } from "../../redux/action/index";
+import httpLayer from "../../httpLayer/index";
+import { headerToken } from "../../utilities/index";
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -37,23 +38,17 @@ class ProductList extends React.Component {
   }
 
   componentDidMount() {
-    const token = localStorage.getItem("token");
-    const authToken = "Bearer " + token;
-    const options = {
-      headers: {
-        Authorization: authToken,
-      },
-    };
-    axios.get("/api/products", options).then((response) => {
+    httpLayer.get("/api/products", headerToken).then((response) => {
       const { results } = response.data;
+      console.log("results: ", results);
       this.setState({
         productList: results,
       });
     });
   }
+
   addItem = (...arg) => {
     const countInCart = document.getElementById("count-selected-item");
-
     const argValue = arg;
     // - Convert arguments array to an object
     const properties = Object.assign({}, argValue);
@@ -115,7 +110,7 @@ class ProductList extends React.Component {
               <Product
                 key={product.id}
                 id={product.id}
-                url={product.image_url}
+                url={product.imageUrl}
                 color={product.color}
                 name={product.name}
                 price={product.price}
@@ -138,6 +133,7 @@ class ProductList extends React.Component {
 function mapStateToProps(state) {
   return {
     productList: state.ProductListReducer,
+    user: state.UserReducer,
   };
 }
 

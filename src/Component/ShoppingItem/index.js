@@ -1,12 +1,12 @@
 import React from "react";
-import { handlePrice } from "../../utilities";
+import { handlePrice } from "../../utilities/index";
 
 import "./style.css";
 
 class ShoppingItem extends React.Component {
   render() {
     const { url, itemName, countItem, itemPrice, removeItem } = this.props;
-    const displayPrice = handlePrice(itemPrice);
+    const displayPrice = handlePrice.formatPrice(itemPrice);
     return (
       <div className="shopping-item-container">
         <div className="shopping-item">

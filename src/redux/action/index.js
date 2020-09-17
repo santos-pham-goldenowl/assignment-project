@@ -62,10 +62,17 @@ const HandlePopUp = () => {
   };
 };
 
-const LoginAct = () => {
+const LoginAct = (userName) => {
   return {
     type: "Login",
+    userName,
   };
 };
 
-export { AddItem, RemoveItem, Filter, HandlePopUp, LoginAct };
+const LogOut = () => {
+  return {
+    type: "LogOut",
+  };
+};
+
+export { AddItem, RemoveItem, Filter, HandlePopUp, LoginAct, LogOut };

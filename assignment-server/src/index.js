@@ -6,6 +6,7 @@ import path from "path";
 import db from "@models";
 import { secureRoutes, publicRoutes } from "@modules";
 import passport from "passport";
+import cors from "cors";
 
 require("@middlewares/passportToken");
 // import { handleErrorResponse } from 'src/utils/response';
@@ -18,6 +19,7 @@ app.use(
   })
 );
 app.use(passport.initialize());
+app.use(cors());
 
 // Test DB connection
 db.sequelize
@@ -48,6 +50,7 @@ app.use((err, req, res, next) => {
       ? err.message
       : "general server error!";
   if (err.status === 401 || err.status === 400 || err.status === 409) {
+    console.log("errors from db: ", err.message);
     res.status(err.status);
     errorMsg = err.message;
   }

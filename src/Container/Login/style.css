@@ -14,3 +14,20 @@
   font-size: 1.3em;
   margin: 0px 0px 10px 0px;
 }
+/* Error */
+
+.has-not-account {
+  margin: 10px 0px 15px;
+  color: rgb(49, 43, 131);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+/* forgot password*/
+
+.forgot-pw {
+  display: block;
+  color: #802639;
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}

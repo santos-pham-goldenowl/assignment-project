@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import "./style.css";
 import ShoppingItem from "../../Component/ShoppingItem/index";
-import { sumPrice } from "../../utilities";
+import { handlePrice } from "../../utilities/index";
 import { RemoveItem, HandlePopUp } from "../../redux/action";
 
 class ShoppingItemList extends React.Component {
@@ -59,7 +59,9 @@ class ShoppingItemList extends React.Component {
                 />
               ))}
             </div>
-            <p className="shopping-total-price">Total: {sumPrice(props)}</p>
+            <p className="shopping-total-price">
+              Total: {handlePrice.priceSum(props)}
+            </p>
           </div>
         ) : (
           <div className="empty-cart-container">
