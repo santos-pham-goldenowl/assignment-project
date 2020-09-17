@@ -45,14 +45,6 @@ class Login extends React.Component {
           // -onSubmit (Sign in)
           onSubmit={(values, { setSubmitting }) => {
             setSubmitting(false);
-            axios.post("/api/login", values).then((res) => {
-              if (res.data.success) {
-                localStorage.setItem("token", res.data.token);
-                this.props.login();
-                this.props.history.push("/");
-              }
-            });
-            // .catch((err) => console.log("err: ", err));
             services
               .login(values)
               .then((res) => {
