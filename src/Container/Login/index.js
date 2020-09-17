@@ -2,18 +2,27 @@ import React from "react";
 import { Formik } from "formik";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import axios from "axios";
 
 import HelmetComp from "../../Component/Helmet/index";
 import Input from "../../Component/Form/input/index";
 import Button from "../../Component/Form/button/index";
 import { LoginAct } from "../../redux/action/index";
+import Error from "../../Component/Form/error/index";
+
+import services from "../../services/index";
 
 import "../../Component/Form/style.css";
 import "./style.css";
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      errServer: "",
+    };
+  }
   render() {
+    const { errServer } = this.state;
     return (
       <div className="login-page">
         <HelmetComp title={"login"} />
@@ -36,35 +45,25 @@ class Login extends React.Component {
           // -onSubmit (Sign in)
           onSubmit={(values, { setSubmitting }) => {
             setSubmitting(false);
-            axios
-              .post("/api/login", values)
+            services
+              .login(values)
               .then((res) => {
                 if (res.data.success) {
                   localStorage.setItem("token", res.data.token);
-                  this.props.login();
+                  this.props.login(res.data.userName);
                   this.props.history.push("/");
+                } else {
+                  this.setState({
+                    errServer: res.data.errors,
+                  });
                 }
               })
-              .catch((err) => console.log("err: ", err));
-
-            // fetch("/login", {
-            //   method: "POST",
-            //   headers: {
-            //     "Content-Type": "application/json",
-            //     Accept: "application/json",
-            //   },
-            //   body: JSON.stringify(values),
-            // })
-            //   .then((res) => res.json())
-            //   .then((data) => {
-            //     this.props.login();
-            // const { token } = data;
-            // cookie.set("token", token);
-            //
-            // });
-
-            // react router dom version 4
-            // window.location = "/";
+              .catch((err) => {
+                const { error_message } = err.response.data;
+                this.setState({
+                  errServer: error_message,
+                });
+              });
           }}
         >
           {({ values, handleSubmit, isSubmitting }) => (
@@ -74,6 +73,7 @@ class Login extends React.Component {
                   <div className="title">
                     <p>Login</p>
                   </div>
+                  {errServer && <Error error={this.state.errServer} />}
                   <div className="user-input">
                     <Input
                       clNameContainerDiv="ip-form"
@@ -127,7 +127,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    login: () => dispatch(LoginAct()),
+    login: (userName) => dispatch(LoginAct(userName)),
   };
 }
 

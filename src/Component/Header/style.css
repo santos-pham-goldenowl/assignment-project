@@ -37,7 +37,9 @@
 
 /* header menu custom */
 
-.header-menu-product, .header-user, .header-cart {
+.header-menu-product,
+.header-user,
+.header-cart {
   display: flex;
   align-items: center;
 }
@@ -78,7 +80,8 @@
 
 /* header user */
 
-.login, .signup, .logout {
+.login,
+.signup {
   display: flex;
   align-items: center;
   background-color: var(--primary-color);
@@ -87,11 +90,14 @@
   font-size: 1.2em;
 }
 
-.login, .signup, .logout {
+.login,
+.signup {
   padding-right: 8px;
 }
 
-.login .menu-link, .signup .menu-link, .logout .menu-link {
+.login .menu-link,
+.signup .menu-link,
+.logout .menu-link {
   display: inline-block;
   line-height: 100%;
   padding: 10px;
@@ -115,6 +121,19 @@
   background: url("../../Images/user-plus-solid.svg");
 }
 
+.user-name {
+  text-align: center;
+  line-height: 2em;
+}
+
+.logout-btn {
+  background-color: #fff;
+  color: orange;
+  border: none;
+  text-decoration: underline;
+  font-size: 1.2em;
+}
+
 /* header cart */
 
 .header-cart {
@@ -136,7 +155,7 @@
   font-size: 1.3em;
 }
 
-.count-in-cart>p {
+.count-in-cart > p {
   margin: 0px;
 }
 

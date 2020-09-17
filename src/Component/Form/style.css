@@ -21,7 +21,7 @@
   text-align: center;
 }
 
-.title>p {
+.title > p {
   margin: 10px 0px;
   font-size: 30px;
   font-weight: bold;
@@ -37,7 +37,7 @@
   margin-right: 12px;
 }
 
-.ip-form>input, .ip-form>input {
+.ip-form > input {
   border: none;
   border-radius: 1px;
   box-sizing: border-box;
@@ -71,35 +71,9 @@
 }
 
 /* Error */
-
-.error {
-  font-size: 12px;
+.error-message {
   color: red;
-  margin-bottom: 10px;
-}
-
-.has-not-account {
-  margin: 10px 0px 15px;
-  color: rgb(49, 43, 131);
-  text-decoration: none;
-  font-size: 12px;
-}
-
-.err-login {
-  color: red;
-  font-size: 12px;
-  margin-bottom: 15px;
-}
-
-/* forgot password*/
-
-.forgot-pw {
-  display: block;
-  color: #802639;
-  font-size: 1.1em;
-  margin-bottom: 10px;
-}
-
-.test {
-  display: flex;
+  background-color: #866e6e59;
+  padding: 2px 0px;
+  font-size: 1.3em;
 }

@@ -18,6 +18,28 @@ class ProductController {
     }
   }
 
+  async getProduct(req, res, next) {
+    const { id } = req.params;
+    console.log("req.params: ", req.params);
+    const user = await ProductService.getProduct(id);
+    console.log("user: ", user);
+    res.json({
+      success: true,
+      result: user,
+    });
+  }
+
+  async getCategoryList(req, res, next) {
+    const { category } = req.params;
+    console.log("req.params: ", req.params);
+    const categoryList = await ProductService.getCategoryList(category);
+    console.log("product: ", categoryList);
+    res.json({
+      success: true,
+      result: categoryList,
+    });
+  }
+
   async createProduct(req, res, next) {
     try {
       const params = req.body || null;

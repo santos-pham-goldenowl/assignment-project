@@ -42,7 +42,7 @@ export default class Slider extends React.Component {
                 key={product.id}
                 id={product.id}
                 name={product.name}
-                url={product.url}
+                url={product.imageUrl}
                 price={product.price}
                 st={style}
                 currentProductId={currentProductId}

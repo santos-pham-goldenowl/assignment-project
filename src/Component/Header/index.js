@@ -1,17 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./style.css";
 import ShoppingItemList from "../../Container/ShoppingItemList/index";
-import { HandlePopUp } from "../../redux/action";
+import { HandlePopUp, LogOut } from "../../redux/action";
 
 class Header extends React.Component {
   handlePopUp = () => {
     this.props.handlePopUp();
   };
+
+  logOut = async () => {
+    localStorage.removeItem("token");
+    await this.props.logOut();
+    this.props.history.push("/login");
+  };
   render() {
     const { shoppingList, isPopUp } = this.props.shoppingItemList;
+    const { isLogin, userName } = this.props.user;
     return (
       <div className="header">
         <div>
@@ -33,28 +40,33 @@ class Header extends React.Component {
             </Link>
           </div>
           <div className="header-user">
-            <div className="login">
-              <Link to="/login" className="menu-link">
-                Login
-              </Link>
-              <div className="login-icon"></div>
-            </div>
-            <div className="signup">
-              <Link to="/signup" className="menu-link">
-                Sign up
-              </Link>
-              <div className="signup-icon"></div>
-            </div>
-            <div className="logout">
-              <Link to="/login" className="menu-link">
-                Log out
-              </Link>
-            </div>
-            <div>
-              <Link to="/user" className="menu-link">
-                (Username)
-              </Link>
-            </div>
+            {!isLogin ? (
+              <>
+                <div className="login">
+                  <Link to="/login" className="menu-link">
+                    Login
+                  </Link>
+                  <div className="login-icon"></div>
+                </div>
+                <div className="signup">
+                  <Link to="/signup" className="menu-link">
+                    Sign up
+                  </Link>
+                  <div className="signup-icon"></div>
+                </div>
+              </>
+            ) : (
+              <div>
+                <div className="user-name">
+                  <Link to="/user" className="menu-link">
+                    {userName}
+                  </Link>
+                </div>
+                <button onClick={this.logOut} className="logout-btn">
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
           <div className="header-cart">
             <div className="count-in-cart" id="count-selected-item">
@@ -81,13 +93,15 @@ class Header extends React.Component {
 const mapStateToProps = (state) => {
   return {
     shoppingItemList: state.ShoppingListReducer,
+    user: state.UserReducer,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     handlePopUp: () => dispatch(HandlePopUp()),
+    logOut: () => dispatch(LogOut()),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
