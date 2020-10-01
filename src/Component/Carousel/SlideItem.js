@@ -11,7 +11,7 @@ class SlideItem extends React.Component {
       +currentProductId === id ? "slide-item current" : "slide-item";
 
     const currentStatus = +currentProductId === id ? "Exploring" : "";
-    console.log("current status: ", currentStatus);
+
     return (
       <div className={currentClassname} style={st}>
         <p className="current-status">{currentStatus}</p>

@@ -5,9 +5,12 @@ const initialState = {
 function ShoppingListReducer(state = initialState, action) {
   let newState = { ...state };
   switch (action.type) {
+    case "UpdateState":
+      newState.shoppingList = action.list;
+      return newState;
     case "Add":
-      const { id, url, name, color, price } = action.payload;
-      // - if newState without a added id key is init a new key by id
+      const { id, imageUrl, name, color, price } = action.payload;
+      // - if newState object doesn't contain an added id key is init a new key by id
       const addedItem = newState.shoppingList.find((item) => {
         return item.id === id;
       });
@@ -16,7 +19,7 @@ function ShoppingListReducer(state = initialState, action) {
       if (!addedItem) {
         const itemProperties = {
           id,
-          url,
+          imageUrl,
           name,
           color,
           price,
@@ -35,6 +38,20 @@ function ShoppingListReducer(state = initialState, action) {
       });
 
       newState.shoppingList = newSelectedItemList;
+      return newState;
+    case "Increase":
+      const idIncreaseProduct = action.idProduct;
+      const increasedItem = newState.shoppingList.find(
+        (product) => product.id === +idIncreaseProduct
+      );
+      increasedItem.count++;
+      return newState;
+    case "Decrease":
+      const idDecreaseProduct = action.idProduct;
+      const decreasedItem = newState.shoppingList.find(
+        (product) => product.id === +idDecreaseProduct
+      );
+      decreasedItem.count--;
       return newState;
     case "PopUp":
       newState.isPopUp = !newState.isPopUp;

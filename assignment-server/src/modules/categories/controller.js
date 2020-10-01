@@ -1,15 +1,27 @@
-import Models from '@models';
+import Models from "@models";
+import { CategoryService } from "@services";
 
 class CategoryController {
+  // - get categories
   async getCategories(req, res, next) {
     try {
-      const results = await Models.Categories.findAll();
+      const results = await CategoryService.getCategoryList();
 
       res.json({
         success: true,
         results,
       });
-    } catch(err) {
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  // - post category
+  async postCategories(req, res, next) {
+    try {
+      const { category } = req.body.values;
+      await CategoryService.createCategory({ name: category });
+    } catch (err) {
       next(err);
     }
   }

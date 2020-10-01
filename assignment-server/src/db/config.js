@@ -14,6 +14,9 @@ module.exports = {
     host: DB_HOST || "127.0.0.1",
     port: DB_PORT || "5432",
     dialect: DB_DIALECT || "postgres",
+    // logging: (...msg) => {
+    //   console.log(msg[0]);
+    // },
     logging: false,
   },
   test: {

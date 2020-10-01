@@ -44,14 +44,13 @@ class ShoppingItemList extends React.Component {
     const { shoppingList } = props.shoppingItemList;
     return (
       <div ref={this.shoppingListRef} className="shopping-infor">
-        {/* - Render shopping item componnents */}
         {shoppingList.length ? (
           <div>
             <div className="shopping-item-list-container">
               {shoppingList.map((shoppingItem) => (
                 <ShoppingItem
                   key={shoppingItem.id}
-                  url={shoppingItem.url}
+                  imageUrl={shoppingItem.imageUrl}
                   itemName={shoppingItem.name}
                   countItem={shoppingItem.count}
                   itemPrice={shoppingItem.price}

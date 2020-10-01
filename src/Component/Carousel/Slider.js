@@ -34,7 +34,7 @@ export default class Slider extends React.Component {
     };
     return (
       <div className="slider">
-        <p className="slider-title">Related Product</p>
+        <p className="slider-title">Related Products</p>
         <div className="slide">
           {relatedProductList.map((product) => {
             return (

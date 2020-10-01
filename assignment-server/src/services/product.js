@@ -6,6 +6,9 @@ class ProductService {
     return Models.Products.create(product);
   }
 
+  findAllProduct(filter) {
+    return Models.Products.findAll(filter);
+  }
   // - get a product
   getProduct(id) {
     return Models.Products.findOne({

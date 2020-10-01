@@ -8,42 +8,94 @@ import {
 } from "react-router-dom";
 
 import "./App.css";
-import Header from "./Component/Header/index";
-import Footer from "./Component/Footer/index";
+import Header from "./Container/Header/index";
+import Footer from "./Container/Footer/index";
 import Login from "./Container/Login/index";
 import Signup from "./Container/Signup/index";
 import User from "./Container/User/index";
 import Cart from "./Container/Cart/index";
 import ProductList from "./Container/ProductList/index";
-import ProductView from "./Container/ProductView";
+import ProductView from "./Container/ProductView/index";
+import HistoryOrder from "./Container/HistoryOrder/index";
+import HistoryOrderDetail from "./Container/HistoryOrderDetail/index";
+// import Admin from "./Container/Admin/index";
+// import LoginAdmin from "./Container/Admin/LoginAdmin/index";
+
+import { authUser, updateState } from "./redux/action/index";
+import headerToken from "./utilities/headerToken";
+import httpLayer from "./httpLayer/index";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.myRef = React.createRef();
+    this.state = {
+      isFetching: true,
+    };
   }
-  componentDidMount() {
-    this.myRef.current.scrollTo(0, 0);
+  // async componentWillMount() {
+  //   await this.getUserInfor();
+  //   this.setState({
+  //     isFetching: false,
+  //   });
+  // }
+  async componentDidMount() {
+    await this.getUserInfor();
+    await this.getShoppingList();
+
+    this.setState({
+      isFetching: false,
+    });
   }
-  // Check if have isLogin in LocalStorage is get this value. Otherwise, get the value in redux
-  isLogin = () => {
-    const { user } = this.props;
-    const localStorageState = localStorage.getItem("persist:root");
-    let isLoginLocalStorage;
-    if (localStorageState) {
-      const isLoginTemp = JSON.parse(localStorageState).UserReducer;
-      isLoginLocalStorage = JSON.parse(isLoginTemp).isLogin;
+
+  async getUserInfor() {
+    const token = await headerToken();
+    if (!token.headers.Authorization.includes(null)) {
+      return await httpLayer
+        .get("/api/users/profile", token)
+        .then((response) => {
+          const { restUserData } = response.data.result;
+          const { lastName, id, avatarUrl, role } = restUserData;
+
+          this.props.auth(lastName, id, avatarUrl, role);
+          return restUserData;
+        });
     }
-    const isLogin = isLoginLocalStorage ? isLoginLocalStorage : user.isLogin;
-    return isLogin;
-  };
-  // PrivateRoute is used to render components respectively when entering home page
+  }
+
+  async getShoppingList() {
+    const token = await headerToken();
+    const shoppingList = JSON.parse(localStorage.getItem("shoppingList"));
+
+    if (!token.headers.Authorization.includes(null)) {
+      if (shoppingList) {
+        const idList = shoppingList.map((element) => element.id);
+
+        return await httpLayer
+          .get(`/api/products?ids=${idList}`, token)
+          .then((response) => {
+            const { results } = response.data;
+
+            results.map((product) => {
+              const { count } = shoppingList.find((item) => {
+                return item.id === product.id;
+              });
+              return (product.count = count);
+            });
+
+            this.props.updateShoppingList(results);
+          });
+      }
+    }
+  }
+
+  // PrivateRoute is used to render components respectively when entering home page whether user logged in or not
   PrivateRoute = ({ component: Component, ...rest }) => {
-    const isLogin = this.isLogin();
+    let { isLogin } = this.props.user;
     return (
       <Route
+        {...rest}
         render={(props) =>
-          isLogin === true ? (
+          isLogin ? (
             <Component {...props} />
           ) : (
             <Redirect
@@ -57,37 +109,55 @@ class App extends React.Component {
       />
     );
   };
+
   render() {
+    const { isFetching } = this.state;
     return (
       <Router>
-        <div className="app" ref={this.myRef}>
-          <Header />
+        {isFetching ? (
+          <div>
+            <p>Loading...</p>
+          </div>
+        ) : (
+          <div className="app" ref={this.myRef}>
+            <Header />
+            <Switch>
+              <this.PrivateRoute exact path="/" component={ProductList} />
 
-          <Switch>
-            <Route exact path="/sign-up"></Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/signup">
-              <Signup />
-            </Route>
-            <Route path="/user">
-              <User />
-            </Route>
-            <Route path="/cart">
-              <Cart />
-            </Route>
-            {/* <Route exact path="/">
-              {this.state.isLogin ? <ProductList /> : <Redirect to="/login" />}
-            </Route> */}
-            <this.PrivateRoute exact path="/" component={ProductList} />
-            <Route path="/product/:id">
-              <ProductView />
-            </Route>
-          </Switch>
+              <Route path="/login">
+                <Login />
+              </Route>
 
-          <Footer />
-        </div>
+              <Route path="/signup">
+                <Signup />
+              </Route>
+
+              <Route exact path="/user/:id">
+                <User />
+              </Route>
+
+              <Route exact path="/cart">
+                <Cart />
+              </Route>
+
+              <Route exact path="/user/:id/shopping-history">
+                <HistoryOrder />
+              </Route>
+
+              <Route
+                exact
+                path="/user/:id/shopping-history/order/:orderId/detail"
+              >
+                <HistoryOrderDetail />
+              </Route>
+
+              <Route exact path="/products/:id">
+                <ProductView />
+              </Route>
+            </Switch>
+            <Footer />
+          </div>
+        )}
       </Router>
     );
   }
@@ -99,4 +169,13 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    auth: (userName, id, avatarUrl, role) =>
+      dispatch(authUser(userName, id, avatarUrl, role)),
+    updateShoppingList: (list) => dispatch(updateState(list)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

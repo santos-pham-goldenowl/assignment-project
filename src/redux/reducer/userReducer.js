@@ -1,6 +1,9 @@
 const initialState = {
   isLogin: false,
+  userId: "",
   userName: "",
+  role: "a",
+  avatarUrl: "",
 };
 
 const UserReducer = (state = initialState, action) => {
@@ -9,6 +12,9 @@ const UserReducer = (state = initialState, action) => {
     case "Login":
       newState.isLogin = true;
       newState.userName = action.userName;
+      newState.userId = action.id;
+      newState.avatarUrl = action.avatarUrl;
+      newState.role = action.role;
       return newState;
     case "LogOut":
       newState.isLogin = false;

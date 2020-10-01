@@ -44,14 +44,14 @@
   position: relative;
 }
 
-table {
+.product-list>table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
   font-size: 1.5em;
 }
 
-tr, td, th {
+.product-list tr, td, th {
   text-align: center;
   border: 1px solid #dddddd;
   padding: 8px;
@@ -61,15 +61,15 @@ tr:nth-child(even) {
   background-color: #84ad77;
 }
 
-tr:nth-child(2n+1) {
+.product-list tr:nth-child(2n+1) {
   background-color: rgba(26, 175, 72, 0.42);
 }
 
-tr:first-child {
+.product-list tr:first-child {
   background-color: #b4bd6c;
 }
 
-tr:last-child {
+.product-list tr:last-child {
   background-color: #b4bd6c;
 }
 

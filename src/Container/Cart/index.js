@@ -1,10 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import CartItem from "../../Component/CartItem/index";
 import { RemoveItem } from "../../redux/action";
-import { handlePrice } from "../../utilities/index";
+import { handlePrice, headerToken } from "../../utilities/index";
+import httpLayer from "../../httpLayer/index";
+
 import "./style.css";
 
 class Cart extends React.Component {
@@ -12,9 +14,61 @@ class Cart extends React.Component {
   removeSelectedItem = (id) => {
     return () => this.props.removeItem(id);
   };
+
+  async checkOut(list) {
+    // const token = localStorage.getItem("token");
+    // console.log("list: ", list);
+    const token = await headerToken();
+
+    httpLayer
+      .post(
+        "/api/checkout",
+        {
+          data: {
+            list: list,
+          },
+        },
+        token
+      )
+      .then(() => {
+        localStorage.removeItem("shoppingList");
+        this.props.history.push("/");
+      })
+      .catch((err) => console.log("err: ", err));
+
+    // axios({
+    //   method: "post",
+    //   url: "http://localhost:3002/api/checkout",
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    //   data: {
+    //     foo: "bar",
+    //   },
+    // });
+    this.props.history.push("/");
+  }
+
   render() {
     const { props } = this;
+    const { userId } = props.user;
     const { shoppingList } = props.shoppingItemList;
+
+    const orderList = JSON.parse(localStorage.getItem("shoppingList"));
+    const priceList = shoppingList.map((element) => {
+      return element.price;
+    });
+
+    if (orderList) {
+      orderList.map((element, index) => {
+        return (element.price = priceList[index]);
+      });
+    }
+    const checkoutInfor = {
+      orderList,
+      userId,
+    };
+
     return (
       <div className="cart-page">
         <div className="back-home-container">
@@ -38,8 +92,9 @@ class Cart extends React.Component {
                 return (
                   <CartItem
                     key={selectedItem.id}
+                    id={selectedItem.id}
                     name={selectedItem.name}
-                    url={selectedItem.url}
+                    imageUrl={selectedItem.imageUrl}
                     color={selectedItem.color}
                     quantity={selectedItem.count}
                     price={selectedItem.price}
@@ -56,7 +111,12 @@ class Cart extends React.Component {
             </tbody>
           </table>
           <div>
-            <button className="checkout-btn">PROCEED TO CHECKOUT</button>
+            <button
+              className="checkout-btn"
+              onClick={() => this.checkOut(checkoutInfor)}
+            >
+              PROCEED TO CHECKOUT
+            </button>
           </div>
         </div>
       </div>
@@ -66,6 +126,7 @@ class Cart extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.UserReducer,
     shoppingItemList: state.ShoppingListReducer,
   };
 };
@@ -76,4 +137,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart));

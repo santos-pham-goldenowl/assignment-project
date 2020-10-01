@@ -5,14 +5,14 @@ import "./style.css";
 
 class ShoppingItem extends React.Component {
   render() {
-    const { url, itemName, countItem, itemPrice, removeItem } = this.props;
+    const { imageUrl, itemName, countItem, itemPrice, removeItem } = this.props;
     const displayPrice = handlePrice.formatPrice(itemPrice);
     return (
       <div className="shopping-item-container">
         <div className="shopping-item">
           <div
             className="shopping-item-img"
-            style={{ backgroundImage: `url("${url}")` }}
+            style={{ backgroundImage: `url("${imageUrl}")` }}
           ></div>
           <div className="shopping-item-name">{itemName}</div>
           <div className="item-price-count">

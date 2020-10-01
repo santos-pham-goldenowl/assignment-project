@@ -18,7 +18,8 @@ class ProductView extends React.Component {
   }
   async componentDidMount() {
     // -Call Api to get data by id
-    const response = await this.getUser();
+    const response = await this.getProduct();
+    console.log("response: ", response);
     const product = response.result;
 
     // - Get categrory value of selecting product and call Api to get category list by it.
@@ -47,23 +48,21 @@ class ProductView extends React.Component {
     });
   }
 
-  async getUser() {
+  async getProduct() {
     const id = this.props.match.params.id;
-    const response = await httpLayer
-      .get(`/api/products/${id}`, headerToken)
-      .then((res) => {
-        return res.data;
-      });
-    return response;
+    const token = await headerToken();
+    return await httpLayer.get(`/api/products/${id}`, token).then((res) => {
+      return res.data;
+    });
   }
 
   async getCategoryList(category) {
-    const response = await httpLayer
-      .get(`/api/products/category/${category}`, headerToken)
+    const token = await headerToken();
+    return await httpLayer
+      .get(`/api/products/category/${category}`, token)
       .then((res) => {
         return res.data;
       });
-    return response;
   }
 
   render() {

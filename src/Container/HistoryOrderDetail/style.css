@@ -1,0 +1,21 @@
+.history-order-detail {
+    min-height: calc(100vh - 90px - 66px);
+    margin-top: 66px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.history-order-detail-container {
+    width: 30%;
+    height: 50%;
+}
+
+.history-order-detail .title {
+    margin-bottom: 15px;
+}
+
+.history-order-detail-container table {
+    font-size: 1.4em;
+    width: 100%;
+}

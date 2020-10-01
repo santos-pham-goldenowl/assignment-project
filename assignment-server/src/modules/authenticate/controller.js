@@ -4,7 +4,7 @@ import { UserService, AuthenticateService } from "@services";
 class AuthenticateController {
   async signUp(req, res, next) {
     const { email, firstName, lastName, password, phone, avatarUrl } = req.body;
-    const user = UserService.getUserByEmail(email);
+    const user = await UserService.getUserByEmail(email);
 
     // - Throw a new error if email already exist
     if (user) {
@@ -20,7 +20,9 @@ class AuthenticateController {
       password: cryptedPassword,
       phone,
       avatarUrl,
+      role: "User",
     });
+    console.log("createdUser: ", createdUser.dataValues);
 
     // If we need user login imemediately. We can generate token here and send it back to the client
     return res.json({
@@ -55,7 +57,7 @@ class AuthenticateController {
     res.json({
       success: true,
       token,
-      userName: u.lastName,
+      result: UserService.publicInformation(u),
     });
   }
 }

@@ -1,33 +1,52 @@
 import React from "react";
 
 import "./style.css";
+import { connect } from "react-redux";
 import { handlePrice } from "../../utilities/index";
+import { changeQuantity } from "../../redux/action/index";
 
 class CartItem extends React.Component {
   constructor(props) {
     super(props);
     this.quantityValue = React.createRef();
+    this.increase = React.createRef();
+    this.decrease = React.createRef();
   }
 
-  addItemCount = () => {
+  componentDidMount() {
+    let quantityValueNumber = +this.quantityValue.current.value;
+    if (quantityValueNumber <= 1) {
+      this.decrease.current.disabled = true;
+    }
+  }
+
+  addItemCount = (id) => {
+    this.decrease.current.disabled = false;
     let quantityValueNumber = +this.quantityValue.current.value;
     quantityValueNumber += 1;
     this.quantityValue.current.value = quantityValueNumber;
+    const properties = changeQuantity(2, id);
+    this.props.change(properties);
   };
-  subtractItemCount = () => {
+
+  subtractItemCount = (id) => {
     let quantityValueNumber = +this.quantityValue.current.value;
-    if (quantityValueNumber === 0) {
-      quantityValueNumber = 0;
+    if (quantityValueNumber === 2) {
+      quantityValueNumber = 1;
+      this.decrease.current.disabled = true;
     } else {
       quantityValueNumber -= 1;
     }
     this.quantityValue.current.value = quantityValueNumber;
+    const properties = changeQuantity(1, id);
+    this.props.change(properties);
   };
 
   render() {
     const {
+      id,
       name,
-      url,
+      imageUrl,
       color,
       quantity,
       price,
@@ -43,10 +62,10 @@ class CartItem extends React.Component {
                 <p className="ordered-product-name">{name}</p>
                 <div className="product-img">
                   <img
-                    src={url}
+                    src={imageUrl}
                     width="80px"
                     height="80px"
-                    alt="Can not display"
+                    alt="Cannot display"
                   ></img>
                 </div>
               </div>
@@ -56,7 +75,8 @@ class CartItem extends React.Component {
           <td>
             <div>
               <button
-                onClick={this.addItemCount}
+                ref={this.increase}
+                onClick={() => this.addItemCount(id)}
                 className="change-quantity-btn"
               >
                 +
@@ -68,7 +88,8 @@ class CartItem extends React.Component {
                 className="change-numberof-item-ip"
               ></input>
               <button
-                onClick={this.subtractItemCount}
+                ref={this.decrease}
+                onClick={() => this.subtractItemCount(id)}
                 className="change-quantity-btn"
               >
                 -
@@ -85,4 +106,10 @@ class CartItem extends React.Component {
   }
 }
 
-export default CartItem;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    change: (properties) => dispatch(properties),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CartItem);

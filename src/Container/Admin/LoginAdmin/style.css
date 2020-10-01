@@ -1,0 +1,16 @@
+/* Login page */
+
+.login-admin-page {
+    /* 100% screen - height of header and footer */
+    min-height: calc(100vh - 90px - 66px);
+    margin-top: 66px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a5b593;
+}
+
+.input-name-lb {
+    font-size: 1.3em;
+    margin: 0px 0px 10px 0px;
+}

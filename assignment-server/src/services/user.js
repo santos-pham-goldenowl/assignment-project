@@ -8,13 +8,13 @@ class UserService {
     return this.UserModel.create(params);
   }
 
+  // - remove sensitive information before sending back data to client
   publicInformation(user) {
     // delete user.secretKey;
     // delete user.password;
-    const { password, secretKey, ...rest } = { ...user };
+    const { password, secretKey, ...restUserData } = user.dataValues || user;
     return {
-      // ...user,
-      rest,
+      restUserData,
     };
   }
 

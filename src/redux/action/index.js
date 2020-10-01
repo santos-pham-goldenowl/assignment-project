@@ -62,10 +62,13 @@ const HandlePopUp = () => {
   };
 };
 
-const LoginAct = (userName) => {
+const authUser = (userName, id, avatarUrl, role) => {
   return {
     type: "Login",
     userName,
+    id,
+    avatarUrl,
+    role,
   };
 };
 
@@ -75,4 +78,31 @@ const LogOut = () => {
   };
 };
 
-export { AddItem, RemoveItem, Filter, HandlePopUp, LoginAct, LogOut };
+const updateState = (list) => {
+  return {
+    type: "UpdateState",
+    list: list,
+  };
+};
+
+const changeQuantity = (status, idProduct) => {
+  let changeStatus = "Increase";
+  if (status === 1) {
+    changeStatus = "Decrease";
+  }
+  return {
+    type: changeStatus,
+    idProduct,
+  };
+};
+
+export {
+  AddItem,
+  RemoveItem,
+  Filter,
+  HandlePopUp,
+  LogOut,
+  authUser,
+  updateState,
+  changeQuantity,
+};

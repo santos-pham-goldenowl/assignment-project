@@ -37,10 +37,10 @@ class ProductList extends React.Component {
     };
   }
 
-  componentDidMount() {
-    httpLayer.get("/api/products", headerToken).then((response) => {
+  async componentDidMount() {
+    const token = await headerToken();
+    httpLayer.get("/api/products", token).then((response) => {
       const { results } = response.data;
-      console.log("results: ", results);
       this.setState({
         productList: results,
       });
@@ -49,25 +49,27 @@ class ProductList extends React.Component {
 
   addItem = (...arg) => {
     const countInCart = document.getElementById("count-selected-item");
-    const argValue = arg;
     // - Convert arguments array to an object
-    const properties = Object.assign({}, argValue);
+    const properties = Object.assign({}, arg);
 
     // - Convert properties object to an object with keys in temp array respectively.
-    const temp = ["id", "url", "name", "color", "price"];
+    const temp = ["id", "imageUrl", "name", "color", "price"];
+
     temp.forEach((item, index) => {
       properties[item] = properties[index.toString()];
       delete properties[index];
     });
+    // ==========
 
     return () => {
-      // add add to scale when click and then remove that class
+      // add scale cart effect when click and then remove that class
       if (countInCart) {
         countInCart.classList.add("scale");
         setTimeout(() => {
           countInCart.classList.remove("scale");
         }, 1001);
       }
+
       this.props.addItem(properties);
     };
   };
@@ -79,10 +81,19 @@ class ProductList extends React.Component {
     });
   };
   // - filter action when select
-  filter = () => {
+  filter = async () => {
+    const token = await headerToken();
     const { valueSelect } = this.state;
-    const actionFilter = Filter(valueSelect);
-    this.props.filter(actionFilter);
+    console.log("this.state.valueSelected: ", valueSelect);
+    token.headers.filtertype = valueSelect;
+    httpLayer.get("/api/products", token).then((response) => {
+      const { results } = response.data;
+      this.setState({
+        productList: results,
+      });
+    });
+    // const actionFilter = Filter(valueSelect);
+    // this.props.filter(actionFilter);
   };
 
   render() {
@@ -116,7 +127,7 @@ class ProductList extends React.Component {
                 price={product.price}
                 addItem={this.addItem(
                   product.id,
-                  product.image_url,
+                  product.imageUrl,
                   product.name,
                   product.color,
                   product.price

@@ -13,7 +13,7 @@ class Product extends React.Component {
     return (
       <Col className="product">
         <div className="product-container">
-          <Link to={`/product/${id}`} className="product-img">
+          <Link to={`/products/${id}`} className="product-img">
             <img src={url} alt="cannot display" width="230" height="200"></img>
           </Link>
           <p className="product-name">{name}</p>

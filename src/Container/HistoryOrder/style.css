@@ -1,0 +1,26 @@
+.shopping-history-page {
+    min-height: calc(100vh - 90px - 66px);
+    margin-top: 66px;
+    display: flex;
+    justify-content: center;
+}
+
+.shopping-history-container {
+    margin-top: 50px;
+    width: 50%;
+    height: 50%;
+}
+
+.shopping-history-container>.title {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.shopping-history-container table {
+    width: 100%;
+    font-size: 1.4em;
+}
+
+.shopping-history-container tr, .shopping-history-container td {
+    text-align: center;
+}

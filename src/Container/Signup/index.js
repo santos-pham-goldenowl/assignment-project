@@ -65,10 +65,10 @@ class Signup extends React.Component {
               .then((response) => {
                 if (response.data.success) {
                   this.props.history.push("/");
-                  // window.location.href = "/login";
                 }
               })
               .catch((err) => {
+                console.log("err: ", err.response);
                 const { error_message } = err.response.data;
                 this.setState({
                   errServer: error_message,

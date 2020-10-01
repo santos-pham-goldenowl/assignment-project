@@ -1,14 +1,15 @@
-import { UserService } from '@services';
+import { UserService } from "@services";
 
 class UserController {
   async getUserProfile(req, res, next) {
     const existedUser = req.user;
-
-    return res.json({
-      success: true,
-      data: UserService.publicInformation(existedUser.dataValues)
-    });
+    if (existedUser) {
+      return res.json({
+        success: true,
+        result: UserService.publicInformation(existedUser),
+      });
+    }
   }
 }
 
-export default new UserController;
+export default new UserController();

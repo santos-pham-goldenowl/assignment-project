@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import HelmetComp from "../../Component/Helmet/index";
 import Input from "../../Component/Form/input/index";
 import Button from "../../Component/Form/button/index";
-import { LoginAct } from "../../redux/action/index";
+import { authUser } from "../../redux/action/index";
 import Error from "../../Component/Form/error/index";
 
 import services from "../../services/index";
@@ -21,6 +21,14 @@ class Login extends React.Component {
       errServer: "",
     };
   }
+
+  componentDidMount() {
+    const { isLogin } = this.props.user;
+    if (isLogin) {
+      this.props.history.push("/");
+    }
+  }
+
   render() {
     const { errServer } = this.state;
     return (
@@ -50,7 +58,10 @@ class Login extends React.Component {
               .then((res) => {
                 if (res.data.success) {
                   localStorage.setItem("token", res.data.token);
-                  this.props.login(res.data.userName);
+                  const { restUserData } = res.data.result;
+                  const { lastName, id, avatarUrl, role } = restUserData;
+
+                  this.props.auth(lastName, id, avatarUrl, role);
                   this.props.history.push("/");
                 } else {
                   this.setState({
@@ -59,10 +70,12 @@ class Login extends React.Component {
                 }
               })
               .catch((err) => {
-                const { error_message } = err.response.data;
-                this.setState({
-                  errServer: error_message,
-                });
+                if (err) {
+                  const { error_message } = err.response.data;
+                  this.setState({
+                    errServer: error_message,
+                  });
+                }
               });
           }}
         >
@@ -127,7 +140,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    login: (userName) => dispatch(LoginAct(userName)),
+    auth: (userName, id, avatarUrl, role) =>
+      dispatch(authUser(userName, id, avatarUrl, role)),
   };
 }
 

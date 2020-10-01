@@ -6,9 +6,10 @@ class HTTPLayer {
     return Axios.get(apiUrl, options);
   }
 
-  post(url, values = "") {
+  post(url, params = "", token = "") {
+    console.log("httpLayer");
     const apiUrl = this.prepareUrl(url);
-    return Axios.post(apiUrl, values);
+    return Axios.post(apiUrl, params, token);
   }
 
   prepareUrl(url) {

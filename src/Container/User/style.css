@@ -9,6 +9,7 @@
 .user-infor {
   display: flex;
   flex-direction: column;
+  position: relative;
   justify-content: center;
   width: 300px;
   border: 1px solid var(--primary-color);
@@ -45,4 +46,12 @@
   margin-bottom: 25px;
   border: none;
   padding: 5px 15px;
+}
+
+/* shopping history */
+
+.shopping-history-link {
+  text-align: center;
+  font-size: 1.3em;
+  margin-bottom: 15px;
 }
