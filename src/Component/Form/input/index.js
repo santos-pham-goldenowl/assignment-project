@@ -9,17 +9,24 @@ function Input(props) {
     ipType,
     ipName,
     ipId,
-    valueIp,
+    ipValue,
     errName,
     errorComponent,
     errorClName,
+    status,
   } = props;
   return (
     <div className={clNameContainerDiv}>
       <label className="span-form" htmlFor={htmlFor}>
         {ipNameLabel}
       </label>
-      <Field type={ipType} name={ipName} id={ipId} value={valueIp} />
+      <Field
+        type={ipType}
+        name={ipName}
+        id={ipId}
+        value={ipValue}
+        disabled={status}
+      />
       <ErrorMessage
         name={errName}
         component={errorComponent}

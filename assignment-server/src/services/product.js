@@ -1,17 +1,84 @@
 import Models from "@models";
+import { Op } from "sequelize";
+import sequelize from "sequelize";
 
 class ProductService {
   // - create a new product
+  constructor() {
+    this.ProductModels = Models.Products;
+  }
   create(product) {
-    return Models.Products.create(product);
+    return this.ProductModels.create(product);
   }
 
-  findAllProduct(filter) {
-    return Models.Products.findAll(filter);
+  findAllProduct() {
+    return this.ProductModels.findAll();
   }
+
+  getByPagination(filter) {
+    return this.ProductModels.findAll(filter);
+  }
+
+  getCount() {
+    return this.ProductModels.count({
+      distinct: "id",
+    });
+  }
+
+  getProductByFilter(filter) {
+    return this.ProductModels.findAll(filter);
+  }
+
   // - get a product
   getProduct(id) {
-    return Models.Products.findOne({
+    return this.ProductModels.findOne({
+      where: {
+        id,
+      },
+      include: [
+        {
+          model: Models.Categories,
+          as: "categoryAs",
+        },
+      ],
+    });
+  }
+
+  custom(params) {
+    const { id } = params;
+    return this.ProductModels.update(params, {
+      where: {
+        id,
+      },
+    });
+  }
+
+  search(params) {
+    // return this.ProductModels.findAll({
+    //   limit: 10,
+    //   where: {
+    //     name: {
+    //       [Op.like]: "%" + params + "%",
+    //     },
+    //   },
+    // });
+
+    return this.ProductModels.findAll({
+      limit: 10,
+      where: {
+        name: sequelize.where(
+          sequelize.fn("LOWER", sequelize.col("name")),
+          "LIKE",
+          params.toLowerCase()
+        ),
+      },
+    });
+  }
+
+  delete(id) {
+    return this.ProductModels.destroy({
+      truncate: true,
+      restartIdentity: true,
       where: {
         id,
       },
@@ -19,7 +86,7 @@ class ProductService {
   }
 
   getCategoryList(category) {
-    return Models.Products.findAll({
+    return this.ProductModels.findAll({
       where: { category },
     });
   }

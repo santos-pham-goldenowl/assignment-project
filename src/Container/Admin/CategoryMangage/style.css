@@ -1,0 +1,31 @@
+.category-list {
+    margin: 30px 0px 0px 30px;
+    font-size: 1.3em;
+}
+
+.category-list ul {
+    padding-left: 17px;
+}
+
+.category-list li {
+    font-size: 1.4em;
+}
+
+.category-list a {
+    font-size: 1.3em;
+}
+
+.category-table-admin {
+    margin: 20px 0px;
+}
+
+/* Table */
+
+.category-table-admin {
+    counter-reset: tableCount;
+}
+
+.category-table-admin tr td:first-child::before {
+    content: counter(tableCount);
+    counter-increment: tableCount;
+}

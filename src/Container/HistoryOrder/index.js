@@ -18,13 +18,14 @@ class HistoryOrder extends React.Component {
   async componentDidMount() {
     const { userId } = this.props.user;
     const token = await headerToken();
-    token.headers.userId = userId;
+    // token.headers.userId = userId;
     httpLayer
-      .get("/api/checkout", token, {
-        data: {
-          username: "Thang",
-        },
-      })
+      // .get("/api/checkout", token, {
+      //   data: {
+      //     username: "Thang",
+      //   },
+      // })
+      .get(`/api/checkout/user/${userId}`, token)
       .then((response) => {
         const { orders } = response.data;
         orders.map((order) => {

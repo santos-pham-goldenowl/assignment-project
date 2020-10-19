@@ -1,0 +1,48 @@
+/* Admin dashboard left */
+
+.admin-dashboard-left-container {
+    background-color: #b09943;
+    padding-bottom: 15px;
+    margin-top: 10px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.admin-dashboard-left-container .title-navbar {
+    color: #fff;
+    background-color: #a26262;
+    font-weight: bold;
+    font-size: 1.6em;
+    border-bottom: 1px solid #fff;
+    margin: 0px;
+    padding: 10px 0px 10px 10px;
+    border-top-left-radius: 6px;
+    text-decoration: underline;
+}
+
+.admin-dashboard-left-container ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.admin-dashboard-left-container li {
+    list-style: none;
+}
+
+.admin-dashboard-left-container .menu-navbar-link {
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    padding: 10px 0px;
+    font-size: 1.6em;
+    color: white;
+    text-align: center;
+    transition: 0.01s;
+    border-bottom: 1px solid white;
+}
+
+.admin-dashboard-left-container .menu-navbar-link:hover {
+    background-color: #fff;
+    color: #b09943;
+    border: 1px solid #b09943;
+}

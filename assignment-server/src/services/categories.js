@@ -12,6 +12,33 @@ class CategoriesService {
   createCategory(params) {
     return this.Categories.create(params);
   }
+
+  getCategory(id) {
+    return this.Categories.findOne({
+      where: {
+        id,
+      },
+    });
+  }
+
+  custom(params) {
+    const { id } = params;
+    return this.Categories.update(params, {
+      where: {
+        id,
+      },
+    });
+  }
+
+  delete(id) {
+    return this.Categories.destroy({
+      truncate: true,
+      restartIdentity: true,
+      where: {
+        id,
+      },
+    });
+  }
 }
 
 export default new CategoriesService();

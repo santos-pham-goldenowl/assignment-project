@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import Admin from "./Container/Admin";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
@@ -16,9 +15,6 @@ ReactDOM.render(
     {/* </React.StrictMode> */}
     <Router>
       <Switch>
-        <Route path="/admin">
-          <Admin />
-        </Route>
         <Route path="/">
           <App />
         </Route>

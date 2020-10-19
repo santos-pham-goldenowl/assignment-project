@@ -6,7 +6,7 @@ import "./style.css";
 import HelmetComp from "../../Component/Helmet";
 import Product from "../../Component/Product/index";
 import Select from "../../Component/Select/index";
-import { AddItem, Filter } from "../../redux/action/index";
+import { AddItem } from "../../redux/action/index";
 import httpLayer from "../../httpLayer/index";
 import { headerToken } from "../../utilities/index";
 
@@ -17,7 +17,7 @@ class ProductList extends React.Component {
       optionNameList: [
         {
           id: 1,
-          name: "Mobile Category",
+          name: "Laptop Category",
         },
         {
           id: 2,
@@ -25,10 +25,14 @@ class ProductList extends React.Component {
         },
         {
           id: 3,
-          name: "Price: Low to high",
+          name: "Mobile Categroy",
         },
         {
           id: 4,
+          name: "Price: Low to high",
+        },
+        {
+          id: 5,
           name: "Price: Hight to low",
         },
       ],
@@ -84,16 +88,14 @@ class ProductList extends React.Component {
   filter = async () => {
     const token = await headerToken();
     const { valueSelect } = this.state;
-    console.log("this.state.valueSelected: ", valueSelect);
+
     token.headers.filtertype = valueSelect;
-    httpLayer.get("/api/products", token).then((response) => {
+    httpLayer.get("/api/products/filter", token).then((response) => {
       const { results } = response.data;
       this.setState({
         productList: results,
       });
     });
-    // const actionFilter = Filter(valueSelect);
-    // this.props.filter(actionFilter);
   };
 
   render() {
@@ -151,7 +153,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     addItem: (properties) => dispatch(AddItem(properties)),
-    filter: (value) => dispatch(value),
   };
 }
 

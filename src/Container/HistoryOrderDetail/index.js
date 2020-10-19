@@ -23,7 +23,7 @@ class HistoryOrderDetail extends React.Component {
       .get(`/api/checkout/order-detail/${orderId}`, token)
       .then((response) => {
         const { result } = response.data;
-
+        // console.log("result: ", result);
         result.map((item) => {
           item.price = handlePrice.formatPrice(item.price);
           item.amount = handlePrice.formatPrice(item.amount);
@@ -41,6 +41,7 @@ class HistoryOrderDetail extends React.Component {
   }
   render() {
     const { orderItemList } = this.state;
+    console.log("orderList in detail: ", orderItemList);
     return (
       <div className="history-order-detail">
         <div className="history-order-detail-container">
@@ -54,6 +55,7 @@ class HistoryOrderDetail extends React.Component {
                 <th>Amount</th>
               </tr>
               {orderItemList.map((order) => {
+                console.log("order.name: ", order.product.name);
                 return (
                   <tr key={order.id}>
                     <td>{order.product.name}</td>

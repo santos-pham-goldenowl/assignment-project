@@ -38,10 +38,10 @@ class Signup extends React.Component {
               errors.password = "Required";
             }
             if (!values.firstName) {
-              errors.firstname = "Required";
+              errors.firstName = "Required";
             }
             if (!values.lastName) {
-              errors.last = "Required";
+              errors.lastName = "Required";
             }
             if (!values.phone) {
               errors.phone = "Required";
@@ -59,7 +59,6 @@ class Signup extends React.Component {
           onSubmit={(values, { setSubmitting }) => {
             setSubmitting(false);
             // - get value of file input by ref and concaternate it into values
-            // values.avatarUrl = this.fileIp.current.files[0].name;
             services
               .signup(values)
               .then((response) => {
@@ -93,7 +92,7 @@ class Signup extends React.Component {
                         ipType="email"
                         ipName="email"
                         ipId="email"
-                        valueIp={values.email}
+                        ipValue={values.email}
                         errName="email"
                         errorComponent="div"
                         errorClName="error"
@@ -131,7 +130,7 @@ class Signup extends React.Component {
                         ipType="password"
                         nameIp="password"
                         ipId="password"
-                        valueIp={values.password}
+                        ipValue={values.password}
                         errName="password"
                         errorComponent="div"
                         errorClName="error"
@@ -157,7 +156,7 @@ class Signup extends React.Component {
                         ipType="text"
                         nameIp="avatarUrl"
                         ipId="avatarUrl"
-                        valueIp={values.avatarUrl}
+                        ipValue={values.avatarUrl}
                         errName="avatarUrl"
                         errorComponent="div"
                         errorClName="error"

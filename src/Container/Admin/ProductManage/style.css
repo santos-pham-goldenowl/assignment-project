@@ -1,0 +1,137 @@
+/* Admin dashboard right */
+
+.admin-dashboard-right {
+    padding: 0px !important;
+}
+
+.find-add-product {
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.find-product-ip {
+    width: 300px;
+    height: 30px;
+    margin-right: 18px;
+    border: none;
+}
+
+.find-product-ip:focus {
+    outline: none;
+    font-size: 1.5em;
+}
+
+.find-product-btn {
+    padding: 5px 10px;
+    color: #fff;
+    margin-right: 18px;
+    background-color: #b07f43;
+}
+
+.add-product-btn {
+    background-color: #884646d1;
+    color: #fff;
+}
+
+.find-product-btn.general-btn, .add-product-btn.general-btn {
+    border: none;
+    height: 30px;
+    font-size: 1.3em;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.product-table-container {
+    display: flex;
+}
+
+.add-product-link {
+    padding: 7px;
+    background-color: #984848;
+    border-radius: 3px;
+    font-size: 1.3em;
+    color: #fff;
+}
+
+.add-product-link:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.product-table-container table {
+    font-size: 1.3em;
+    width: 98%;
+}
+
+.product-table-container td:nth-child(5) {
+    word-break: break-all;
+}
+
+.product-table-container tr:nth-child(even) {
+    background-color: #b09943;
+}
+
+.product-table-container tr:nth-child(2n + 1) {
+    background-color: #fff;
+}
+
+.admin-delete-product-btn {
+    border-radius: 3px;
+}
+
+.admin-delete-product-btn {
+    color: white;
+    background-color: #cc5151;
+}
+
+.admin-custom-product-link {
+    text-decoration: none;
+    padding: 2px 8px;
+    background-color: #efef54;
+    border-radius: 3px;
+}
+
+.admin-custom-product-link:hover {
+    text-decoration: none;
+}
+
+/* pagination */
+
+.admin-dashboard-right .pagination-container {
+    display: flex;
+}
+
+.admin-dashboard-right .pagination {
+    margin: 30px auto 0px auto;
+    display: flex;
+    list-style: none;
+    outline: none;
+}
+
+.admin-dashboard-right .pagination>.active>a {
+    background-color: #984848;
+    border-color: #984848;
+    color: #fff;
+}
+
+.admin-dashboard-right .pagination>li>a {
+    border: 1px solid #984848;
+    padding: 5px 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+.admin-dashboard-right .pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+    background-color: #984848;
+    border-color: #984848;
+    outline: none;
+}
+
+.admin-dashboard-right .pagination>li>a, .pagination>li>span {
+    color: #984848;
+}
+
+.admin-dashboard-right .pagination>li:first-child>a, .pagination>li:first-child>span, .pagination>li:last-child>a, .pagination>li:last-child>span {
+    border-radius: unset
+}

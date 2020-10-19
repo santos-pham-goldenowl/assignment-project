@@ -21,40 +21,6 @@ const RemoveItem = (id) => {
   };
 };
 
-// - Filter items
-const Filter = (value) => {
-  let valueAction;
-  switch (value) {
-    case "1":
-      valueAction = {
-        type: 1,
-        payload: value,
-      };
-      break;
-    case "2":
-      valueAction = {
-        type: 2,
-        payload: value,
-      };
-      break;
-    case "3":
-      valueAction = {
-        type: 3,
-        payload: value,
-      };
-      break;
-    case "4":
-      valueAction = {
-        type: 4,
-        payload: value,
-      };
-      break;
-    default:
-      return null;
-  }
-  return valueAction;
-};
-
 // - handle PopUp
 const HandlePopUp = () => {
   return {
@@ -96,13 +62,19 @@ const changeQuantity = (status, idProduct) => {
   };
 };
 
+const changeAction = (params) => {
+  return {
+    type: params,
+  };
+};
+
 export {
   AddItem,
   RemoveItem,
-  Filter,
   HandlePopUp,
   LogOut,
   authUser,
   updateState,
   changeQuantity,
+  changeAction,
 };

@@ -7,7 +7,6 @@ class HTTPLayer {
   }
 
   post(url, params = "", token = "") {
-    console.log("httpLayer");
     const apiUrl = this.prepareUrl(url);
     return Axios.post(apiUrl, params, token);
   }

@@ -1,7 +1,6 @@
 import { Router } from "express";
 import Controller from "./controller";
 import trycatchWrapper from "@utils/trycatchWrapper";
-import passport from "passport";
 
 const publicRoutes = new Router();
 

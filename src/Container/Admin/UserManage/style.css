@@ -1,0 +1,23 @@
+.user-list {
+    margin: 30px 0px 0px 30px;
+    font-size: 1.4em;
+}
+
+.user-list ul {
+    padding-left: 17px;
+}
+
+.user-list li {
+    font-size: 1.4em;
+}
+
+/* Table */
+
+.users-admin {
+    counter-reset: tableCount;
+}
+
+.users-admin tr td:first-child::before {
+    content: counter(tableCount);
+    counter-increment: tableCount;
+}

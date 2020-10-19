@@ -21,7 +21,7 @@
   text-align: center;
 }
 
-.title > p {
+.title>p {
   margin: 10px 0px;
   font-size: 30px;
   font-weight: bold;
@@ -37,7 +37,7 @@
   margin-right: 12px;
 }
 
-.ip-form > input {
+.ip-form>input {
   border: none;
   border-radius: 1px;
   box-sizing: border-box;
@@ -71,9 +71,14 @@
 }
 
 /* Error */
+
 .error-message {
   color: red;
   background-color: #866e6e59;
   padding: 2px 0px;
   font-size: 1.3em;
+}
+
+.error {
+  color: red;
 }

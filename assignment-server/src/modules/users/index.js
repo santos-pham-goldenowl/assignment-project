@@ -9,4 +9,24 @@ router.get(
     return Controller.getUserProfile(req, res, next);
   })
 );
+
+router.get("/:id", (req, res, next) => {
+  return Controller.getUser(req, res, next);
+});
+
+router.post("/custom", (req, res, next) => {
+  return Controller.updateUser(req, res, next);
+});
+
+router.post("/delete", (req, res, next) => {
+  return Controller.deleteUser(req, res, next);
+});
+
+router.get(
+  "/",
+  trycatchWrapper(async (req, res, next) => {
+    return Controller.getListUser(req, res, next);
+  })
+);
+
 export default router;

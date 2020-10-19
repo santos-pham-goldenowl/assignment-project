@@ -57,7 +57,7 @@
   padding: 8px;
 }
 
-tr:nth-child(even) {
+.product-list tr:nth-child(even) {
   background-color: #84ad77;
 }
 
@@ -73,7 +73,7 @@ tr:nth-child(even) {
   background-color: #b4bd6c;
 }
 
-tr:last-child>th:first-child {
+.product-list tr:last-child>th:first-child {
   text-align: right;
 }
 

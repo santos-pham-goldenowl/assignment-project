@@ -7,7 +7,6 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import "./App.css";
 import Header from "./Container/Header/index";
 import Footer from "./Container/Footer/index";
 import Login from "./Container/Login/index";
@@ -18,12 +17,13 @@ import ProductList from "./Container/ProductList/index";
 import ProductView from "./Container/ProductView/index";
 import HistoryOrder from "./Container/HistoryOrder/index";
 import HistoryOrderDetail from "./Container/HistoryOrderDetail/index";
-// import Admin from "./Container/Admin/index";
-// import LoginAdmin from "./Container/Admin/LoginAdmin/index";
+import Admin from "./Container/Admin/index";
 
 import { authUser, updateState } from "./redux/action/index";
 import headerToken from "./utilities/headerToken";
 import httpLayer from "./httpLayer/index";
+
+import "./App.css";
 
 class App extends React.Component {
   constructor(props) {
@@ -58,10 +58,14 @@ class App extends React.Component {
 
           this.props.auth(lastName, id, avatarUrl, role);
           return restUserData;
+        })
+        .catch((err) => {
+          console.log("error: ", err);
         });
     }
   }
 
+  // Get cart and cart items
   async getShoppingList() {
     const token = await headerToken();
     const shoppingList = JSON.parse(localStorage.getItem("shoppingList"));
@@ -83,6 +87,9 @@ class App extends React.Component {
             });
 
             this.props.updateShoppingList(results);
+          })
+          .catch((error) => {
+            console.log("error: ", error);
           });
       }
     }
@@ -110,6 +117,60 @@ class App extends React.Component {
     );
   };
 
+  renderRoutes = () => {
+    const {
+      user: { role },
+    } = this.props;
+    
+    return role.toLowerCase() === "admin"
+      ? this.renderAdminRoutes()
+      : this.renderAppRoutes();
+  };
+
+  renderAdminRoutes = () => {
+    return <Admin />;
+  };
+
+  renderAppRoutes = () => {
+    return (
+      <>
+        <Header />
+        <Switch>
+          <this.PrivateRoute exact path="/" component={ProductList} />
+
+          <Route path="/login">
+            <Login />
+          </Route>
+
+          <Route path="/signup">
+            <Signup />
+          </Route>
+
+          <Route exact path="/user/:id">
+            <User />
+          </Route>
+
+          <Route exact path="/cart">
+            <Cart />
+          </Route>
+
+          <Route exact path="/user/:id/shopping-history">
+            <HistoryOrder />
+          </Route>
+
+          <Route exact path="/user/:id/shopping-history/order/:orderId/detail">
+            <HistoryOrderDetail />
+          </Route>
+
+          <Route exact path="/products/:id">
+            <ProductView />
+          </Route>
+        </Switch>
+        <Footer />
+      </>
+    );
+  };
+
   render() {
     const { isFetching } = this.state;
     return (
@@ -119,44 +180,7 @@ class App extends React.Component {
             <p>Loading...</p>
           </div>
         ) : (
-          <div className="app" ref={this.myRef}>
-            <Header />
-            <Switch>
-              <this.PrivateRoute exact path="/" component={ProductList} />
-
-              <Route path="/login">
-                <Login />
-              </Route>
-
-              <Route path="/signup">
-                <Signup />
-              </Route>
-
-              <Route exact path="/user/:id">
-                <User />
-              </Route>
-
-              <Route exact path="/cart">
-                <Cart />
-              </Route>
-
-              <Route exact path="/user/:id/shopping-history">
-                <HistoryOrder />
-              </Route>
-
-              <Route
-                exact
-                path="/user/:id/shopping-history/order/:orderId/detail"
-              >
-                <HistoryOrderDetail />
-              </Route>
-
-              <Route exact path="/products/:id">
-                <ProductView />
-              </Route>
-            </Switch>
-            <Footer />
-          </div>
+          <div className="app">{this.renderRoutes()}</div>
         )}
       </Router>
     );

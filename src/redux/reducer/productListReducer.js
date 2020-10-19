@@ -223,23 +223,6 @@ const initialState = [];
 function ProductListReducer(state = initialState, action) {
   let newState = [...state];
   switch (action.type) {
-    case 1:
-      const mobileList = [...newState].filter(
-        (product) => product.category === "mobile"
-      );
-      return mobileList; // lưu trong localStorage
-    case 2:
-      const tabletList = [...newState].filter(
-        (product) => product.category === "tablet"
-      );
-      return tabletList;
-    case 3:
-      const lowToHigh = [...newState];
-      const tempList = lowToHigh.sort((a, b) => a.price - b.price);
-      return tempList;
-    case 4:
-      const hightToLowList = newState.sort((a, b) => b.price - a.price);
-      return hightToLowList;
     default:
       return newState;
   }

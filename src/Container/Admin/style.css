@@ -1,0 +1,23 @@
+.admin-dashboard-page {
+    background-color: #b5bb51;
+    min-height: 100vh;
+    padding-bottom: 30px;
+}
+
+.admin-dashboard-container h3 {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: #3e1d1d;
+}
+
+.title-admin {
+    background-color: transparent;
+    padding: 10px;
+    border-bottom: 1px solid #fff;
+    ;
+}
+
+.title-admin h3 {
+    font-size: 2.5em;
+}

@@ -1,0 +1,16 @@
+.form-admin {
+    width: 500px;
+    margin-top: 10px;
+}
+
+.btn-classname {
+    background-color: var(--primary-color);
+    padding: 5px 10px;
+    font-size: 1.4em;
+    border-radius: 3px;
+}
+
+.select-category-list {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}

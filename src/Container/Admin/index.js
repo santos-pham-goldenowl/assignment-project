@@ -5,12 +5,26 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import { Container, Row } from "reactstrap";
+
 import { connect } from "react-redux";
 import { authUser, updateState } from "../../redux/action/index";
 import { headerToken } from "../../utilities/index";
 import httpLayer from "../../httpLayer/index";
-import AdminDashboard from "./AdminDashboard/index";
 import LoginAdmin from "./LoginAdmin/index";
+import AddProductAdmin from "./AddProductAdmin/index";
+import AddCategoryAdmin from "./AddCategoryAdmin/index";
+import CustomProductAdmin from "./CustomProductAdmin/index";
+import CustomCategoryAdmin from "./CustomCategoryAdmin/index";
+import CustomUserAdmin from "./CustomUserAdmin/index";
+import CustomOrderAdmin from "./CustomOrderAdmin/index";
+import ViewDetailOrderAdmin from "../../Component/AdminComp/ViewDetailOrderAdmin/index";
+import MenuAdmin from "../../Component/AdminComp/MenuAdmin/index";
+import CategoryManage from "./CategoryMangage/index";
+import UserManage from "./UserManage/index";
+import ProductManage from "./ProductManage";
+import OrdersManage from "./OrdersManage";
+
 import "./style.css";
 
 class Admin extends React.Component {
@@ -21,7 +35,6 @@ class Admin extends React.Component {
     };
   }
   async componentDidMount() {
-    console.log("didmount");
     await this.getUserInfor();
     this.setState({
       isFetching: false,
@@ -45,9 +58,8 @@ class Admin extends React.Component {
   // -------
   ProtectedAdminRoute = ({ component: Component, ...rest }) => {
     const { role } = this.props.user;
-    console.log("role: ", role);
-    // console.log(role === "Admin");
-    const isAdmin = role === "Admin" ? true : false;
+    const isAdmin = role === "Admin";
+
     return (
       <Route
         {...rest}
@@ -68,8 +80,6 @@ class Admin extends React.Component {
   };
 
   render() {
-    console.log("render");
-    console.log("role in administrator: ", this.props.user.role);
     const { isFetching } = this.state;
     return (
       <>
@@ -77,15 +87,57 @@ class Admin extends React.Component {
           <p>Loading...</p>
         ) : (
           <Router>
-            <Switch>
-              <this.ProtectedAdminRoute
-                path="/admin/dashboard"
-                component={AdminDashboard}
-              />
-              <Route path="/admin/login">
-                <LoginAdmin />
-              </Route>
-            </Switch>
+            <div className="admin-dashboard-page">
+              <Container fluid className="admin-dashboard-container">
+                <Row className="title-admin">
+                  <h3>This page can only be accessed by administrators.</h3>
+                </Row>
+                <Row className="main-row-admin">
+                  <MenuAdmin />
+
+                  <Switch>
+                    <Route exact path="/admin/dashboard/category">
+                      <CategoryManage />
+                    </Route>
+                    <Route exact path="/admin/dashboard/user">
+                      <UserManage />
+                    </Route>
+                    <Route exact path="/admin/dashboard/user/edit/:id">
+                      <CustomUserAdmin />
+                    </Route>
+                    <Route exact path="/admin/dashboard/add-category">
+                      <AddCategoryAdmin />
+                    </Route>
+                    <Route exact path="/admin/dashboard/custom-product/id=:id">
+                      <CustomProductAdmin />
+                    </Route>
+                    <Route exact path="/admin/dashboard/add-product">
+                      <AddProductAdmin />
+                    </Route>
+                    <Route exact path="/admin/dashboard/category/edit/:id">
+                      <CustomCategoryAdmin />
+                    </Route>
+                    <Route exact path="/admin/dashboard/orders">
+                      <OrdersManage />
+                    </Route>
+                    <Route exact path="/admin/dashboard/orders/update/:id">
+                      <CustomOrderAdmin />
+                    </Route>
+                    <Route exact path="/admin/dashboard/orders/view-detail/:id">
+                      <ViewDetailOrderAdmin />
+                    </Route>
+                    <this.ProtectedAdminRoute
+                      exact
+                      path="/admin/dashboard"
+                      component={ProductManage}
+                    />
+                    <Route path="/admin/login">
+                      <LoginAdmin />
+                    </Route>
+                  </Switch>
+                </Row>
+              </Container>
+            </div>
           </Router>
         )}
       </>

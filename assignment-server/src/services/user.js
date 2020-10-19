@@ -37,6 +37,37 @@ class UserService {
       },
     });
   }
+
+  update(params) {
+    const { id } = params;
+    console.log("params: ", params);
+    // const { email, firstname, lastname, phone, avatarUrl, role } = params;
+    // const newUpdateUser = {
+    //   id,
+    //   password: "DEFAULT",
+    //   email,
+    //   firstname,
+    //   lastname,
+    //   phone,
+    //   avatarUrl,
+    //   role,
+    // };
+    // console.log("newList: ", newUpdateUser);
+    return this.UserModel.update(params, {
+      where: {
+        id,
+      },
+      field: ["id", "firstname", "lastname", "phone", "avatarUrl", "role"],
+    });
+  }
+
+  delete(id) {
+    return this.UserModel.destroy({
+      where: {
+        id,
+      },
+    });
+  }
 }
 
 export default new UserService();

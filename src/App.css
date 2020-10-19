@@ -10,3 +10,8 @@ html {
   /* 1em = 10px */
   font-size: 62.5%;
 }
+
+button {
+  border: none;
+  outline: none;
+}

@@ -9,7 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // this.belongsTo(models.OrderItems);
+      this.belongsTo(models.Categories, {
+        as: "categoryAs",
+        foreignKey: "category",
+      });
     }
   }
   Products.init(
@@ -17,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
       },
       name: {
         type: DataTypes.STRING,
@@ -32,7 +36,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
+      paranoid: true,
       modelName: "Products",
+      // deletedAt: DataTypes.DATE,
     }
   );
   return Products;

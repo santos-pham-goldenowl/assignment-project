@@ -1,0 +1,44 @@
+.orders-table-admin {
+    font-size: 1.3em;
+}
+
+.search-orders {
+    height: 24px;
+    margin: 10px 0px;
+}
+
+.find-user-ip {
+    border: none;
+    height: 100%;
+    width: 180px;
+    margin-right: 20px;
+    font-size: 1.2em;
+}
+
+.select-status-order {
+    height: 100%;
+    margin-right: 20px;
+    border: none;
+    border-radius: 2px;
+    font-size: 1.2em;
+}
+
+.find-user-btn {
+    border: none;
+    background-color: #b07f43;
+    color: #fff;
+    height: 100%;
+    border-radius: 2px;
+    font-size: 1.2em;
+}
+
+/* Table */
+
+.orders-table-admin {
+    counter-reset: tableCount;
+}
+
+.orders-table-admin tr td:first-child::before {
+    content: counter(tableCount);
+    counter-increment: tableCount;
+}
