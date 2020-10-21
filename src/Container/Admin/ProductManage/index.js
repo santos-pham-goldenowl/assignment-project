@@ -29,18 +29,17 @@ class ProductManage extends React.Component {
       .then((response) => {
         const data = response.data.productList;
         const { count } = response.data;
-        console.log("count");
-        data.map((element) => {
+        const newData = data.map((element) => {
           element.price = handlePrice.formatPrice(element.price);
           return element;
         });
 
         const { perPage } = this.state;
         const pageCount = Math.ceil(count / perPage);
-        // const newList = data.slice(0, perPage);
+
         this.setState({
-          list: data,
-          isFetching: true,
+          list: newData,
+          isFetching: false,
           pageCount,
         });
       })
@@ -51,6 +50,9 @@ class ProductManage extends React.Component {
 
   handleInputChange = (e) => {
     const { value } = e.target;
+    if (!value) {
+      window.location.reload();
+    }
     this.setState({
       searchValue: value,
     });
@@ -75,7 +77,9 @@ class ProductManage extends React.Component {
       });
   };
 
-  searchProduct = async (params) => {
+  searchProduct = async () => {
+    const { searchValue } = this.state;
+    const params = searchValue;
     const token = await headerToken();
     if (params) {
       httpLayer
@@ -118,7 +122,7 @@ class ProductManage extends React.Component {
     return (
       <>
         <HelmetComp title={"Admin products"} />
-        {isFetching && (
+        {!isFetching && (
           <Col md="9" sm="6" className="admin-dashboard-right">
             <div className="admin-dashboard-right-container">
               <div className="find-add-product">
@@ -130,7 +134,7 @@ class ProductManage extends React.Component {
                 ></input>
                 <button
                   className="find-product-btn general-btn"
-                  onClick={() => this.searchProduct(searchValue)}
+                  onClick={this.searchProduct}
                 >
                   Search
                 </button>

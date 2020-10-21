@@ -1,0 +1,6 @@
+.create-product-admin-btn {
+    background-color: var(--primary-color);
+    padding: 5px 10px;
+    font-size: 1.4em;
+    border-radius: 3px;
+}

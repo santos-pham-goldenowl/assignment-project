@@ -1,5 +1,4 @@
 import { ProductService } from "@services";
-import Models from "@models";
 
 class ProductController {
   constructor() {
@@ -140,14 +139,15 @@ class ProductController {
   async createProduct(req, res, next) {
     try {
       // const params = req.body || null;
-      const {
-        name,
-        imageUrl,
-        price,
-        color,
-        category,
-        currency,
-      } = req.body.values;
+      // const {
+      //   name,
+      //   imageUrl,
+      //   price,
+      //   color,
+      //   category,
+      //   currency,
+      // } = req.body.values;
+      console.log("res.body: ", req.body);
 
       // const result = await this.ProductService.create({
       //   name,
@@ -157,10 +157,10 @@ class ProductController {
       //   category,
       //   currency,
       // });
-      res.json({
-        success: true,
-        result: result,
-      });
+      // res.json({
+      //   success: true,
+      //   result: result,
+      // });
     } catch (err) {
       next(err);
     }

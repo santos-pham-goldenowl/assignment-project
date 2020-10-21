@@ -35,15 +35,22 @@ class CustomOrderAmin extends React.Component {
       });
   };
 
-  handleOnSubmit = async (values, { setSubmitting }) => {
-    setSubmitting(false);
+  customOrder = async (values, status) => {
     const token = await headerToken();
-    delete values.newTotalAmount;
+    const data = {
+      id: values.id,
+      userId: values.userId,
+      lastName: values.lastName,
+      totalAmount: values.totalAmount,
+      status: status,
+    };
+
+    console.log("values: ", values);
     httpLayer
       .post(
         "/api/checkout/update",
         {
-          values,
+          data,
         },
         token
       )
@@ -60,7 +67,7 @@ class CustomOrderAmin extends React.Component {
     return (
       <>
         {!isFetching && (
-          <CustomOrderForm order={order} handleOnSubmit={this.handleOnSubmit} />
+          <CustomOrderForm order={order} customOrder={this.customOrder} />
         )}
       </>
     );

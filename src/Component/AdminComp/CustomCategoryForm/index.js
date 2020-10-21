@@ -3,10 +3,16 @@ import { Formik } from "formik";
 import { withRouter } from "react-router-dom";
 import Input from "../../../Component/Form/input/index";
 
-class CustomCategoryAdmin extends React.Component {
+class CustomCategoryForm extends React.Component {
+  handleCustomCategory = (values, { setSubmitting }) => {
+    setSubmitting(false);
+    const { customCategory } = this.props;
+    return customCategory(values);
+  };
+
   render() {
-    const { value, id, handleOnSumbit } = this.props;
-    console.log("value: ", value);
+    const { value, id } = this.props;
+
     return (
       <>
         <Formik
@@ -20,7 +26,7 @@ class CustomCategoryAdmin extends React.Component {
               errors.name = "Required";
             }
           }}
-          onSubmit={handleOnSumbit}
+          onSubmit={this.handleCustomCategory}
         >
           {({
             values,
@@ -64,4 +70,4 @@ class CustomCategoryAdmin extends React.Component {
   }
 }
 
-export default withRouter(CustomCategoryAdmin);
+export default withRouter(CustomCategoryForm);

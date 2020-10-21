@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik } from "formik";
+import { Formik, Field } from "formik";
 import Input from "../../Form/input/index";
 
 import "./style.css";
@@ -8,11 +8,30 @@ class FormAdmin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectValue: 1,
+      selectValue: "",
+      fileValue: null,
     };
   }
 
-  handleOnchange = (e) => {
+  componentDidMount() {
+    if (this.props.ipValueList) {
+      const { category } = this.props.ipValueList;
+      if (category) {
+        this.setState({
+          selectValue: category,
+        });
+      }
+    }
+    if (this.props.categoryList) {
+      const { categoryList } = this.props;
+      const { name } = categoryList[0];
+      this.setState({
+        selectValue: name,
+      });
+    }
+  }
+
+  handleOnChangeSelectCategory = (e) => {
     const { value } = e.target;
 
     this.setState({
@@ -20,15 +39,20 @@ class FormAdmin extends React.Component {
     });
   };
 
-  render() {
+  onChangeFileValue = (e) => {
+    this.setState({ fileValue: e.target.files[0] });
+  };
+
+  handleForm = (values, { setSubmitting }) => {
+    setSubmitting(false);
+    const { handleOnClick } = this.props;
     const { selectValue } = this.state;
-    const {
-      formName,
-      handleOnclick,
-      ipValueList,
-      categoryList,
-      btnName,
-    } = this.props;
+    return handleOnClick(values, selectValue);
+  };
+
+  render() {
+    const { selectValue, fileValue } = this.state;
+    const { formName, ipValueList, btnName, categoryList } = this.props;
 
     let idValue,
       nameValue,
@@ -36,9 +60,9 @@ class FormAdmin extends React.Component {
       priceValue,
       colorValue,
       categoryValue,
-      currencyValue,
-      newCategoryList;
+      currencyValue;
 
+    // - if have ipValueList is for Custom product otherwise is for Add Product
     if (ipValueList) {
       const {
         id,
@@ -49,6 +73,7 @@ class FormAdmin extends React.Component {
         category,
         currency,
       } = ipValueList;
+
       idValue = id;
       nameValue = name;
       imageUrlValue = imageUrl;
@@ -56,16 +81,6 @@ class FormAdmin extends React.Component {
       colorValue = color;
       categoryValue = category;
       currencyValue = currency;
-
-      // Resort category list to set value for option in select tag.
-      const nameCategory = ipValueList.categoryAs.name;
-      newCategoryList = categoryList.filter((category) => {
-        return category.name !== nameCategory;
-      });
-      newCategoryList.unshift(ipValueList.categoryAs);
-      console.log("newCategory list: ", newCategoryList);
-    } else {
-      newCategoryList = categoryList;
     }
 
     return (
@@ -85,27 +100,18 @@ class FormAdmin extends React.Component {
             if (!values.name) {
               errors.name = "Required";
             }
-            if (!values.imageUrl) {
-              errors.imageUrl = "Required";
-            }
             if (!values.price) {
               errors.price = "Required";
             }
             if (!values.color) {
               errors.color = "Required";
             }
-            if (!values.category) {
-              errors.category = "Required";
-            }
             if (!values.currency) {
               errors.currency = "Required";
             }
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
-            const temp = selectValue;
-            return handleOnclick(values, { setSubmitting }, temp);
-          }}
+          onSubmit={this.handleForm}
         >
           {({
             values,
@@ -132,8 +138,7 @@ class FormAdmin extends React.Component {
                   errorComponent="div"
                   errorClName="error"
                 />
-                <input type="file"></input>
-                {/* <Input
+                <Input
                   clNameContainerDiv="ip-form"
                   htmlFor="Image Url"
                   ipNameLabel="imageUrl"
@@ -144,7 +149,7 @@ class FormAdmin extends React.Component {
                   errName="imageUrl"
                   errorComponent="div"
                   errorClName="error"
-                /> */}
+                />
                 <Input
                   clNameContainerDiv="ip-form"
                   htmlFor="price"
@@ -169,22 +174,41 @@ class FormAdmin extends React.Component {
                   errorComponent="div"
                   errorClName="error"
                 />
-                <select
-                  className="select-category-list"
-                  onChange={this.handleOnchange}
+                <label className="select-category-lb">Category</label>
+                <Field
+                  component="select"
+                  id="category"
+                  name="category"
+                  value={selectValue}
+                  className={"select-category-sl"}
+                  onChange={this.handleOnChangeSelectCategory}
                 >
-                  {newCategoryList.map((category) => {
+                  {categoryList.map((element) => {
                     return (
-                      <option key={category.id} value={category.id}>
-                        {category.name}
+                      <option key={element.id} value={element.id}>
+                        {element.name}
                       </option>
                     );
                   })}
-                </select>
+                </Field>
+
+                {/* <select
+                  className="select-category-list"
+                  defaultValue={categoryValue}
+                  onChange={this.handleOnchange}
+                >
+                  {categoryList.map((element) => {
+                    return (
+                      <option key={element.id} value={element.id}>
+                        {element.name}
+                      </option>
+                    );
+                  })}
+                </select> */}
                 <Input
                   clNameContainerDiv="ip-form"
                   htmlFor="currency"
-                  ipNameLabel="currency"
+                  ipNameLabel="Currency"
                   ipType="text"
                   ipName="currency"
                   ipId="currency"

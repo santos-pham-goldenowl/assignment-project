@@ -10,7 +10,18 @@
     border-radius: 3px;
 }
 
-.select-category-list {
+/* .select-category-list {
     font-size: 1.2em;
+    margin-bottom: 15px;
+} */
+
+.select-category-lb {
+    display: block;
+    font-size: 1.3em;
+    margin-bottom: 5px;
+}
+
+.select-category-sl {
+    width: 15%;
     margin-bottom: 15px;
 }

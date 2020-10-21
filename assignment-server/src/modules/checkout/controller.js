@@ -115,8 +115,8 @@ class CheckOutController {
 
   async updateOrder(req, res, next) {
     try {
-      const { values } = req.body;
-      await OrderService.update(values);
+      const { data } = req.body;
+      await OrderService.update(data);
       res.json({
         success: true,
       });

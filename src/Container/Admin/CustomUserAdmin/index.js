@@ -13,6 +13,7 @@ class CustomUserAdmin extends React.Component {
       isFetching: true,
     };
   }
+
   async componentDidMount() {
     const user = await this.getUser();
     this.setState({
@@ -34,9 +35,37 @@ class CustomUserAdmin extends React.Component {
         console.log("error: ", error);
       });
   };
+
+  customUser = async (values, role) => {
+    const token = await headerToken();
+    values.role = role;
+    console.log(values);
+    console.log(role);
+    httpLayer
+      .post(
+        "/api/users/custom",
+        {
+          values,
+        },
+        token
+      )
+      .then((res) => {
+        this.props.history.push("/admin/dashboard/user");
+      })
+      .catch((err) => {
+        console.log("error: ", err);
+      });
+  };
+
   render() {
     const { isFetching, user } = this.state;
-    return <>{!isFetching && <CustomUserForm user={user} />}</>;
+    return (
+      <>
+        {!isFetching && (
+          <CustomUserForm user={user} customUser={this.customUser} />
+        )}
+      </>
+    );
   }
 }
 

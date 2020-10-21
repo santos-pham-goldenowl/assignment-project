@@ -2,14 +2,44 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 
 import { handlePrice } from "../../../utilities/index";
-import { Formik } from "formik";
+import { Formik, Field } from "formik";
 import Input from "../../../Component/Form/input/index";
 
 import "./style.css";
 
 class CustomOrderAmin extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectValue: "",
+    };
+  }
+
+  componentDidMount() {
+    const { status } = this.props.order;
+    console.log("status: ", status);
+    this.setState({
+      selectValue: status,
+    });
+  }
+
+  handleOnchangeSelectStatusShipment = (e) => {
+    const { value } = e.target;
+    this.setState({
+      selectValue: value,
+    });
+  };
+
+  handleCustomOrder = async (values, { setSubmitting }) => {
+    setSubmitting(false);
+    const { selectValue } = this.state;
+    const { customOrder } = this.props;
+    return customOrder(values, selectValue);
+  };
+
   render() {
-    const { order, handleOnSubmit } = this.props;
+    const { selectValue } = this.state;
+    const { order } = this.props;
     const { id, userId, totalAmount, status, user } = order;
     const newTotalAmount = handlePrice.formatPrice(totalAmount);
     return (
@@ -26,7 +56,7 @@ class CustomOrderAmin extends React.Component {
                 status,
               }}
               validate={(values) => {}}
-              onSubmit={handleOnSubmit}
+              onSubmit={this.handleCustomOrder}
             >
               {({
                 values,
@@ -69,19 +99,18 @@ class CustomOrderAmin extends React.Component {
                       status={true}
                     />
                     {errors.totalAmount && touched.totalAmount}
-                    <Input
-                      clNameContainerDiv="ip-form"
-                      htmlFor="status"
-                      ipNameLabel="Status"
-                      ipType="text"
-                      ipName="status"
-                      ipId="status"
-                      ipValue={values.status}
-                      errName="status"
-                      errorComponent="div"
-                      errorClName="error"
-                    />
-                    {errors.status && touched.status}
+                    <label className="shipment-status-lb">Status</label>
+                    <Field
+                      component="select"
+                      id="status"
+                      name="status"
+                      value={selectValue}
+                      className={"shipment-status-sl"}
+                      onChange={this.handleOnchangeSelectStatusShipment}
+                    >
+                      <option value="pending">Pending</option>
+                      <option value="paid">Paid</option>
+                    </Field>
                     <button
                       type="submit"
                       disabled={isSubmitting}

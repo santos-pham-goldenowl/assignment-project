@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 import FormAdmin from "../../../Component/AdminComp/FormAdmin/index";
 
 import "./style.css";
+// import AddProductTestComp from "../../../Component/AdminComp/AddProductTestComp";
 
 class AddProductAmin extends React.Component {
   constructor(props) {
@@ -18,7 +19,6 @@ class AddProductAmin extends React.Component {
 
   async componentDidMount() {
     const categoryList = await this.getCategory();
-    console.log("categoryList in didmount: ", categoryList);
     this.setState({
       isFetching: false,
       categoryList: categoryList,
@@ -31,7 +31,6 @@ class AddProductAmin extends React.Component {
       .get("/api/categories", token)
       .then((res) => {
         const { results } = res.data;
-        console.log("results: ", results);
         return results;
       })
       .catch((error) => {
@@ -39,25 +38,14 @@ class AddProductAmin extends React.Component {
       });
   };
 
-  handleOnclick = async (values, { setSubmitting }, selectValue) => {
-    setSubmitting(false);
+  handleOnClick = async (values, selectValue) => {
     values.category = selectValue;
     const token = await headerToken();
-
+    // console.log("category: ", values);
     // const formData = new FormData();
-    // formData.append("myImage", this.state.file);
-    // const config = {
-    //   headers: {
-    //     "content-type": "multipart/form-data",
-    //   },
-    // };
-    // axios
-    //   .post("/upload", formData, config)
-    //   .then((response) => {
-    //     alert("The file is successfully uploaded");
-    //   })
-    //   .catch((error) => {});
-    // token.headers[conten - type] = "multipart/form-date";
+    // formData.append("myImage", fileValue);
+    // console.log("formData: ", formData);
+    console.log("values: ", values);
     httpLayer
       .post(
         "/api/products/add",
@@ -72,16 +60,20 @@ class AddProductAmin extends React.Component {
   };
 
   render() {
-    const { categoryList } = this.state;
+    const { categoryList, isFetching } = this.state;
     return (
-      <div className="add-product-container">
-        <FormAdmin
-          formName={"Add a new product"}
-          handleOnclick={this.handleOnclick}
-          categoryList={categoryList}
-          btnName="Create"
-        />
-      </div>
+      <>
+        {!isFetching && (
+          <div className="add-product-container">
+            <FormAdmin
+              formName={"Add a new product"}
+              handleOnClick={this.handleOnClick}
+              categoryList={categoryList}
+              btnName="Create"
+            />
+          </div>
+        )}
+      </>
     );
   }
 }

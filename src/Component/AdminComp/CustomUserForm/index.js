@@ -1,15 +1,48 @@
 import React from "react";
-import { headerToken } from "../../../utilities/index";
-import httpLayer from "../../../httpLayer/index";
 import { withRouter } from "react-router-dom";
 
-import { Formik } from "formik";
+import { Formik, Field } from "formik";
 import Input from "../../Form/input";
 
+import "./style.css";
+
 class CustomUserAdmin extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectValue: "",
+    };
+  }
+
+  componentDidMount() {
+    if (this.props.user) {
+      const { role } = this.props.user;
+      this.setState({
+        selectValue: role,
+      });
+    }
+  }
+
+  handleOnChangeSelectUserRole = (e) => {
+    const { value } = e.target;
+    this.setState({
+      selectValue: value,
+    });
+  };
+
+  handleCustomUser = async (values, { setSubmitting }) => {
+    setSubmitting(false);
+
+    const { selectValue } = this.state;
+    const { customUser } = this.props;
+
+    return customUser(values, selectValue);
+  };
+
   render() {
+    const { selectValue } = this.state;
     const { user } = this.props;
-    const { id, email, lastName, firstName, avatarUrl, phone, role } = user;
+    const { id, email, lastName, firstName, avatarUrl, phone } = user;
     return (
       <>
         <div className="custom-product-admin">
@@ -22,27 +55,9 @@ class CustomUserAdmin extends React.Component {
                 lastname: lastName || "",
                 phone: phone || "",
                 avatarUrl: avatarUrl || "",
-                role: role || "",
               }}
               validate={(values) => {}}
-              onSubmit={async (values, { setSubmitting }) => {
-                setSubmitting(false);
-                const token = await headerToken();
-                httpLayer
-                  .post(
-                    "/api/users/custom",
-                    {
-                      values,
-                    },
-                    token
-                  )
-                  .then((res) => {
-                    this.props.history.push("/admin/dashboard/user");
-                  })
-                  .catch((err) => {
-                    console.log("error: ", err);
-                  });
-              }}
+              onSubmit={this.handleCustomUser}
             >
               {({
                 values,
@@ -123,20 +138,18 @@ class CustomUserAdmin extends React.Component {
                       errorClName="error"
                     />
                     {errors.avatarUrl && touched.avatarUrl}
-
-                    <Input
-                      clNameContainerDiv="ip-form"
-                      htmlFor="role"
-                      ipNameLabel="role"
-                      ipType="text"
-                      ipName="role"
-                      ipId="role"
-                      ipValue={values.role}
-                      errName="role"
-                      errorComponent="div"
-                      errorClName="error"
-                    />
-                    {errors.role && touched.role}
+                    <label className="user-role-lb">role</label>
+                    <Field
+                      component="select"
+                      id="category"
+                      name="category"
+                      value={selectValue}
+                      className={"user-role-sl"}
+                      onChange={this.handleOnChangeSelectUserRole}
+                    >
+                      <option value="Admin">Admin</option>
+                      <option value="User">User</option>
+                    </Field>
                     <button
                       type="submit"
                       disabled={isSubmitting}

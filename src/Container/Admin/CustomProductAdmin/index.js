@@ -15,6 +15,7 @@ class CustomProductAdmin extends React.Component {
       isFetching: true,
     };
   }
+
   async componentDidMount() {
     const categoryList = await this.getCategory();
     const productList = await this.getProduct();
@@ -52,8 +53,7 @@ class CustomProductAdmin extends React.Component {
       });
   };
 
-  handleOnclick = async (values, { setSubmitting }, selectValue) => {
-    setSubmitting(false);
+  handleOnClick = async (values, selectValue) => {
     values.category = selectValue;
     const token = await headerToken();
     httpLayer
@@ -78,7 +78,7 @@ class CustomProductAdmin extends React.Component {
           <div className="custom-product-admin">
             <FormAdmin
               formName="Custom product"
-              handleOnclick={this.handleOnclick}
+              handleOnClick={this.handleOnClick}
               ipValueList={customedProduct}
               categoryList={categoryList}
               btnName="Update"

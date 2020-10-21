@@ -18,7 +18,7 @@ import CustomProductAdmin from "./CustomProductAdmin/index";
 import CustomCategoryAdmin from "./CustomCategoryAdmin/index";
 import CustomUserAdmin from "./CustomUserAdmin/index";
 import CustomOrderAdmin from "./CustomOrderAdmin/index";
-import ViewDetailOrderAdmin from "../../Component/AdminComp/ViewDetailOrderAdmin/index";
+import ViewDetailOrderAdmin from "./ViewDetailOrderAdmin/index";
 import MenuAdmin from "../../Component/AdminComp/MenuAdmin/index";
 import CategoryManage from "./CategoryMangage/index";
 import UserManage from "./UserManage/index";

@@ -1,13 +1,15 @@
 import { Router } from "express";
 const router = new Router();
 import Controller from "./controller";
+import upload from "../../config/multer.config.js";
 
 router.get("/category/:category", (req, res, next) => {
   return Controller.getCategoryList(req, res, next);
 });
 
-router.post("/add", (req, res, next) => {
-  return Controller.createProduct(req, res, next);
+router.post("/add", upload.single("myImage"), (req, res, next) => {
+  console.log("req.body: ", req.file);
+  // return Controller.createProduct(req, res, next);
 });
 router.post("/search", (req, res, next) => {
   return Controller.searchProduct(req, res, next);

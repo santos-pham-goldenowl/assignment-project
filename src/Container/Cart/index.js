@@ -35,17 +35,6 @@ class Cart extends React.Component {
         this.props.history.push("/");
       })
       .catch((err) => console.log("err: ", err));
-
-    // axios({
-    //   method: "post",
-    //   url: "http://localhost:3002/api/checkout",
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    //   data: {
-    //     foo: "bar",
-    //   },
-    // });
     this.props.history.push("/");
   }
 

@@ -1,8 +1,18 @@
-.orders-admin {
+.shipment-status-sl {
+    display: block;
+    margin-bottom: 30px;
+    width: 15%;
+}
+
+/* .orders-admin {
     counter-reset: tableCount;
 }
 
 .orders-admin tr td:first-child::before {
     content: counter(tableCount);
     counter-increment: tableCount;
+} */
+
+.shipment-status-lb {
+    font-size: 1.3em;
 }

@@ -22,6 +22,9 @@ class OrdersManage extends React.Component {
   handleInputChange = (e) => {
     const name = e.target.name;
     const { value } = e.target;
+    if (!value) {
+      window.location.reload();
+    }
     this.setState({
       [name]: value,
     });
@@ -51,8 +54,9 @@ class OrdersManage extends React.Component {
       });
   };
 
-  search = async (userName, orderStatus) => {
+  search = async () => {
     const token = await headerToken();
+    const { userName, orderStatus } = this.state;
     httpLayer
       .post("/api/checkout/search/", { userName, orderStatus }, token)
       .then((res) => {
@@ -67,7 +71,7 @@ class OrdersManage extends React.Component {
   };
 
   render() {
-    const { orderList, isFetChing, userName, orderStatus } = this.state;
+    const { orderList, isFetChing } = this.state;
 
     return (
       <>
@@ -91,10 +95,7 @@ class OrdersManage extends React.Component {
                   <option>pending</option>
                   <option>paid</option>
                 </select>
-                <button
-                  className="find-user-btn"
-                  onClick={() => this.search(userName, orderStatus)}
-                >
+                <button className="find-user-btn" onClick={this.search}>
                   Search
                 </button>
               </div>

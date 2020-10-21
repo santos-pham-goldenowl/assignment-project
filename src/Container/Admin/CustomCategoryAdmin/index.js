@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import CustomCategoryForm from "../../../Component/AdminComp/CustomCategoryForm/index";
+import CustomCategoryForm from "../../../Component/AdminComp/CustomCategoryForm";
 import httpLayer from "../../../httpLayer";
 import { headerToken } from "../../../utilities";
 
@@ -36,8 +36,7 @@ class CustomCategoryAdmin extends React.Component {
       });
   };
 
-  handleOnSubmit = async (values, { setSubmitting }) => {
-    setSubmitting(false);
+  customCategory = async (values) => {
     const token = await headerToken();
     httpLayer
       .post("/api/categories/custom", { values }, token)
@@ -58,7 +57,7 @@ class CustomCategoryAdmin extends React.Component {
           <CustomCategoryForm
             value={value}
             id={id}
-            handleOnSubmit={this.handleOnSubmit}
+            customCategory={this.customCategory}
           />
         )}
       </>
