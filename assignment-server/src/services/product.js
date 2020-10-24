@@ -11,11 +11,7 @@ class ProductService {
     return this.ProductModels.create(product);
   }
 
-  findAllProduct() {
-    return this.ProductModels.findAll();
-  }
-
-  getByPagination(filter) {
+  getAllProduct(filter) {
     return this.ProductModels.findAll(filter);
   }
 
@@ -54,25 +50,31 @@ class ProductService {
   }
 
   search(params) {
-    // return this.ProductModels.findAll({
-    //   limit: 10,
-    //   where: {
-    //     name: {
-    //       [Op.like]: "%" + params + "%",
-    //     },
-    //   },
-    // });
-
     return this.ProductModels.findAll({
-      limit: 10,
+      // where: {
+      //   name: {
+      //     [Op.like]: "%" + params + "%",
+      //   },
+      // },
       where: {
         name: sequelize.where(
           sequelize.fn("LOWER", sequelize.col("name")),
           "LIKE",
-          params.toLowerCase()
+          "%" + params.toLowerCase() + "%"
         ),
       },
     });
+
+    // return this.ProductModels.findAll({
+    //   limit: 10,
+    //   where: {
+    //     name: sequelize.where(
+    //       sequelize.fn("LOWER", sequelize.col("name")),
+    //       "LIKE",
+    //       params.toLowerCase()
+    //     ),
+    //   },
+    // });
   }
 
   delete(id) {

@@ -23,10 +23,12 @@ class ProductManage extends React.Component {
 
   async componentDidMount() {
     const token = await headerToken();
+    // token.responseType = "blob";
     const { currentPage } = this.state;
     httpLayer
-      .get(`/api/products/page/${currentPage}`, token)
+      .get(`/api/products?page=${currentPage}`, token)
       .then((response) => {
+        console.table(response.data.productList);
         const data = response.data.productList;
         const { count } = response.data;
         const newData = data.map((element) => {
@@ -63,14 +65,22 @@ class ProductManage extends React.Component {
     httpLayer
       .post("/api/products/delete", { id }, token)
       .then((response) => {
-        const data = response.data.results;
-        data.map((element) => {
-          element.price = handlePrice.formatPrice(element.price);
-          return element;
+        const { list } = this.state;
+        const newList = list.filter((item) => {
+          return item.id === id;
         });
         this.setState({
-          list: data,
+          list: newList,
         });
+
+        // const data = response.data.results;
+        // data.map((element) => {
+        //   element.price = handlePrice.formatPrice(element.price);
+        //   return element;
+        // });
+        // this.setState({
+        //   list: data,
+        // });
       })
       .catch((error) => {
         console.log("errors: ", error);
@@ -81,6 +91,7 @@ class ProductManage extends React.Component {
     const { searchValue } = this.state;
     const params = searchValue;
     const token = await headerToken();
+
     if (params) {
       httpLayer
         .post("/api/products/search", { params }, token)
@@ -101,7 +112,7 @@ class ProductManage extends React.Component {
     const token = await headerToken();
 
     httpLayer
-      .get(`/api/products/page/${selected}`, token)
+      .get(`/api/products?page=${selected}`, token)
       .then((response) => {
         const { productList } = response.data;
         productList.map((element) => {
@@ -159,13 +170,24 @@ class ProductManage extends React.Component {
                     </tr>
                     {list.map((product) => {
                       const { id } = product;
+                      const b64 = new Buffer(product.imageUrl).toString(
+                        "base64"
+                      );
                       return (
                         <tr key={product.id}>
                           <td key={product.id}>{product.id}</td>
                           <td>{product.name}</td>
                           <td>{product.price}</td>
                           <td>3</td>
-                          <td>{product.imageUrl}</td>
+
+                          <td>
+                            <img
+                              className="image-product-admin"
+                              src={`data:${product.imageUrl};base64,${b64}`}
+                              alt="product"
+                            />
+                          </td>
+
                           <td>
                             <a
                               href={`/admin/dashboard/custom-product/id=${id}`}

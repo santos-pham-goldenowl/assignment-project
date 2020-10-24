@@ -27,7 +27,7 @@ class OrderService {
       where: {
         id,
       },
-      include: [{ model: Models.Users, as: "user" }],
+      include: [{ model: Models.Users, as: "user", paranoid: false }],
     });
   }
 

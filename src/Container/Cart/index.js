@@ -31,7 +31,7 @@ class Cart extends React.Component {
         token
       )
       .then(() => {
-        localStorage.removeItem("shoppingList");
+        // localStorage.removeItem("shoppingList");
         this.props.history.push("/");
       })
       .catch((err) => console.log("err: ", err));

@@ -6,6 +6,8 @@ class SlideItem extends React.Component {
   render() {
     const { id, name, url, price, st, currentProductId } = this.props;
     const displayPrice = handlePrice.formatPrice(price);
+    const b64 = new Buffer(url).toString("base64");
+
     // - set className, status name for current product
     const currentClassname =
       +currentProductId === id ? "slide-item current" : "slide-item";
@@ -18,11 +20,11 @@ class SlideItem extends React.Component {
         <p className="slide-item-name">{name}</p>
         <div className="slide-item-img">
           <img
-            src={`${url}`}
-            alt="Can not display"
+            src={`data:${url};base64,${b64}`}
+            alt="product"
             width="230"
             height="200"
-          ></img>
+          />
         </div>
         <div className="slide-item-price">{displayPrice}</div>
       </div>

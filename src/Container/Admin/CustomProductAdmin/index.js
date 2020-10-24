@@ -53,22 +53,51 @@ class CustomProductAdmin extends React.Component {
       });
   };
 
-  handleOnClick = async (values, selectValue) => {
-    values.category = selectValue;
+  // handleOnClick = async (values, selectValue) => {
+  //   values.category = selectValue;
+  //   const token = await headerToken();
+  //   httpLayer
+  //     .post(
+  //       "/api/products/custom",
+  //       {
+  //         values,
+  //       },
+  //       token
+  //     )
+  //     .then((res) => {
+  //       console.log("success");
+  //       this.props.history.push("/admin/dashboard/");
+  //     });
+  // };
+
+  handleOnClick = async (values, selectValue, fileValue) => {
     const token = await headerToken();
+
+    token.headers["content-type"] =
+      "multipart/form-data boundary=" + Math.random().toString().substr(2);
+
+    const formData = new FormData();
+    const { id, name, price, color, currency } = values;
+    console.log("select value: ", selectValue);
+
+    formData.append("id", id);
+    formData.append("name", name);
+    formData.append("imageUrl", fileValue);
+    formData.append("price", price);
+    formData.append("color", color);
+    formData.append("category", selectValue);
+    formData.append("currency", currency);
+
     httpLayer
-      .post(
-        "/api/products/custom",
-        {
-          values,
-        },
-        token
-      )
+      .post("/api/products/custom", formData, token)
       .then((res) => {
-        console.log("success");
-        this.props.history.push("/admin/dashboard/");
+        this.props.history.push("/admin/dashboard");
+      })
+      .catch((err) => {
+        console.log("error: ", err);
       });
   };
+
   render() {
     const { customedProduct, categoryList } = this.state;
     const { isFetching } = this.state;

@@ -74,10 +74,6 @@ class LoginAdmin extends React.Component {
               })
               .catch((err) => {
                 if (err) {
-                  // const { error_message } = err.response.data;
-                  // this.setState({
-                  //   errServer: error_message,
-                  // });
                   console.log("err: ", err);
                 }
               });

@@ -24,9 +24,9 @@ class FormAdmin extends React.Component {
     }
     if (this.props.categoryList) {
       const { categoryList } = this.props;
-      const { name } = categoryList[0];
+      const { id } = categoryList[0];
       this.setState({
-        selectValue: name,
+        selectValue: id,
       });
     }
   }
@@ -46,8 +46,8 @@ class FormAdmin extends React.Component {
   handleForm = (values, { setSubmitting }) => {
     setSubmitting(false);
     const { handleOnClick } = this.props;
-    const { selectValue } = this.state;
-    return handleOnClick(values, selectValue);
+    const { selectValue, fileValue } = this.state;
+    return handleOnClick(values, selectValue, fileValue);
   };
 
   render() {
@@ -59,27 +59,17 @@ class FormAdmin extends React.Component {
       imageUrlValue,
       priceValue,
       colorValue,
-      categoryValue,
       currencyValue;
 
     // - if have ipValueList is for Custom product otherwise is for Add Product
     if (ipValueList) {
-      const {
-        id,
-        name,
-        imageUrl,
-        price,
-        color,
-        category,
-        currency,
-      } = ipValueList;
+      const { id, name, imageUrl, price, color, currency } = ipValueList;
 
       idValue = id;
       nameValue = name;
       imageUrlValue = imageUrl;
       priceValue = price;
       colorValue = color;
-      categoryValue = category;
       currencyValue = currency;
     }
 
@@ -92,7 +82,6 @@ class FormAdmin extends React.Component {
             imageUrl: imageUrlValue || "",
             price: priceValue || "",
             color: colorValue || "",
-            category: categoryValue || "",
             currency: currencyValue || "VND" || "",
           }}
           validate={(values) => {
@@ -105,9 +94,6 @@ class FormAdmin extends React.Component {
             }
             if (!values.color) {
               errors.color = "Required";
-            }
-            if (!values.currency) {
-              errors.currency = "Required";
             }
             return errors;
           }}
@@ -125,7 +111,7 @@ class FormAdmin extends React.Component {
           }) => (
             <div className="form-admin">
               <h2>{formName}</h2>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <Input
                   clNameContainerDiv="ip-form"
                   htmlFor="name"
@@ -135,18 +121,6 @@ class FormAdmin extends React.Component {
                   ipId="name"
                   ipValue={values.name}
                   errName="name"
-                  errorComponent="div"
-                  errorClName="error"
-                />
-                <Input
-                  clNameContainerDiv="ip-form"
-                  htmlFor="Image Url"
-                  ipNameLabel="imageUrl"
-                  ipType="text"
-                  ipName="imageUrl"
-                  ipId="imageUrl"
-                  ipValue={values.imageUrl}
-                  errName="imageUrl"
                   errorComponent="div"
                   errorClName="error"
                 />
@@ -191,20 +165,6 @@ class FormAdmin extends React.Component {
                     );
                   })}
                 </Field>
-
-                {/* <select
-                  className="select-category-list"
-                  defaultValue={categoryValue}
-                  onChange={this.handleOnchange}
-                >
-                  {categoryList.map((element) => {
-                    return (
-                      <option key={element.id} value={element.id}>
-                        {element.name}
-                      </option>
-                    );
-                  })}
-                </select> */}
                 <Input
                   clNameContainerDiv="ip-form"
                   htmlFor="currency"
@@ -217,6 +177,12 @@ class FormAdmin extends React.Component {
                   errorComponent="div"
                   errorClName="error"
                 />
+                <input
+                  className="file-ip"
+                  type="file"
+                  name="imageUrl"
+                  onChange={this.onChangeFileValue}
+                ></input>
                 <button
                   type="submit"
                   disabled={isSubmitting}

@@ -19,9 +19,10 @@ class Header extends React.Component {
 
   render() {
     const { shoppingList, isPopUp } = this.props.shoppingItemList;
-    const shoppingListLocs = localStorage.getItem("shoppingList");
+    // const shoppingListLocs = localStorage.getItem("shoppingList");
     const tempList = [];
-    if (shoppingList.length && !shoppingListLocs) {
+    if (shoppingList.length) {
+      // Seperate id and count and save them into localStorage
       shoppingList.forEach((element) => {
         const { id, count } = element;
         const selectedProduct = {

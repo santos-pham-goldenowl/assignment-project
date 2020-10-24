@@ -11,7 +11,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      imageUrl: Sequelize.STRING,
+      imageUrl: Sequelize.BLOB,
       price: Sequelize.DOUBLE,
       color: Sequelize.STRING,
       category: Sequelize.INTEGER,

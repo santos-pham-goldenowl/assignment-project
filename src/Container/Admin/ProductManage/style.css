@@ -64,6 +64,11 @@
     width: 98%;
 }
 
+.image-product-admin {
+    width: 60px;
+    height: 60px;
+}
+
 .product-table-container td:nth-child(5) {
     word-break: break-all;
 }

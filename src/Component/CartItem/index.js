@@ -53,6 +53,8 @@ class CartItem extends React.Component {
       removeSelectedItem,
     } = this.props;
     const displayPrice = handlePrice.formatPrice(price);
+    const b64 = new Buffer(imageUrl).toString("base64");
+
     return (
       <>
         <tr>
@@ -60,13 +62,14 @@ class CartItem extends React.Component {
             <div className="product-name-img-container">
               <div className="product-name-img">
                 <p className="ordered-product-name">{name}</p>
-                <div className="product-img">
+                <div className="product-img-cart-container">
                   <img
-                    src={imageUrl}
+                    className="product-img-cart"
+                    src={`data:${imageUrl};base64,${b64}`}
                     width="80px"
                     height="80px"
                     alt="Cannot display"
-                  ></img>
+                  />
                 </div>
               </div>
             </div>

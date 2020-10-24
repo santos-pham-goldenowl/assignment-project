@@ -17,10 +17,15 @@
     text-decoration: none;
 }
 
-.product-img {
+.product-img-container {
     margin: 0px;
     display: flex;
     justify-content: center;
+}
+
+.product-img {
+    width: 210px;
+    height: 200px;
     transition: 0.9s;
 }
 

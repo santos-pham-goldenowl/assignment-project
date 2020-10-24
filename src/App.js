@@ -121,7 +121,7 @@ class App extends React.Component {
     const {
       user: { role },
     } = this.props;
-    
+
     return role.toLowerCase() === "admin"
       ? this.renderAdminRoutes()
       : this.renderAppRoutes();

@@ -38,24 +38,30 @@ class AddProductAmin extends React.Component {
       });
   };
 
-  handleOnClick = async (values, selectValue) => {
-    values.category = selectValue;
+  handleOnClick = async (values, selectValue, fileValue) => {
     const token = await headerToken();
-    // console.log("category: ", values);
-    // const formData = new FormData();
-    // formData.append("myImage", fileValue);
-    // console.log("formData: ", formData);
-    console.log("values: ", values);
+
+    token.headers["content-type"] =
+      "multipart/form-data boundary=" + Math.random().toString().substr(2);
+
+    const formData = new FormData();
+    const { name, price, color, currency } = values;
+    console.log("select value: ", selectValue);
+
+    formData.append("name", name);
+    formData.append("imageUrl", fileValue);
+    formData.append("price", price);
+    formData.append("color", color);
+    formData.append("category", selectValue);
+    formData.append("currency", currency);
+
     httpLayer
-      .post(
-        "/api/products/add",
-        {
-          values,
-        },
-        token
-      )
+      .post("/api/products/add", formData, token)
       .then((res) => {
         this.props.history.push("/admin/dashboard");
+      })
+      .catch((err) => {
+        console.log("error: ", err);
       });
   };
 

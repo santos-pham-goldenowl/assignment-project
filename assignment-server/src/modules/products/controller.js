@@ -7,21 +7,37 @@ class ProductController {
 
   async getProductList(req, res, next) {
     try {
-      // const { ids } = req.query;
-      // const queryIds = ids ? ids.split(",") : null;
-      // let filter = {};
+      let filter = {};
+      if (req.query) {
+        if (req.query.ids) {
+          // get product by id list of shopping
+          const { ids } = req.query;
+          const queryIds = ids ? ids.split(",") : null;
+          if (queryIds && queryIds.length) {
+            filter = {
+              where: {
+                id: queryIds,
+              },
+            };
+          }
+        } else if (req.query.page) {
+          // get product by pagination
+          const { page } = req.query;
+          const offset = page * 10;
+          filter = {
+            offset,
+            limit: 10,
+          };
+        }
+      }
 
-      // if (queryIds && queryIds.length) {
-      //   filter = {
-      //     where: {
-      //       id: ids.split(","),
-      //     },
-      //   };
-      // }
-      const results = await ProductService.findAllProduct();
+      const productList = await ProductService.getAllProduct(filter);
+      const count = await ProductService.getCount();
+
       return res.json({
         success: true,
-        results,
+        count,
+        productList,
       });
     } catch (err) {
       next(err);
@@ -87,27 +103,6 @@ class ProductController {
     }
   }
 
-  async getProductListByPagination(req, res, next) {
-    try {
-      const { currentPage } = req.params;
-      const offset = currentPage * 10;
-      const filter = {
-        offset,
-        limit: 10,
-      };
-      const productList = await ProductService.getByPagination(filter);
-      const count = await ProductService.getCount();
-
-      res.json({
-        success: true,
-        productList,
-        count,
-      });
-    } catch (err) {
-      next(err);
-    }
-  }
-
   async getProduct(req, res, next) {
     try {
       const { id } = req.params;
@@ -138,29 +133,22 @@ class ProductController {
 
   async createProduct(req, res, next) {
     try {
-      // const params = req.body || null;
-      // const {
-      //   name,
-      //   imageUrl,
-      //   price,
-      //   color,
-      //   category,
-      //   currency,
-      // } = req.body.values;
-      console.log("res.body: ", req.body);
+      const params = req.body || null;
+      const { name, price, color, category, currency } = req.body;
+      const imageUrl = req.file.buffer;
+      const result = await this.ProductService.create({
+        name,
+        imageUrl,
+        price,
+        color,
+        category,
+        currency,
+      });
 
-      // const result = await this.ProductService.create({
-      //   name,
-      //   imageUrl,
-      //   price,
-      //   color,
-      //   category,
-      //   currency,
-      // });
-      // res.json({
-      //   success: true,
-      //   result: result,
-      // });
+      res.json({
+        success: true,
+        result: result,
+      });
     } catch (err) {
       next(err);
     }
@@ -184,10 +172,9 @@ class ProductController {
     try {
       const { id } = req.body;
       await ProductService.delete(id);
-      const results = await ProductService.findAllProduct();
+      // const results = await ProductService.getAllProduct();
       return res.json({
         success: true,
-        results,
       });
     } catch (err) {
       next(err);
@@ -196,8 +183,20 @@ class ProductController {
 
   async customProduct(req, res, next) {
     try {
-      const { values } = req.body;
-      const customedProduct = await ProductService.custom(values);
+      const { id, name, price, color, category, currency } = req.body;
+      const imageUrl = req.file.buffer;
+
+      const result = await this.ProductService.custom({
+        id,
+        name,
+        imageUrl,
+        price,
+        color,
+        category,
+        currency,
+      });
+
+      // const customedProduct = await ProductService.custom(values);
       res.json({
         success: true,
       });
