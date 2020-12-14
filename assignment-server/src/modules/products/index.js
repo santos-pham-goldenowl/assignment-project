@@ -7,14 +7,15 @@ router.get("/category/:category", (req, res, next) => {
   return Controller.getCategoryList(req, res, next);
 });
 
-router.post("/add", upload.single("imageUrl"), (req, res, next) => {
+router.post("/add", upload.array("imageUrl"), (req, res, next) => {
+
   return Controller.createProduct(req, res, next);
 });
 router.post("/search", (req, res, next) => {
   return Controller.searchProduct(req, res, next);
 });
 
-router.post("/custom", upload.single("imageUrl"), (req, res, next) => {
+router.post("/custom", upload.array("imageUrl"), (req, res, next) => {
   return Controller.customProduct(req, res, next);
 });
 

@@ -1,6 +1,6 @@
 import React from "react";
-import { headerToken } from "../../../utilities/index";
-import httpLayer from "../../../httpLayer/index";
+import { headerToken } from "../../../utilities";
+import httpLayer from "../../../httpLayer";
 import { withRouter } from "react-router-dom";
 import CustomUserForm from "../../../Component/AdminComp/CustomUserForm";
 

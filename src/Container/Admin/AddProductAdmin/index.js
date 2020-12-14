@@ -1,9 +1,9 @@
 import React from "react";
-import { headerToken } from "../../../utilities/index";
-import httpLayer from "../../../httpLayer/index";
+import { headerToken } from "../../../utilities";
+import httpLayer from "../../../httpLayer";
 import { withRouter } from "react-router-dom";
 
-import FormAdmin from "../../../Component/AdminComp/FormAdmin/index";
+import FormAdmin from "../../../Component/AdminComp/FormAdmin";
 
 import "./style.css";
 // import AddProductTestComp from "../../../Component/AdminComp/AddProductTestComp";
@@ -46,10 +46,14 @@ class AddProductAmin extends React.Component {
 
     const formData = new FormData();
     const { name, price, color, currency } = values;
-    console.log("select value: ", selectValue);
+    // console.log("select value: ", selectValue);
+    console.log("select value: ", fileValue);
+
+    for (const key of Object.keys(fileValue)) {
+      formData.append("imageUrl", fileValue[key]);
+    }
 
     formData.append("name", name);
-    formData.append("imageUrl", fileValue);
     formData.append("price", price);
     formData.append("color", color);
     formData.append("category", selectValue);

@@ -11,6 +11,8 @@ class AuthenticateController {
       throw new Error("This Email already exist");
     }
 
+    const newAvatarUrl = req.file.filename;
+
     const cryptedPassword = await bcrypt.hash(password, 10);
 
     const createdUser = await UserService.createUser({
@@ -19,10 +21,9 @@ class AuthenticateController {
       lastName,
       password: cryptedPassword,
       phone,
-      avatarUrl,
+      avatarUrl: newAvatarUrl,
       role: "User",
     });
-    console.log("createdUser: ", createdUser.dataValues);
 
     // If we need user login imemediately. We can generate token here and send it back to the client
     return res.json({

@@ -135,7 +135,17 @@ class ProductController {
     try {
       const params = req.body || null;
       const { name, price, color, category, currency } = req.body;
-      const imageUrl = req.file.buffer;
+      // const imageUrl = req.file.buffer;
+
+      let imageUrl = "";
+      req.files.forEach((file, index) => {
+        if (index === 0) {
+          imageUrl = file.filename;
+        } else {
+          imageUrl = imageUrl + "," + file.filename;
+        }
+      });
+
       const result = await this.ProductService.create({
         name,
         imageUrl,
@@ -183,13 +193,49 @@ class ProductController {
 
   async customProduct(req, res, next) {
     try {
-      const { id, name, price, color, category, currency } = req.body;
-      const imageUrl = req.file.buffer;
+      const { id, name, price, color, category, currency, oldValue } = req.body;
+      // const imageUrl = req.file.buffer;
+      console.log("req.files: ", req.files[0]);
+      console.log("req.body: ", req.body);
+      // const b64 = new Buffer(url).toString("base64");
+      console.log(req.files[0] === true);
+
+      let newImageUrl = "",
+        imageUploadList,
+        oldImageList;
+      if (req.files[0]) {
+        console.log("Matched");
+        req.files.forEach((file, index) => {
+          console.log("Matched v2");
+          if (index === 0) {
+            imageUploadList = file.filename;
+          } else {
+            imageUploadList = imageUploadList + "," + file.filename;
+          }
+        });
+      }
+      if (oldValue) {
+        const newValue = oldValue.split(",").map(String);
+        console.log("newValue: ", newValue);
+        newValue.forEach((item, index) => {
+          if (index === 0) {
+            oldImageList = item;
+          } else {
+            oldImageList = oldImageList + "," + item;
+          }
+        });
+      }
+      if (imageUploadList) {
+        newImageUrl = imageUploadList + "," + oldImageList;
+      } else {
+        newImageUrl = oldImageList;
+      }
+      console.log("newImageUrl: ", newImageUrl);
 
       const result = await this.ProductService.custom({
         id,
         name,
-        imageUrl,
+        imageUrl: newImageUrl,
         price,
         color,
         category,

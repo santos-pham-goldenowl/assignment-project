@@ -2,22 +2,59 @@ import React from "react";
 import { Formik } from "formik";
 import { withRouter } from "react-router-dom";
 
-import Input from "../../Component/Form/input/index";
-import Button from "../../Component/Form/button/index";
+import Input from "../../Component/Form/input";
+import Button from "../../Component/Form/button";
 import HelmetComp from "../../Component/Helmet";
-import Error from "../../Component/Form/error/index";
+import Error from "../../Component/Form/error";
 
 import "./style.css";
 
-import services from "../../services/index";
+import services from "../../services";
+import FileUpload from "../../Component/FileUpload";
 
 class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       errServer: "",
+      fileValue: "",
     };
   }
+
+  getValueUpload = (value) => {
+    console.log("value: ", value);
+    this.setState({ fileValue: value });
+  };
+
+  onSumbitSignUp = (values, { setSubmitting }) => {
+    setSubmitting(false);
+    const { email, firstName, lastName, password, phone } = values;
+    console.log("values ne: ", values);
+    const { fileValue } = this.state;
+    const formData = new FormData();
+    formData.append("imageUrl", fileValue[0]);
+    formData.append("email", email);
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("password", password);
+    formData.append("phone", phone);
+    // - get value of file input by ref and concaternate it into values
+    services
+      .signup(formData)
+      .then((response) => {
+        if (response.data.success) {
+          this.props.history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log("err: ", err.response);
+        const { error_message } = err.response.data;
+        this.setState({
+          errServer: error_message,
+        });
+      });
+  };
+
   render() {
     const { errServer } = this.state;
     return (
@@ -56,24 +93,7 @@ class Signup extends React.Component {
             return errors;
           }}
           // - onSubmit (Sign up)
-          onSubmit={(values, { setSubmitting }) => {
-            setSubmitting(false);
-            // - get value of file input by ref and concaternate it into values
-            services
-              .signup(values)
-              .then((response) => {
-                if (response.data.success) {
-                  this.props.history.push("/");
-                }
-              })
-              .catch((err) => {
-                console.log("err: ", err.response);
-                const { error_message } = err.response.data;
-                this.setState({
-                  errServer: error_message,
-                });
-              });
-          }}
+          onSubmit={this.onSumbitSignUp}
         >
           {({ values, handleSubmit, isSubmitting }) => (
             <form onSubmit={handleSubmit}>
@@ -149,7 +169,11 @@ class Signup extends React.Component {
                         errorComponent="div"
                         errorClName="error"
                       />
-                      <Input
+                      <FileUpload
+                        lbName={"Avatar image"}
+                        getValueUpload={this.getValueUpload}
+                      />
+                      {/* <Input
                         clNameContainerDiv="ip-form"
                         htmlFor="avatarUrl"
                         ipNameLabel="Avatar Url"
@@ -160,7 +184,7 @@ class Signup extends React.Component {
                         errName="avatarUrl"
                         errorComponent="div"
                         errorClName="error"
-                      />
+                      /> */}
                     </div>
                   </div>
                   <Button disabled={isSubmitting} />

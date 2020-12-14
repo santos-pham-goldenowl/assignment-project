@@ -1,9 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { Formik } from "formik";
-import { headerToken } from "../../../utilities/index";
-import httpLayer from "../../../httpLayer/index";
-import Input from "../../../Component/Form/input/index";
+import { headerToken } from "../../../utilities";
+import httpLayer from "../../../httpLayer";
+import Input from "../../../Component/Form/input";
 
 import "./style.css";
 

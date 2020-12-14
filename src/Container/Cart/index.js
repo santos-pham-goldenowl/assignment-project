@@ -2,10 +2,10 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import CartItem from "../../Component/CartItem/index";
+import CartItem from "../../Component/CartItem";
 import { RemoveItem } from "../../redux/action";
-import { handlePrice, headerToken } from "../../utilities/index";
-import httpLayer from "../../httpLayer/index";
+import { handlePrice, headerToken } from "../../utilities";
+import httpLayer from "../../httpLayer";
 
 import "./style.css";
 

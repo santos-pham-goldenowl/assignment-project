@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Slider from "../../Component/Carousel/Slider";
-import { handlePrice, headerToken } from "../../utilities/index";
+import { handlePrice, headerToken } from "../../utilities";
 import httpLayer from "../../httpLayer";
 
 import "./style.css";
@@ -75,6 +75,11 @@ class ProductView extends React.Component {
   render() {
     const { productSelected, relatedProductList, isFetching, b64 } = this.state;
     const { imageUrl, name, price } = productSelected;
+    let tempUrl, imgUrl;
+    if (imageUrl) {
+      tempUrl = imageUrl.split(",").map(String);
+      imgUrl = "http://localhost:3002/images/" + tempUrl[0];
+    }
 
     let displayPrice;
     if (price) {
@@ -93,7 +98,8 @@ class ProductView extends React.Component {
                   <div
                     className="product-view-img"
                     style={{
-                      backgroundImage: `url("data:${imageUrl};base64,${b64}")`,
+                      // backgroundImage: `url("data:${imageUrl};base64,${b64}")`,
+                      backgroundImage: `url(${imgUrl})`,
                     }}
                   ></div>
                 </div>

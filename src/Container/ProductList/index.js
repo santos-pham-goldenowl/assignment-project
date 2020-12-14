@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 
 import "./style.css";
 import HelmetComp from "../../Component/Helmet";
-import Product from "../../Component/Product/index";
-import Select from "../../Component/Select/index";
-import { AddItem } from "../../redux/action/index";
-import httpLayer from "../../httpLayer/index";
-import { headerToken } from "../../utilities/index";
+import Product from "../../Component/Product";
+import Select from "../../Component/Select";
+import { AddItem } from "../../redux/action";
+import httpLayer from "../../httpLayer";
+import { headerToken } from "../../utilities";
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -44,9 +44,10 @@ class ProductList extends React.Component {
   async componentDidMount() {
     const token = await headerToken();
     httpLayer.get("/api/products", token).then((response) => {
-      const { results } = response.data;
+      console.log("response: ", response);
+      const { productList } = response.data;
       this.setState({
-        productList: results,
+        productList,
       });
     });
   }
@@ -119,23 +120,27 @@ class ProductList extends React.Component {
             </div>
           </Row>
           <Row className="product-list-row">
-            {productList.map((product) => (
-              <Product
-                key={product.id}
-                id={product.id}
-                url={product.imageUrl}
-                color={product.color}
-                name={product.name}
-                price={product.price}
-                addItem={this.addItem(
-                  product.id,
-                  product.imageUrl,
-                  product.name,
-                  product.color,
-                  product.price
-                )}
-              />
-            ))}
+            {productList.map((product) => {
+              const tempUrl = product.imageUrl.split(",").map(String);
+              const imgUrl = "http://localhost:3002/images/" + tempUrl[0];
+              return (
+                <Product
+                  key={product.id}
+                  id={product.id}
+                  url={imgUrl}
+                  color={product.color}
+                  name={product.name}
+                  price={product.price}
+                  addItem={this.addItem(
+                    product.id,
+                    product.imageUrl,
+                    product.name,
+                    product.color,
+                    product.price
+                  )}
+                />
+              );
+            })}
           </Row>
         </Container>
       </div>

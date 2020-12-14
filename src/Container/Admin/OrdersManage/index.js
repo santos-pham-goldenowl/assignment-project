@@ -5,7 +5,7 @@ import { Col } from "reactstrap";
 
 import HelmetComp from "../../../Component/Helmet";
 import httpLayer from "../../../httpLayer";
-import { headerToken, handlePrice } from "../../../utilities/index";
+import { headerToken, handlePrice } from "../../../utilities";
 
 import "./style.css";
 

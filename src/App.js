@@ -7,21 +7,21 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import Header from "./Container/Header/index";
-import Footer from "./Container/Footer/index";
-import Login from "./Container/Login/index";
-import Signup from "./Container/Signup/index";
-import User from "./Container/User/index";
-import Cart from "./Container/Cart/index";
-import ProductList from "./Container/ProductList/index";
-import ProductView from "./Container/ProductView/index";
-import HistoryOrder from "./Container/HistoryOrder/index";
-import HistoryOrderDetail from "./Container/HistoryOrderDetail/index";
-import Admin from "./Container/Admin/index";
+import Header from "./Container/Header";
+import Footer from "./Container/Footer";
+import Login from "./Container/Login";
+import Signup from "./Container/Signup";
+import User from "./Container/User";
+import Cart from "./Container/Cart";
+import ProductList from "./Container/ProductList";
+import ProductView from "./Container/ProductView";
+import HistoryOrder from "./Container/HistoryOrder";
+import HistoryOrderDetail from "./Container/HistoryOrderDetail";
+import Admin from "./Container/Admin";
 
-import { authUser, updateState } from "./redux/action/index";
+import { authUser, updateState } from "./redux/action";
 import headerToken from "./utilities/headerToken";
-import httpLayer from "./httpLayer/index";
+import httpLayer from "./httpLayer";
 
 import "./App.css";
 

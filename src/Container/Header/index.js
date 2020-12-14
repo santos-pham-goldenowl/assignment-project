@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./style.css";
-import ShoppingItemList from "../ShoppingItemList/index";
+import ShoppingItemList from "../ShoppingItemList";
 import { HandlePopUp, LogOut } from "../../redux/action";
 
 class Header extends React.Component {

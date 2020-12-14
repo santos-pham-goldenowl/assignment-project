@@ -47,16 +47,18 @@ class OrderService {
       where: {
         status: orderStatus,
       },
+
       include: [
         {
           model: Models.Users,
           as: "user",
           paranoid: false,
+
           where: {
             lastName: sequelize.where(
               sequelize.fn("LOWER", sequelize.col("lastName")),
               "LIKE",
-              userName.toLowerCase()
+              "%" + userName.toLowerCase() + "%"
             ),
           },
         },

@@ -1,9 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { headerToken } from "../../../utilities/index";
+import { headerToken } from "../../../utilities";
 
-import httpLayer from "../../../httpLayer/index";
-import { handlePrice } from "../../../utilities/index";
+import httpLayer from "../../../httpLayer";
+import { handlePrice } from "../../../utilities";
 
 import "./style.css";
 

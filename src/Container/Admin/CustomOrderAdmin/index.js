@@ -1,9 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-import CustomOrderForm from "../../../Component/AdminComp/CustomOrderForm/index";
-import { headerToken } from "../../../utilities/index";
-import httpLayer from "../../../httpLayer/index";
+import CustomOrderForm from "../../../Component/AdminComp/CustomOrderForm";
+import { headerToken } from "../../../utilities";
+import httpLayer from "../../../httpLayer";
 
 class CustomOrderAmin extends React.Component {
   constructor(props) {

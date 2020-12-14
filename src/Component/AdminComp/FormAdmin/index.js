@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Field } from "formik";
-import Input from "../../Form/input/index";
+import Input from "../../Form/input";
+import FileUpload from "../../FileUpload";
 
 import "./style.css";
 
@@ -21,8 +22,7 @@ class FormAdmin extends React.Component {
           selectValue: category,
         });
       }
-    }
-    if (this.props.categoryList) {
+    } else if (this.props.categoryList) {
       const { categoryList } = this.props;
       const { id } = categoryList[0];
       this.setState({
@@ -39,19 +39,19 @@ class FormAdmin extends React.Component {
     });
   };
 
-  onChangeFileValue = (e) => {
-    this.setState({ fileValue: e.target.files[0] });
+  getValueUpload = (value, oldValue) => {
+    this.setState({ fileValue: value, oldValue });
   };
 
   handleForm = (values, { setSubmitting }) => {
     setSubmitting(false);
     const { handleOnClick } = this.props;
-    const { selectValue, fileValue } = this.state;
-    return handleOnClick(values, selectValue, fileValue);
+    const { selectValue, fileValue, oldValue } = this.state;
+    return handleOnClick(values, selectValue, fileValue, oldValue);
   };
 
   render() {
-    const { selectValue, fileValue } = this.state;
+    const { selectValue } = this.state;
     const { formName, ipValueList, btnName, categoryList } = this.props;
 
     let idValue,
@@ -177,12 +177,11 @@ class FormAdmin extends React.Component {
                   errorComponent="div"
                   errorClName="error"
                 />
-                <input
-                  className="file-ip"
-                  type="file"
-                  name="imageUrl"
-                  onChange={this.onChangeFileValue}
-                ></input>
+                <FileUpload
+                  lbName={"Product image"}
+                  getValueUpload={this.getValueUpload}
+                  imagePreviewList={imageUrlValue}
+                />
                 <button
                   type="submit"
                   disabled={isSubmitting}

@@ -1,5 +1,5 @@
 import React from "react";
-import { handlePrice } from "../../utilities/index";
+import { handlePrice } from "../../utilities";
 
 import "./style.css";
 

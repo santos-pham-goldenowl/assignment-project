@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import HelmetComp from "../../Component/Helmet/index";
+import HelmetComp from "../../Component/Helmet";
 import ChangeUserInfor from "../ChangeUserInfor";
 
 import "./style.css";
@@ -18,13 +18,14 @@ class User extends React.Component {
   render() {
     const { userName, avatarUrl, role } = this.props.user;
     const pathName = this.props.location.pathname;
+    const avtUrl = "http://localhost:3002/images/" + avatarUrl;
     return (
       <div className="user-infor-container">
         <HelmetComp title="User" />
         <div className="user-infor">
           <div className="avatar">
             <img
-              src={avatarUrl}
+              src={avtUrl}
               alt="Cannot display"
               width="150"
               height="150"

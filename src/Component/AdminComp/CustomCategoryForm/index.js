@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
 import { withRouter } from "react-router-dom";
-import Input from "../../../Component/Form/input/index";
+import Input from "../../../Component/Form/input";
 
 class CustomCategoryForm extends React.Component {
   handleCustomCategory = (values, { setSubmitting }) => {

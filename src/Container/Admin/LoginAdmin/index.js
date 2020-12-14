@@ -3,13 +3,13 @@ import { Formik } from "formik";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import HelmetComp from "../../../Component/Helmet/index";
-import Input from "../../../Component/Form/input/index";
-import Button from "../../../Component/Form/button/index";
-import { authUser } from "../../../redux/action/index";
-import Error from "../../../Component/Form/error/index";
+import HelmetComp from "../../../Component/Helmet";
+import Input from "../../../Component/Form/input";
+import Button from "../../../Component/Form/button";
+import { authUser } from "../../../redux/action";
+import Error from "../../../Component/Form/error";
 
-import services from "../../../services/index";
+import services from "../../../services";
 
 import "../../../Component/Form/style.css";
 import "./style.css";

@@ -1,0 +1,25 @@
+.add-img {
+    margin-bottom: 30px;
+}
+
+.preview-container {
+    display: flex;
+}
+
+.upload-file-lb {
+    font-size: 1.3em;
+}
+
+.preview-img {
+    margin-right: 10px;
+}
+
+.preview-img-container {
+    position: relative;
+}
+
+.remove-img-btn {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}

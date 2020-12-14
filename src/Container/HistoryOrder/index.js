@@ -2,9 +2,9 @@ import React from "react";
 import { withRouter, Link } from "react-router-dom";
 import httpLayer from "../../httpLayer";
 import { connect } from "react-redux";
-import { handlePrice } from "../../utilities/index";
+import { handlePrice } from "../../utilities";
 
-import { headerToken } from "../../utilities/index";
+import { headerToken } from "../../utilities";
 
 import "./style.css";
 class HistoryOrder extends React.Component {

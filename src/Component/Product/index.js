@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 
 import "./style.css";
 
-import { handlePrice } from "../../utilities/index";
+import { handlePrice } from "../../utilities";
 
 class Product extends React.Component {
   render() {
     const { id, url, name, price, addItem } = this.props;
     const displayPrice = handlePrice.formatPrice(price);
-    const b64 = new Buffer(url).toString("base64");
+    // const b64 = new Buffer(url).toString("base64");
 
     return (
       <Col className="product">
@@ -19,7 +19,8 @@ class Product extends React.Component {
             <Link to={`/products/${id}`}>
               <img
                 className="product-img"
-                src={`data:${url};base64,${b64}`}
+                // src={`data:${url};base64,${b64}`}
+                src={url}
                 alt="product"
               />
               {/* <img src={url} alt="cannot display" width="230" height="200"></img> */}

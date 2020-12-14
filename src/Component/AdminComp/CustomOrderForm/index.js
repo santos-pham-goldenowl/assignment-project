@@ -1,9 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 
-import { handlePrice } from "../../../utilities/index";
+import { handlePrice } from "../../../utilities";
 import { Formik, Field } from "formik";
-import Input from "../../../Component/Form/input/index";
+import Input from "../../../Component/Form/input";
 
 import "./style.css";
 
@@ -69,7 +69,7 @@ class CustomOrderAmin extends React.Component {
                 /* and other goodies */
               }) => (
                 <div className="form-admin">
-                  <h2>Custom user's information</h2>
+                  <h2>Custom orders' information</h2>
                   <form onSubmit={handleSubmit}>
                     <Input
                       clNameContainerDiv="ip-form"

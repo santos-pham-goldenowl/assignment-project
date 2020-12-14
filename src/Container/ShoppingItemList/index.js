@@ -3,8 +3,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./style.css";
-import ShoppingItem from "../../Component/ShoppingItem/index";
-import { handlePrice } from "../../utilities/index";
+import ShoppingItem from "../../Component/ShoppingItem";
+import { handlePrice } from "../../utilities";
 import { RemoveItem, HandlePopUp } from "../../redux/action";
 
 class ShoppingItemList extends React.Component {

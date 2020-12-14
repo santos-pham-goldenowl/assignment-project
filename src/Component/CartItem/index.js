@@ -2,8 +2,8 @@ import React from "react";
 
 import "./style.css";
 import { connect } from "react-redux";
-import { handlePrice } from "../../utilities/index";
-import { changeQuantity } from "../../redux/action/index";
+import { handlePrice } from "../../utilities";
+import { changeQuantity } from "../../redux/action";
 
 class CartItem extends React.Component {
   constructor(props) {

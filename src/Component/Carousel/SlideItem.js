@@ -1,12 +1,18 @@
 import React from "react";
 
-import { handlePrice } from "../../utilities/index";
+import { handlePrice } from "../../utilities";
 
 class SlideItem extends React.Component {
   render() {
     const { id, name, url, price, st, currentProductId } = this.props;
     const displayPrice = handlePrice.formatPrice(price);
-    const b64 = new Buffer(url).toString("base64");
+
+    let tempUrl, imgUrl;
+    if (url) {
+      tempUrl = url.split(",").map(String);
+      imgUrl = "http://localhost:3002/images/" + tempUrl[0];
+    }
+    // const b64 = new Buffer(url).toString("base64");
 
     // - set className, status name for current product
     const currentClassname =
@@ -20,7 +26,8 @@ class SlideItem extends React.Component {
         <p className="slide-item-name">{name}</p>
         <div className="slide-item-img">
           <img
-            src={`data:${url};base64,${b64}`}
+            // src={`data:${url};base64,${b64}`}
+            src={imgUrl}
             alt="product"
             width="230"
             height="200"

@@ -1,6 +1,6 @@
 import React from "react";
-import { headerToken } from "../../../utilities/index";
-import httpLayer from "../../../httpLayer/index";
+import { headerToken } from "../../../utilities";
+import httpLayer from "../../../httpLayer";
 import { withRouter } from "react-router-dom";
 import FormAdmin from "../../../Component/AdminComp/FormAdmin";
 
@@ -19,6 +19,7 @@ class CustomProductAdmin extends React.Component {
   async componentDidMount() {
     const categoryList = await this.getCategory();
     const productList = await this.getProduct();
+
     this.setState({
       isFetching: false,
       categoryList: categoryList,
@@ -70,7 +71,7 @@ class CustomProductAdmin extends React.Component {
   //     });
   // };
 
-  handleOnClick = async (values, selectValue, fileValue) => {
+  handleOnClick = async (values, selectValue, fileValue, oldValue) => {
     const token = await headerToken();
 
     token.headers["content-type"] =
@@ -79,14 +80,23 @@ class CustomProductAdmin extends React.Component {
     const formData = new FormData();
     const { id, name, price, color, currency } = values;
     console.log("select value: ", selectValue);
+    console.log("fileValue: ", fileValue);
+    if (fileValue) {
+      for (const key of Object.keys(fileValue)) {
+        formData.append("imageUrl", fileValue[key]);
+      }
+    }
 
     formData.append("id", id);
     formData.append("name", name);
-    formData.append("imageUrl", fileValue);
+    // formData.append("imageUrl", fileValue);
     formData.append("price", price);
     formData.append("color", color);
     formData.append("category", selectValue);
     formData.append("currency", currency);
+    if (oldValue) {
+      formData.append("oldValue", oldValue);
+    }
 
     httpLayer
       .post("/api/products/custom", formData, token)

@@ -4,7 +4,7 @@ import ReactPaginate from "react-paginate";
 
 import httpLayer from "../../../httpLayer";
 import { headerToken, handlePrice } from "../../../utilities";
-import HelmetComp from "../../../Component/Helmet/index";
+import HelmetComp from "../../../Component/Helmet";
 
 import "./style.css";
 
@@ -170,9 +170,12 @@ class ProductManage extends React.Component {
                     </tr>
                     {list.map((product) => {
                       const { id } = product;
-                      const b64 = new Buffer(product.imageUrl).toString(
-                        "base64"
-                      );
+
+                      const tempUrl = product.imageUrl.split(",").map(String);
+
+                      const imgUrl =
+                        "http://localhost:3002/images/" + tempUrl[0];
+
                       return (
                         <tr key={product.id}>
                           <td key={product.id}>{product.id}</td>
@@ -183,7 +186,8 @@ class ProductManage extends React.Component {
                           <td>
                             <img
                               className="image-product-admin"
-                              src={`data:${product.imageUrl};base64,${b64}`}
+                              // src={`data:${product.imageUrl};base64,${b64}`}
+                              src={imgUrl}
                               alt="product"
                             />
                           </td>
@@ -236,3 +240,9 @@ class ProductManage extends React.Component {
 }
 
 export default ProductManage;
+
+{
+  /* const b64 = new Buffer(product.imageUrl).toString(
+  "base64"
+); */
+}

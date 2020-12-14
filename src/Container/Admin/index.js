@@ -8,20 +8,20 @@ import {
 import { Container, Row } from "reactstrap";
 
 import { connect } from "react-redux";
-import { authUser, updateState } from "../../redux/action/index";
-import { headerToken } from "../../utilities/index";
-import httpLayer from "../../httpLayer/index";
-import LoginAdmin from "./LoginAdmin/index";
-import AddProductAdmin from "./AddProductAdmin/index";
-import AddCategoryAdmin from "./AddCategoryAdmin/index";
-import CustomProductAdmin from "./CustomProductAdmin/index";
-import CustomCategoryAdmin from "./CustomCategoryAdmin/index";
-import CustomUserAdmin from "./CustomUserAdmin/index";
-import CustomOrderAdmin from "./CustomOrderAdmin/index";
-import ViewDetailOrderAdmin from "./ViewDetailOrderAdmin/index";
-import MenuAdmin from "../../Component/AdminComp/MenuAdmin/index";
-import CategoryManage from "./CategoryMangage/index";
-import UserManage from "./UserManage/index";
+import { authUser, updateState } from "../../redux/action";
+import { headerToken } from "../../utilities";
+import httpLayer from "../../httpLayer";
+import LoginAdmin from "./LoginAdmin";
+import AddProductAdmin from "./AddProductAdmin";
+import AddCategoryAdmin from "./AddCategoryAdmin";
+import CustomProductAdmin from "./CustomProductAdmin";
+import CustomCategoryAdmin from "./CustomCategoryAdmin";
+import CustomUserAdmin from "./CustomUserAdmin";
+import CustomOrderAdmin from "./CustomOrderAdmin";
+import ViewDetailOrderAdmin from "./ViewDetailOrderAdmin";
+import MenuAdmin from "../../Component/AdminComp/MenuAdmin";
+import CategoryManage from "./CategoryMangage";
+import UserManage from "./UserManage";
 import ProductManage from "./ProductManage";
 import OrdersManage from "./OrdersManage";
 
